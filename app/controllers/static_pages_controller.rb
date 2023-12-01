@@ -1,4 +1,10 @@
 class StaticPagesController < ApplicationController
-  def home
+  
+  def landing_page
+    render 'landing_page'
+  end
+
+  def login
+    render 'login'
   end
 end

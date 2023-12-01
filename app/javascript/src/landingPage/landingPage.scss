@@ -1,0 +1,83 @@
+#landing-page {
+  .container-fluid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  #hero {
+    background-image: url(../../../assets/images/anton-8q-U8X1zkvI-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    h1 {
+      padding-top: 45px;
+    }
+  }
+
+  #hero-cards {
+    .container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: rgba(0, 0, 0, 0.6);
+    }
+  
+    .hero-card {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-top: 5px solid #CCCCFF;
+      min-height: 250px;
+    }
+  }
+
+  .hero-footer {
+    background-color: #253746;
+  }
+
+  @media (max-width: 991px) {
+    .landing-page {
+      border-bottom: 2px solid black;
+    }
+    #hero {
+      min-height: 300px;
+    }
+    footer {
+      border-top: 2px solid black;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    #hero {
+      height: 50vh;
+      min-height: 650px;
+    }
+  
+    #hero-cards {
+      position: absolute;
+      top: 120px;
+      width: 100%;
+    }
+  }
+}
+
+.navbar-brand {
+  font-family: 'Satisfy', sans-serif;
+  color: #8d8df6 !important;
+  font-size: 25px;
+}
+
+footer {
+  padding-top: 20px;
+  background-color: rgba(238, 238, 238);
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
