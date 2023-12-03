@@ -28,11 +28,11 @@ class SignupWidget extends React.Component {
             <input type='text' className='form-control form-control-lg rounded' id='password' />
           </div>
           <div className='col-12 mt-3 text-end'>
-          <button type='submit' className='btn btn-primary btn-block btn-lg'>Log in</button>
+          <button type='submit' className='btn btn-primary btn-block btn-lg'>Sign up</button>
         </div>
         </form>
         <hr className='mt-0' />
-        <p className='mb-0 text-center'>Have an account? <a className='text-primary' onClick={this.props.toggle}>Sign Up</a></p>
+        <p className='mb-0 text-center'>Have an account? <a className='text-primary' onClick={this.props.toggle}>Log In</a></p>
       </React.Fragment>
     )
   }

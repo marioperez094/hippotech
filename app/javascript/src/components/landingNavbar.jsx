@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactDOM } from 'react';
 
-import './landingPage.scss';
+import '@src/landingPage/landingPage.scss'
 
 const Navbar = () => {
   return (

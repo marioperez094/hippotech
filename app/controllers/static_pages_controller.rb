@@ -7,4 +7,8 @@ class StaticPagesController < ApplicationController
   def login
     render 'login'
   end
+
+  def patient_list
+    render 'patient_list'
+  end
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "static_pages#landing_page"
 
   get '/login' => 'static_pages#login'
+  get '/patient_list' => 'static_pages#patient_list'
 
   
 end

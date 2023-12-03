@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Navbar from '../landingPage/navbar'
-import Footer from '../landingPage/footer';
+import Navbar from '@components/landingNavbar';
+import Footer from '@components/landingFooter';
 import SignupWidget from './signupWidget';
 import LoginWidget from './loginWidget';
 
