@@ -11,12 +11,7 @@ const Navbar = (props) => {
         <a className='navbar-brand d-none d-md-block' href='/patient_list'>H</a>
         <a className='d-md-none navbar-toggler navbar-brand' role='button' type='button' data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">H</a>
 
-        <h5 className='mx-auto d-md-none'>{username}</h5>
-
-        <form className='d-flex d-md-none'>
-          <input className="form-control me-2" type="search" placeholder="Patient Name" aria-label="Search" />
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <h5 className='ms-auto d-md-none'>{username}</h5>
 
 
         
@@ -26,13 +21,16 @@ const Navbar = (props) => {
             <li className='nav-item d-md-none'>
               <a className='nav-link active' aria-current='page' href='/patient_list'>Home</a>
             </li>
-            <form className='me-3 d-none d-md-flex'>
-              <input className="form-control me-2" type="search" placeholder="Patient Name" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            <li className='nav-item'>
-              <a className='nav-link active' aria-current='page' href='/patient_list'>Log out</a>
+            <li className='nav-item order-md-2'>
+              <a className='nav-link'>Settings</a>
             </li>
+            <li className='nav-item order-md-3'>
+              <a className='nav-link'>Log out</a>
+            </li>
+            <form className='me-3 d-flex search-box order-md-1'>
+              <input className="form-control me-2 search-input" type="search" placeholder="Patient Name" aria-label="Search" />
+              <button className="btn btn-outline-success search-btn" type="submit">Search</button>
+            </form>
           </ul>
         </div>
       </div>
