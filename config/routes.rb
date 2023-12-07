@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/login' => 'static_pages#login'
   get '/patient_list' => 'static_pages#patient_list'
+  get '/patient/:id' => 'static_pages#patient'
 
-  
+  get '*path', to: 'static_pages#patient_list'
 end

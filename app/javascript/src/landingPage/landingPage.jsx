@@ -8,10 +8,6 @@ import './landingPage.scss';
 
 
 class LandingPage extends React.Component {
-  state = {
-
-  }
-
   render() {
     return (
       <>
