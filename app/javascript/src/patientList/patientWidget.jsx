@@ -4,11 +4,15 @@ import '../patientList/patientList.scss'
 
 const PatientWidget = (props) => {
 
-  const { patient } = props;
-  const { id, fName, lName, gender, age, diagnosis, admission } = patient;
+  const { patient, options } = props;
+  const { id, fName, lName, gender, age } = patient;
+
+  const redirect = () => {
+    location.assign(`/patient/${id}`)
+  }
 
   return (
-    <tr>
+    <tr onClick={() => redirect()}>
       <th scope='row'>{id}</th>
       <td className='row'>
         <div className='col-12'>
@@ -18,8 +22,8 @@ const PatientWidget = (props) => {
           {age} | {gender}
         </div>
       </td>
-      <td className='d-none d-md-table-cell'>{diagnosis}</td>
-      <td>{admission}</td>
+      <td>{patient[options[1]]}</td>
+      <td className='d-none d-md-table-cell'>{patient[options[2]]}</td>
     </tr>
   )
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from '../components/navbar'
 import PatientWidget from "./patientWidget";
-import { sort } from "webpack/lib/dependencies/DependencyReference";
+import OptionSelect from "./optionSelect";
 
 class PatientList extends React.Component {
   state = {
@@ -12,6 +12,8 @@ class PatientList extends React.Component {
       lName: 'Feta',
       gender: 'Male',
       age: 62,
+      code: 'Full Code',
+      diet: 'Regular',
       diagnosis: 'Shortness of breath',
       admission: '12/06/2023',
     },
@@ -21,6 +23,8 @@ class PatientList extends React.Component {
       lName: 'Goota',
       gender: 'Male',
       age: 62,
+      code: 'DNR',
+      diet: 'Diabetic',
       diagnosis: 'Shortness of breath',
       admission: '12/06/2023',
     },
@@ -30,45 +34,73 @@ class PatientList extends React.Component {
       lName: 'Cheddar',
       gender: 'Female',
       age: 62,
+      code: 'Full Code',
+      diet: 'Cardiac',
       diagnosis: 'Congestive Heart Failure',
       admission: '12/02/2023',
     }],
-    category: 'id',
+    options: {
+      1: 'diagnosis',
+      2: 'admission'
+    },
+    category: '',
   }
 
-  sortByID() {
-    this.setState({ patients: this.state.patients.sort((a, b) => {return a.id - b.id}), category: 'id'})
+  sortByID = () => {
+    this.setState({ patients: this.state.patients.sort((a, b) => {return a.id - b.id}), category: 'id' });
   }
 
-  sortByLastName() {
-    console.log(this.state.patients.sort((a, b) => { return a.lName < b.lName ? -1 : 1 }))
-    this.setState({ patients: this.state.patients.sort((a, b) => { return a.lName < b.lName ? -1 : 1 }), category: 'lName'})
+  sortByLastName = () => {
+    this.setState({ patients: this.state.patients.sort((a, b) => { return a.lName < b.lName ? -1 : 1 }), category: 'lName' });
+  }
+
+  changeOption = (e) => {
+    this.setState({ options: {...this.state.options, [e.target.name]: e.target.value}})
   }
 
   render() {
-    const {patients, category} = this.state;
+    const {patients, category, options} = this.state;
     return (
       <>
         <Navbar />
         <main>
           <div className='container-fluid'>
             <div className='row'>
-              <div className='col-1'></div>
-              <div className='col-11'>
-                <table className="table table-responsive">
+              <div className='col-12'>
+                <table className="table table-responsive patient-list">
                   <thead className="list-header">
                     <tr>
-                      <th scope="col"><a onClick={() => this.sortByID()}>ID {category === 'id' ? 'v' : '>'}</a></th>
-                      <th scope="col"><a onClick={() => this.sortByLastName()}>Patient {category === 'lName' ? 'v' : '>'}</a></th>
-                      <th className="d-none d-md-table-cell" scope="col">Diagnosis</th>
-                      <th className="d-none d-md-table-cell" scope="col">Length of Stay</th>
-                      <th className="d-md-none">LOS</th>
+                      <th scope="col">
+                        <a onClick={() => this.sortByID()}>
+                          ID 
+                          <small className={`${category === 'id' ? 'active-arrow' : 'inactive-arrow'}`}>^</small>
+                        </a>
+                      </th>
+                      <th scope="col">
+                        <a onClick={() => this.sortByLastName()}>
+                          Patient 
+                          <small className={`${category === 'lName' ? 'active-arrow' : 'inactive-arrow'}`}>^
+                          </small>
+                        </a>
+                      </th>
+                      <th scope="col">
+                        <OptionSelect option={options[1]} num={1} changeOption={this.changeOption} />
+                      </th>
+                      <th className="d-none d-md-table-cell" scope="col">
+                        <OptionSelect option={options[2]} num={2} changeOption={this.changeOption}/>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {patients.length > 0
                       ? patients.map((patient) => {
-                        return <PatientWidget key={patient.id} patient={patient} />
+                        return (
+                          <PatientWidget 
+                            key={patient.id} 
+                            patient={patient} 
+                            options={options}
+                          />
+                        )
                       })
                       : <p>No patients found.</p> 
                     }

@@ -19,10 +19,7 @@ const Navbar = (props) => {
           <h5 className='mx-auto d-none d-md-flex'>{username}</h5>
           <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
             <li className='nav-item d-md-none'>
-              <a className='nav-link active' aria-current='page' href='/patient_list'>Home</a>
-            </li>
-            <li className='nav-item order-md-2'>
-              <a className='nav-link'>Settings</a>
+              <a className='nav-link' href='/patient_list'>Home</a>
             </li>
             <li className='nav-item order-md-3'>
               <a className='nav-link'>Log out</a>
