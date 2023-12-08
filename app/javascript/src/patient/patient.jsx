@@ -7,6 +7,7 @@ import Sidebar from "./sidebar";
 import PatientSummary from "./patientSummary";
 import IntakeOutput from "./intakeOutput";
 import Flowsheet from "./flowsheet";
+import VitalChart from "./vitalChart";
 
 class Patient extends React.Component {
   state = {
@@ -75,6 +76,9 @@ class Patient extends React.Component {
                   </Route>
                   <Route exact path={`/patient/${patient.id}/flowsheet`}>
                     <Flowsheet />
+                  </Route>
+                  <Route exact path={`/patient/${patient.id}/temp`}>
+                    <VitalChart />
                   </Route>
                 </Switch>
               </div>

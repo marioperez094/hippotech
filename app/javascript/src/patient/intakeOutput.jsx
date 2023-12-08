@@ -21,7 +21,6 @@ class IntakeOutput extends React.Component {
   }
 
   buildChart = () => {
-    const {data} = this.state;
     const chartRef = this.chartRef.current.getContext("2d");
 
     this.chart = new Chart(chartRef, {

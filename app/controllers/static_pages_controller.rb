@@ -12,6 +12,10 @@ class StaticPagesController < ApplicationController
     render 'patient_list'
   end
 
+  def new_patient
+    render 'new_patient'
+  end
+
   def patient
     @data = { patient_id: params[:id] }.to_json
     render 'patient'

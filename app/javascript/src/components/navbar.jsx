@@ -21,6 +21,9 @@ const Navbar = (props) => {
             <li className='nav-item d-md-none'>
               <a className='nav-link' href='/patient_list'>Home</a>
             </li>
+            <li className='nav-item order-md-2'>
+              <a className='nav-link' href='/new_patient'>Admit A new Patient</a>
+            </li>
             <li className='nav-item order-md-3'>
               <a className='nav-link'>Log out</a>
             </li>
