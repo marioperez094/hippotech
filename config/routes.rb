@@ -7,5 +7,12 @@ Rails.application.routes.draw do
   get '/new_patient' => 'static_pages#new_patient'
   get '/patient/:id' => 'static_pages#patient'
 
+  namespace :api do
+    resources :users, only: [:create]
+    resources :sessions, only: [:create, :destroy]
+
+    get '/authenticated' => 'sessions#authenticated'
+  end
+
   get '*path', to: 'static_pages#patient_list'
 end

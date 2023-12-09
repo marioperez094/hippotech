@@ -1,4 +1,5 @@
 import React from 'react';
+import { handleErrors } from '@utils/fetchHelper';
 
 import Navbar from '@components/landingNavbar';
 import Footer from '@components/landingFooter';
@@ -10,13 +11,26 @@ import './login.scss'
 class Login extends React.Component {
   state = {
     showLogin: true,
+  };
+
+  //Redirects if user is authenticated
+  componentDidMount() {
+    fetch('/api/authenticated')
+      .then(handleErrors)
+      .then(data => {
+        if (data.authenticated) {
+          location.assign('/patient_list');
+        }
+      })
   }
 
+  //Toggle between sign up or log in 
   toggle = () => {
     this.setState({
       showLogin: !this.state.showLogin,
     })
   }
+
   render () {
     const { showLogin } = this.state;
 
@@ -31,7 +45,6 @@ class Login extends React.Component {
                   {showLogin
                     ? <LoginWidget toggle={this.toggle} />
                     : <SignupWidget toggle={this.toggle} />
-
                   }
                 </div>
               </div>
