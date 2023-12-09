@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create]
     resources :sessions, only: [:create, :destroy]
 
+    delete '/sessions' => 'sessions#destroy'
     get '/authenticated' => 'sessions#authenticated'
   end
 

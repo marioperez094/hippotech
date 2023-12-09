@@ -7,6 +7,7 @@ import SignupWidget from './signupWidget';
 import LoginWidget from './loginWidget';
 
 import './login.scss'
+import { getRequest } from '../utils/fetchRequests';
 
 class Login extends React.Component {
   state = {
@@ -15,13 +16,11 @@ class Login extends React.Component {
 
   //Redirects if user is authenticated
   componentDidMount() {
-    fetch('/api/authenticated')
-      .then(handleErrors)
-      .then(data => {
-        if (data.authenticated) {
-          location.assign('/patient_list');
-        }
-      })
+    getRequest('/api/authenticated', function(data) {
+      if (data.authenticated) {
+        location.assign('/patient_list')
+      }
+    })
   }
 
   //Toggle between sign up or log in 

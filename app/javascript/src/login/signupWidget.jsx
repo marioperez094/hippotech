@@ -13,6 +13,7 @@ class SignupWidget extends React.Component {
     password: '',
     username: '',
     error: '',
+    loading: false
   }
 
   handleChange = (e) => {
@@ -25,6 +26,7 @@ class SignupWidget extends React.Component {
     if (e) { e.preventDefault(); }
     this.setState({
       error: '',
+      loading: true,
     });
 
     fetch('/api/users', safeCredentials({
@@ -42,20 +44,56 @@ class SignupWidget extends React.Component {
       .then(handleErrors)
       .then(data => {
         console.log(data)
+        if (!data.user.success) {
+          return this.setState({error: data.error, loading: false})
+        }
+        return this.login();
       })
       .catch(error => {
-        this.setState({ 
+        this.setState({
           error: 'Could not sign up.',
+          loading: false
         })
       })
   }
 
+  login = () => {
+    this.setState({error: ''});
+
+    fetch('api/sessions', safeCredentials({
+      method: 'POST',
+      body: JSON.stringify({
+        user: {
+          username: this.state.username,
+          password: this.state.password,
+        }
+      })
+    }))
+      .then(handleErrors)
+      .then(data => {
+        if (!data.success) {
+          return this.setState({error: data.error, loading: false})
+        }
+        return location.assign('/patient_list')
+      })
+      .catch(error => {
+        this.setState({
+          error: 'Could not log in.',
+          loading: false
+        })
+      })
+  };
+
   render () {
-    const { first_name, last_name, email, password, username } = this.state;
+    const { first_name, last_name, email, password, username, error } = this.state;
 
     return (
       <React.Fragment>
+        {loading &&
+          <LoadingRing />
+        }
         <h6 className='text-center'>Sign up</h6>
+        <p className='text-danger text-center'>{error}</p>
         <form className='py-4' onSubmit={this.signup}>
           <div className='row'>
             <div className='form-group labeled-border col-sm-6'>

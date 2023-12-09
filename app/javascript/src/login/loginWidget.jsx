@@ -1,8 +1,8 @@
 // loginWidget.jsx
 import React from 'react';
 
-
 import SpecialInput from './specialInput';
+import LoadingRing from '@components/loadingRing'
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper'
 
@@ -11,6 +11,7 @@ class LoginWidget extends React.Component {
     username: '',
     password: '',
     error: '',
+    loading: false,
   };
 
   handleChange = (e) => {
@@ -23,6 +24,7 @@ class LoginWidget extends React.Component {
     if (e) { e.preventDefault(); }
     this.setState({
       error: '',
+      loading: true
     });
 
     fetch('/api/sessions', safeCredentials({
@@ -36,22 +38,30 @@ class LoginWidget extends React.Component {
     }))
       .then(handleErrors)
       .then(data => {
-        console.log(data)
+        if (!data.success) {
+          return this.setState({error: data.error, loading: false})
+        }
+        return location.assign('/patient_list')
       })
       .catch(error => {
         this.setState({
           error: 'Could not log in.',
+          loading: false
         })
       })
   }
 
   render () {
-    const {username, password} = this.state;
+    const {username, password, error, loading} = this.state;
 
     return (
       <React.Fragment>
+        {loading &&
+          <LoadingRing /> 
+        }
         <h6 className='text-center'>Log in</h6>
-        <form className='py-4' onSubmit={this.login}>
+        <p className='text-danger text-center'>{error}</p>
+        <form className='pb-4' onSubmit={this.login}>
           <SpecialInput name='username' value={username} handleChange={this.handleChange} />
           <div className='form-group labeled-border col-12 mt-3'>
             <label htmlFor='password'>Password</label>

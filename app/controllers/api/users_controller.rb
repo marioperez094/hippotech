@@ -6,7 +6,10 @@ module Api
       if @user.save
         render 'api/users/create'
       else
-        render json: { success: false }
+        render json: { 
+          success: false,
+          error: @user.errors.full_messages 
+        }
       end
     end
 
