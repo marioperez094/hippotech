@@ -4,6 +4,6 @@ FactoryBot.define do
     username { 'testtest' }
     password { 'testtest' }
     first_name { 'test' }
-    last_name { 'test '}
+    last_name { 'test' }
   end
 end

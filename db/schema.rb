@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_12_093906) do
+ActiveRecord::Schema.define(version: 2023_12_12_170135) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -45,8 +45,10 @@ ActiveRecord::Schema.define(version: 2023_12_12_093906) do
     t.string "last_name"
     t.date "date_of_birth"
     t.string "bio_sex"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -67,7 +69,31 @@ ActiveRecord::Schema.define(version: 2023_12_12_093906) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vitals", force: :cascade do |t|
+    t.decimal "temperature"
+    t.string "temp_source"
+    t.integer "heart_rate"
+    t.integer "systolic"
+    t.integer "diastolic"
+    t.integer "respirations"
+    t.string "o2_source"
+    t.integer "fio2"
+    t.integer "liters"
+    t.integer "intake"
+    t.integer "output"
+    t.string "comment"
+    t.integer "patient_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_vitals_on_patient_id"
+    t.index ["user_id"], name: "index_vitals_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "patients", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "vitals", "patients"
+  add_foreign_key "vitals", "users"
 end

@@ -1,4 +1,5 @@
 class Patient < ApplicationRecord
+  belongs_to :user
   has_many :admissions
   has_many :vitals
   has_one_attached :image

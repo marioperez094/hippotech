@@ -10,10 +10,14 @@ module Api
         return render json: { error: 'Not logged in' }, status: :unauthorized
       end
 
-      @patient = Patient.new(patient_params)
+      user = current_session.user
+      return render json: { error: 'cannot find user' }, status: :not_found if !user
 
-      if @patient.save
-        render 'api/patients/show'
+      begin 
+        @patient = user.patients.create!(patient_params)
+        render 'api/patients/show', status: :created
+      rescue ArgumentError => e
+        render json: { error: e.message }, status: :bad_request
       end
     end
 
@@ -24,7 +28,7 @@ module Api
     end
 
     def update
-      if !current_session.user
+      if !current_session
         return render json: { error: 'Not logged in' }, status: :unauthorized
       end
 

@@ -10,4 +10,9 @@ json.patient do
   else 
     json.image nil
   end
+
+  json.user do
+    json.user_first_name @patient.user.first_name
+    json.user_last_name @patient.user.last_name
+  end
 end

@@ -43,7 +43,11 @@ RSpec.describe Api::PatientsController, type: :controller do
           last_name: 'test', 
           date_of_birth: '2023-01-31',
           bio_sex: 'male',
-          image: nil
+          image: nil,
+          user:{
+            user_first_name: "test",
+            user_last_name: "test"
+          }
         }
       }.to_json)
 
@@ -78,8 +82,8 @@ RSpec.describe Api::PatientsController, type: :controller do
       @request.cookie_jar.signed['hippotech_session_token'] = session.token
 
 
-      patient1 = FactoryBot.create(:patient)
-      patient2 = FactoryBot.create(:patient)
+      patient1 = FactoryBot.create(:patient, user: user)
+      patient2 = FactoryBot.create(:patient, user: user)
 
       get :index
 
@@ -112,7 +116,7 @@ RSpec.describe Api::PatientsController, type: :controller do
       session = user.sessions.create
       @request.cookie_jar.signed['hippotech_session_token'] = session.token
 
-      patient = FactoryBot.create(:patient)
+      patient = FactoryBot.create(:patient, user: user)
 
       get :show, params: { id: patient.id }
 
@@ -123,19 +127,50 @@ RSpec.describe Api::PatientsController, type: :controller do
           last_name: 'test',
           date_of_birth: '2023-01-31',
           bio_sex: 'male',
-          image: nil
+          image: nil,
+          user:{
+            user_first_name: "test",
+            user_last_name: "test"
+          }
         }
       }.to_json)
     end
   end
 
   context 'PUT /patients/:id' do
+    it 'does not update patient info' do
+      user = FactoryBot.create(:user)
+      session = user.sessions.create
+      @request.cookie_jar.signed['hippotech_session_token'] = session.token
+
+      patient = FactoryBot.create(:patient, user: user)
+
+      user = nil
+      session = nil
+      @request.cookie_jar.signed['hippotech_session_token'] = nil
+
+      post :update, params: { id: patient.id,
+        patient: {
+          first_name: 'New',
+          last_name: 'test',
+          date_of_birth: '2023-01-31',
+          bio_sex: 'male'
+        }
+      }
+
+      expect(response.body).to eq({
+        error: 'Not logged in'
+      }.to_json)
+
+    end
+
+
     it 'updates a patient'do
       user = FactoryBot.create(:user)
       session = user.sessions.create
       @request.cookie_jar.signed['hippotech_session_token'] = session.token
 
-      patient = FactoryBot.create(:patient)
+      patient = FactoryBot.create(:patient, user: user)
 
       post :update, params: { id: patient.id,
         patient: {
@@ -153,7 +188,11 @@ RSpec.describe Api::PatientsController, type: :controller do
           last_name: 'test',
           date_of_birth: '2023-01-31',
           bio_sex: 'male',
-          image: nil
+          image: nil,
+          user:{
+            user_first_name: "test",
+            user_last_name: "test"
+          }
         }
       }.to_json)
     end
