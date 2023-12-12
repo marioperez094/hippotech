@@ -86,9 +86,9 @@ class Flowsheet extends React.Component {
                   </div>
                 </th>
                 {vitals.length > 0 &&
-                  vitals.map((vital) => {
+                  vitals.map((vital, index) => {
                     return (
-                      <FlowsheetHeader date={vital.date} />
+                      <FlowsheetHeader key={index} date={vital.date} />
                     )
                   })
                 }
@@ -100,8 +100,8 @@ class Flowsheet extends React.Component {
               <tr>
                 <th scope='row'>Temperature Source</th>
                 {vitals.length > 0 && 
-                  vitals.map((vital) => { return (
-                    <td>
+                  vitals.map((vital, index) => { return (
+                    <td key={index}>
                       <select name='source' className='form-control' value={vital.source} disabled>
                         <option value='oral'>Oral</option>
                         <option value='temporal'>Temporal</option>
@@ -122,8 +122,8 @@ class Flowsheet extends React.Component {
               <tr>
                 <th scope='row'>Blood Pressure</th>
                   {vitals.length > 0 && 
-                    vitals.map((vital) => { return (
-                      <td>
+                    vitals.map((vital, index) => { return (
+                      <td key={index}>
                         <input name='systolic' className='form-control bp-form' value={vital.systolic} disabled />
                         /
                         <input name='diastolic' className='form-control bp-form' value={vital.diastolic} disabled />
@@ -140,8 +140,8 @@ class Flowsheet extends React.Component {
               <tr>
                 <th scope='row'>Oxygen source</th>
                 {vitals.length > 0 && 
-                  vitals.map((vital) => { return (
-                    <td>
+                  vitals.map((vital, index) => { return (
+                    <td key={index}>
                       <select name='oxygen' className='form-control' value={vital.oxygen} disabled >
                         <option value={'RA'}>Room Air</option>
                         <option value={'NC'}>Nasal Cannula</option>
