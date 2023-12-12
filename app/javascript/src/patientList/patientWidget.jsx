@@ -8,7 +8,7 @@ const PatientWidget = (props) => {
   const { id, fName, lName, gender, age } = patient;
 
   const redirect = () => {
-    location.assign(`/patient/${id}`)
+    location.assign(`/patient/1`)
   }
 
   return (
