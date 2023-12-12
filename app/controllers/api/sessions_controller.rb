@@ -15,21 +15,27 @@ module Api
         render 'api/sessions/create'
       else
         render json: {
-          success: false
+          success: false,
+          error: 'Invalid username or password.'
         }
       end
     end
 
     def authenticated
-      token = cookies.signed[:hippotech_session_token]
-      session = Session.find_by(token: token)
-
-      if session
-        @user = session.user
-        render 'api/sessions/authenticated'
-      else
-        render json: {
+      if !current_session
+        return render json: {
           authenticated: false
+        }
+      end
+
+      @user = current_session.user
+      render 'api/sessions/authenticated'
+    end
+
+    def destroy
+      if current_session&.destroy
+        render json: {
+          success: true
         }
       end
     end
