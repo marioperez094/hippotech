@@ -62,9 +62,9 @@ const PatientSummary = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {allergies.map((allergy) => {
+                    {allergies.map((allergy, index) => {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{allergy.name}</td>
                           <td>{allergy.type}</td>
                           <td>{allergy.symptom}</td>
