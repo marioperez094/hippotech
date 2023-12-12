@@ -2,7 +2,7 @@
 import React from 'react';
 
 import SpecialInput from './specialInput';
-import LoadingRing from '@components/loadingRing'
+import LoadingRing from '@components/loadingRing';
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper'
 
@@ -45,7 +45,7 @@ class LoginWidget extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error: 'Could not log in.',
+          error: error.error,
           loading: false
         })
       })

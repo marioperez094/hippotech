@@ -1,7 +1,7 @@
-// signupWidget.jsx
 import React from 'react';
 
 import SpecialInput from './specialInput';
+import LoadingRing from '@components/loadingRing';
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
@@ -43,15 +43,15 @@ class SignupWidget extends React.Component {
     }))
       .then(handleErrors)
       .then(data => {
-        console.log(data)
-        if (!data.user.success) {
+        if (!data.user) {
+          console.log(data.user)
           return this.setState({error: data.error, loading: false})
         }
         return this.login();
       })
       .catch(error => {
         this.setState({
-          error: 'Could not sign up.',
+          error: error.error,
           loading: false
         })
       })
@@ -85,7 +85,7 @@ class SignupWidget extends React.Component {
   };
 
   render () {
-    const { first_name, last_name, email, password, username, error } = this.state;
+    const { first_name, last_name, email, password, username, error, loading } = this.state;
 
     return (
       <React.Fragment>

@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [:create]
-    resources :sessions, only: [:create, :destroy]
+    resources :sessions, only: [:create]
 
+    #Session APIs
     delete '/sessions' => 'sessions#destroy'
     get '/authenticated' => 'sessions#authenticated'
   end
