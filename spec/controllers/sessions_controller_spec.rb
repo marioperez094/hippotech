@@ -5,13 +5,7 @@ RSpec.describe Api::SessionsController, type: :controller do
   
   describe 'POST /sessions' do
     it 'renders new session object' do
-      user = User.create(
-        email: 'test@test.com',
-        password: 'asdasdasd',
-        username: 'test',
-        first_name: 'test',
-        last_name: 'test'
-      )
+      FactoryBot.create(:user, username: 'test', password: 'asdasdasd')
 
       post :create, params: {
         user: {
@@ -27,46 +21,15 @@ RSpec.describe Api::SessionsController, type: :controller do
   end
 
   describe 'DELETE /sessions' do
-    it 'renders delete session object' do
-      user = User.create(
-        email: 'test@test.com',
-        password: 'asdasdasd',
-        username: 'test',
-        first_name: 'test',
-        last_name: 'test'
-      )
+    it 'renders success' do
+      user = FactoryBot.create(:user)
+      session = user.sessions.create
+      @request.cookie_jar.signed['hippotech_session_token'] = session.token
 
-      post :create, params: {
-        user: {
-          username: 'test',
-          password: 'asdasdasd'
-        }
-      }
+      delete :destroy
 
-      post :destroy
-
-      expect(response.body).to eq({ 
-        success: true 
-      }.to_json)
+      expect(user.sessions.count).to be(0)
     end
   end
 
 end
-
-
-#describe 'DELETE /sessions' do
-  #it 'renders success'
-    #user = User.create(
-      #email: 'test@test.com',
-      #password: 'asdasdasd',
-      #username: 'test',
-      #first_name: 'test',
-      #last_name: 'test'
-    #)
-    #session = user.sessions.create
-
-    #delete :destroy
-
-    #expect(response.body).to eq({ success: true }.to_json)
-  #end
-#end
