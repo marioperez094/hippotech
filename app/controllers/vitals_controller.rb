@@ -1,2 +1,0 @@
-class VitalsController < ApplicationController
-end

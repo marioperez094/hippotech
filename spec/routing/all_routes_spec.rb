@@ -33,15 +33,15 @@ RSpec.describe 'Route Definition', :type => :routing do
     expect(:post => '/api/vitals').to route_to(:controller => 'api/vitals', :action => 'create')
   end
 
-  it 'of GET /vitals' do
-    expect(:get => '/api/vitals').to route_to(:controller => 'api/vitals', :action => 'index')
-  end
-
   it 'of GET /vitals/:id' do
     expect(:get => '/api/vitals/:id').to route_to(:controller => 'api/vitals', :action => 'show', :id => ':id')
   end
 
   it 'of PUT /vitals/:id' do
     expect(:put => '/api/vitals/:id').to route_to(:controller => 'api/vitals', :action => 'update', :id => ':id')
+  end
+
+  it 'of GET /vitals/:patient' do
+    expect(:get => '/api/patients/:id/vitals').to route_to(:controller => 'api/vitals', :action => 'index_by_patient', :id => ':id')
   end
 end

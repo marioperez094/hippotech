@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2023_12_12_170135) do
     t.integer "intake"
     t.integer "output"
     t.string "comment"
+    t.datetime "service_time"
     t.integer "patient_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false

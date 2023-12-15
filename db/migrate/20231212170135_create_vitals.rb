@@ -13,6 +13,7 @@ class CreateVitals < ActiveRecord::Migration[6.1]
       t.integer :intake
       t.integer :output
       t.string :comment
+      t.datetime :service_time
       t.belongs_to :patient, index: true, foreign_key: true
       t.belongs_to :user, index: true, foreign_key: true
 
