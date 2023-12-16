@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :patients
   has_many :vitals
   has_many :admissions
+  has_many :allergies
+  has_many :histories
 
   validates :first_name, presence: true, length: { minimum: 3, maximum: 64 }
   validates :last_name, presence: true, length: { minimum: 3, maximum: 64 }

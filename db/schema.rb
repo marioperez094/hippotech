@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_16_062256) do
+ActiveRecord::Schema.define(version: 2023_12_16_160301) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 2023_12_16_062256) do
     t.index ["user_id"], name: "index_allergies_on_user_id"
   end
 
+  create_table "histories", force: :cascade do |t|
+    t.string "diagnosis"
+    t.date "diagnosis_date"
+    t.integer "patient_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_histories_on_patient_id"
+    t.index ["user_id"], name: "index_histories_on_user_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -128,6 +139,8 @@ ActiveRecord::Schema.define(version: 2023_12_16_062256) do
   add_foreign_key "admissions", "users"
   add_foreign_key "allergies", "patients"
   add_foreign_key "allergies", "users"
+  add_foreign_key "histories", "patients"
+  add_foreign_key "histories", "users"
   add_foreign_key "patients", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "vitals", "patients"

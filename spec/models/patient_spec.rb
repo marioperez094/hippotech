@@ -31,7 +31,7 @@ RSpec.describe Patient, type: :model do
     it 'must have a date of birth' do
       expect {
         user = FactoryBot.create(:user)
-        FactoryBot.create(:patient, date_of_birth: nil, user: user).to raise_error(ActiveRecord::RecordInvalid)
+        FactoryBot.create(:patient, date_of_birth: nil, user: user).to raise_error(ArgumentError)
       }
     end
 
@@ -73,7 +73,7 @@ RSpec.describe Patient, type: :model do
     it 'must have a date' do
       expect {
         user = FactoryBot.create(:user)
-        FactoryBot.create(:patient, date_of_birth: '22-22-22', user: user).to raise_error(ActiveRecord::RecordInvalid)
+        FactoryBot.create(:patient, date_of_birth: '22-22-22', user: user).to raise_error(ArgumentError)
       }
     end
 

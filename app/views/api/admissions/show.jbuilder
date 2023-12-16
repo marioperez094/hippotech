@@ -28,6 +28,17 @@ json.admission do
         end
       end
     end
+
+    if @admission.patient.histories.length < 1
+      json.histories nil
+    else
+      json.histories do
+        json.array! @admission.patient.histories do |history|
+          json.diagnosis history.diagnosis
+          json.diagnosis_date history.diagnosis_date
+        end
+      end
+    end
   end
 
   json.user do
