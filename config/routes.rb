@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :vitals, only: [:create, :show, :update]
     resources :admissions, only: [:create, :index, :show, :update]
     resources :allergies, only: [:create, :destroy]
+    resources :histories, only: [:create, :destroy]
+
+    #Histories API
+    get '/patients/:id/histories' => 'histories#index_by_patient'
 
     #Allergies API
     get '/patients/:id/allergies' => 'allergies#index_by_patient'

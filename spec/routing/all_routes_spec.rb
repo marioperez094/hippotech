@@ -80,4 +80,16 @@ RSpec.describe 'Route Definition', :type => :routing do
   it 'of DELETE /allergies/:id' do
     expect(:delete => '/api/allergies/:id').to route_to(:controller => 'api/allergies', :action => 'destroy', :id => ':id')
   end
+
+  it 'of POST /histories' do
+    expect(:post => '/api/histories').to route_to(:controller => 'api/histories', :action => 'create')
+  end
+
+  it 'of GET /patients/:id/historiess' do
+    expect(:get => '/api/patients/:id/histories').to route_to(:controller => 'api/histories', :action => 'index_by_patient', :id => ':id')
+  end
+
+  it 'of DELETE /histories/:id' do
+    expect(:delete => '/api/histories/:id').to route_to(:controller => 'api/histories', :action => 'destroy', :id => ':id')
+  end
 end
