@@ -41,7 +41,31 @@ RSpec.describe 'Route Definition', :type => :routing do
     expect(:put => '/api/vitals/:id').to route_to(:controller => 'api/vitals', :action => 'update', :id => ':id')
   end
 
-  it 'of GET /vitals/:patient' do
+  it 'of GET /patients/:id/vitals' do
     expect(:get => '/api/patients/:id/vitals').to route_to(:controller => 'api/vitals', :action => 'index_by_patient', :id => ':id')
+  end
+
+  it 'of POST /admissions' do
+    expect(:post => '/api/admissions').to route_to(:controller => 'api/admissions', :action => 'create')
+  end
+
+  it 'of GET /admissions' do
+    expect(:get => '/api/admissions').to route_to(:controller => 'api/admissions', :action => 'index')
+  end
+
+  it 'of GET /admissions/:id' do
+    expect(:get => '/api/admissions/:id').to route_to(:controller => 'api/admissions', :action => 'show', :id => ':id')
+  end
+
+  it 'of GET /patients/:id/admissions' do
+    expect(:get => '/api/patients/:id/admissions').to route_to(:controller => 'api/admissions', :action => 'index_by_patient', :id => ':id')
+  end
+
+  it 'of PUT /admissions/:id' do
+    expect(:put => '/api/admissions/:id').to route_to(:controller => 'api/admissions', :action => 'update', :id => ':id')
+  end
+
+  it 'of PUT /admissions/:id/discharge' do
+    expect(:put => '/api/admissions/:id/discharge').to route_to(:controller => 'api/admissions', :action => 'discharge', :id => ':id')
   end
 end

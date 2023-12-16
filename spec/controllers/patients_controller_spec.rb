@@ -17,7 +17,6 @@ RSpec.describe Api::PatientsController, type: :controller do
       expect(response.body).to eq({
         error: 'Not logged in'
       }.to_json)
-
     end
 
     it 'renders new patient object' do
