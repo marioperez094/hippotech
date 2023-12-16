@@ -31,8 +31,7 @@ module Api
     end
 
     def index_by_patient
-      patient = Patient.find_by(id: params[:id])
-      return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
+      patient = find_patient
 
       @admissions = patient.admissions.order(created_at: :asc)
       render 'api/admissions/index', status: :ok

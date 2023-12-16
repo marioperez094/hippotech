@@ -4,7 +4,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
   render_views
 
   context 'POST /admissions' do
-    it 'does not render a new admission object' do
+    it 'does not render a new admission object no user' do
       post :create, params: {
         admission: {
           phone_number: '1234567890',
@@ -24,7 +24,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
       }.to_json)
     end
 
-    it 'does not render a new admission object' do
+    it 'does not render a new admission object no patient' do
       user = FactoryBot.create(:user)
       session = user.sessions.create
       @request.cookie_jar.signed['hippotech_session_token'] = session.token
@@ -89,7 +89,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient.id,
             first_name: patient.first_name,
-            last_name: patient.last_name
+            last_name: patient.last_name,
+            allergies: nil
           },
           user: {
             user_first_name: user.first_name,
@@ -108,6 +109,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
 
       patient1 = FactoryBot.create(:patient, user: user)
       patient2 = FactoryBot.create(:patient, user: user)
+
+      allergy = FactoryBot.create(:allergy, patient: patient1, user: user)
 
       admission1 = FactoryBot.create(:admission, patient: patient1, user: user)
       admission2 = FactoryBot.create(:admission, patient: patient2, user: user)
@@ -131,7 +134,10 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient1.id,
             first_name: patient1.first_name,
-            last_name: patient1.last_name
+            last_name: patient1.last_name,
+            allergies: [{
+              name: allergy.name
+            }]
           },
         },
         {
@@ -150,7 +156,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient2.id,
             first_name: patient2.first_name,
-            last_name: patient2.last_name
+            last_name: patient2.last_name,
+            allergies: nil
           },
         }]
       }.to_json)
@@ -186,7 +193,53 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient.id,
             first_name: patient.first_name,
-            last_name: patient.last_name
+            last_name: patient.last_name,
+            allergies: nil
+          },
+          user: {
+            user_first_name: user.first_name,
+            user_last_name: user.last_name
+          }
+        }
+      }.to_json)
+    end
+
+    it 'admissions can have allergies' do
+      user = FactoryBot.create(:user)
+      session = user.sessions.create
+      @request.cookie_jar.signed['hippotech_session_token'] = session.token
+  
+      patient = FactoryBot.create(:patient, user: user)
+
+      admission = FactoryBot.create(:admission, patient: patient, user: user)
+
+      allergy = FactoryBot.create(:allergy, patient: patient, user: user)
+  
+      get :show, params: { id: admission.id }
+  
+      expect(response.body).to eq({
+        admission: {
+          id: 1,
+          phone_number: '1234567890',
+          address: '1234 S. First St. Paris, France 12345',
+          occupation: 'unemployed',
+          diagnosis: 'Shortness of breath',
+          code_status: 'Full',
+          diet: 'cardiac',
+          emergency_contact: 'Test Test',
+          emergency_relationship: 'Spouse',
+          emergency_phone: '1234567890',
+          discharge: false,
+          created_at: Admission.first.created_at,
+          patient: {
+            patient_id: patient.id,
+            first_name: patient.first_name,
+            last_name: patient.last_name,
+            allergies: [{
+              name: allergy.name,
+              reaction: allergy.reaction,
+              symptoms: allergy.symptoms
+            }]
           },
           user: {
             user_first_name: user.first_name,
@@ -229,7 +282,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient1.id,
             first_name: patient1.first_name,
-            last_name: patient1.last_name
+            last_name: patient1.last_name,
+            allergies: nil,
           },
         },
         {
@@ -248,7 +302,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient1.id,
             first_name: patient1.first_name,
-            last_name: patient1.last_name
+            last_name: patient1.last_name,
+            allergies: nil,
           },
         }]
       }.to_json)
@@ -268,7 +323,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
       post :update, params: { id: admission.id,
         admission: {
           id: admission.id,
-          phone_number: '1234567890',
+          phone_number: '1234567891',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
           diagnosis: 'Shortness of breath',
@@ -277,20 +332,13 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           emergency_contact: 'Test Test',
           emergency_relationship: 'Spouse',
           emergency_phone: '1234567890',
-          discharge: false,
-          created_at: Admission.first.created_at,
-          patient: {
-            patient_id: patient.id,
-            first_name: patient.first_name,
-            last_name: patient.last_name
-          },
         }
       }
  
       expect(response.body).to eq({
         admission: {
           id: 1,
-          phone_number: '1234567890',
+          phone_number: '1234567891',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
           diagnosis: 'Shortness of breath',
@@ -304,7 +352,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient.id,
             first_name: patient.first_name,
-            last_name: patient.last_name
+            last_name: patient.last_name,
+            allergies: nil
           },
           user: {
             user_first_name: user.first_name,
@@ -376,7 +425,8 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           patient: {
             patient_id: patient.id,
             first_name: patient.first_name,
-            last_name: patient.last_name
+            last_name: patient.last_name,
+            allergies: nil
           },
           user: {
             user_first_name: user.first_name,

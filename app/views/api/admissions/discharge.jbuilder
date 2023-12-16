@@ -17,6 +17,16 @@ json.admission do
     json.patient_id @admission.patient.id
     json.first_name @admission.patient.first_name
     json.last_name @admission.patient.last_name
+
+    if @admission.patient.allergies.length < 1
+      json.allergies nil
+    else
+      json.array! @admission.patient.allergies do |allergy|
+        json.name @admission.patient.allergy.name
+        json.reaction @admission.patient.allergy.reaction
+        json.symptoms @admission.patient.allergy.symp
+      end
+    end
   end
 
   json.user do
