@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_12_170135) do
+ActiveRecord::Schema.define(version: 2023_12_15_062908) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,25 @@ ActiveRecord::Schema.define(version: 2023_12_12_170135) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "admissions", force: :cascade do |t|
+    t.string "phone_number"
+    t.string "address"
+    t.string "occupation"
+    t.string "diagnosis"
+    t.string "code_status"
+    t.string "diet"
+    t.string "emergency_contact"
+    t.string "emergency_relationship"
+    t.string "emergency_phone"
+    t.boolean "discharge", default: false
+    t.integer "patient_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_admissions_on_patient_id"
+    t.index ["user_id"], name: "index_admissions_on_user_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -93,6 +112,8 @@ ActiveRecord::Schema.define(version: 2023_12_12_170135) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admissions", "patients"
+  add_foreign_key "admissions", "users"
   add_foreign_key "patients", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "vitals", "patients"

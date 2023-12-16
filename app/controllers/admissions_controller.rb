@@ -1,2 +1,0 @@
-class AdmissionsController < ApplicationController
-end

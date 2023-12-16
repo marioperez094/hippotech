@@ -12,9 +12,14 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
     resources :patients, only: [:create, :index, :show, :update]
     resources :vitals, only: [:create, :show, :update]
+    resources :admissions, only: [:create, :index, :show, :update]
 
     #Vitals API
     get '/patients/:id/vitals' => 'vitals#index_by_patient'
+
+    #Admission API
+    get '/patients/:id/admissions' => 'admissions#index_by_patient'
+    put '/admissions/:id/discharge' => 'admissions#discharge'
 
     #Session APIs
     delete '/sessions' => 'sessions#destroy'

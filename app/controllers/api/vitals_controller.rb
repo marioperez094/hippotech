@@ -12,7 +12,7 @@ module Api
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
     
       begin 
-        @vital = Vital.create({ user_id: user.id, patient_id: patient.id, temperature: params[:vital][:temperature], temp_source: params[:vital][:temp_source], heart_rate: params[:vital][:heart_rate], systolic: params[:vital][:systolic], diastolic: params[:vital][:diastolic], respirations: params[:vital][:respirations], o2_source: params[:vital][:o2_source], fio2: params[:vital][:fio2], liters: params[:vital][:liters], intake: params[:vital][:intake], output: params[:vital][:output], comment: params[:vital][:comment], service_time: params[:vital][:service_time]})
+        @vital = Vital.create({user_id: user.id, patient_id: patient.id, temperature: params[:vital][:temperature], temp_source: params[:vital][:temp_source], heart_rate: params[:vital][:heart_rate], systolic: params[:vital][:systolic], diastolic: params[:vital][:diastolic], respirations: params[:vital][:respirations], o2_source: params[:vital][:o2_source], fio2: params[:vital][:fio2], liters: params[:vital][:liters], intake: params[:vital][:intake], output: params[:vital][:output], comment: params[:vital][:comment], service_time: params[:vital][:service_time]})
         render 'api/vitals/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request
@@ -44,7 +44,7 @@ module Api
         @vital.update(vital_params)
         render 'api/vitals/show', status: :ok
       rescue ArgumentError => e
-        render json: { errro: e.message }, status: :bad_request
+        render json: { error: e.message }, status: :bad_request
       end
     end
 
