@@ -26,8 +26,7 @@ module Api
     end
 
     def index_by_patient
-      patient = Patient.find_by(id: params[:id])
-      return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
+      patient = find_patient
 
       @vitals = patient.vitals.order(service_time: :asc)
       render 'api/vitals/index', status: :ok
@@ -56,7 +55,7 @@ module Api
     private
 
     def vital_params
-      params.require(:vital).permit(:property_id, :temperature, :temp_source, :heart_rate, :systolic, :diastolic, :respirations, :o2_source, :fio2, :liters, :intake, :output, :comment, :service_time)
+      params.require(:vital).permit(:temperature, :temp_source, :heart_rate, :systolic, :diastolic, :respirations, :o2_source, :fio2, :liters, :intake, :output, :comment, :service_time)
     end
   end
 end
