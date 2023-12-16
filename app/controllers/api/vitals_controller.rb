@@ -11,6 +11,7 @@ module Api
       patient = Patient.find_by(id: params[:vital][:patient_id])
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
     
+      #Vitals belongs to a patient, the user is charting on the patient
       begin 
         @vital = Vital.create({user_id: user.id, patient_id: patient.id, temperature: params[:vital][:temperature], temp_source: params[:vital][:temp_source], heart_rate: params[:vital][:heart_rate], systolic: params[:vital][:systolic], diastolic: params[:vital][:diastolic], respirations: params[:vital][:respirations], o2_source: params[:vital][:o2_source], fio2: params[:vital][:fio2], liters: params[:vital][:liters], intake: params[:vital][:intake], output: params[:vital][:output], comment: params[:vital][:comment], service_time: params[:vital][:service_time]})
         render 'api/vitals/show', status: :created

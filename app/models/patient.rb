@@ -16,12 +16,14 @@ class Patient < ApplicationRecord
 
   private
 
+  #Date of birth must be a valid date
   def date_must_be_a_date
     if self.date_of_birth == nil
       raise ArgumentError.new("Diagnosis date must be a date")
     end
   end
 
+  #Date of birth must be before current date
   def date_smaller_than_current_date
     if self.date_of_birth > Date.today
       raise ArgumentError.new("Diagnosis date cannot be after today's date")

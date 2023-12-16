@@ -11,6 +11,7 @@ module Api
       patient = Patient.find_by(id: params[:allergy][:patient_id])
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
+      #Allergies belong to a patient and are charted by a user
       begin 
         @allergy = Allergy.create({user_id: user.id, patient_id: patient.id, name: params[:allergy][:name], reaction: params[:allergy][:reaction], symptoms: params[:allergy][:symptoms]})
         render 'api/allergies/show', status: :created

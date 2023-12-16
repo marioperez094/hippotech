@@ -11,6 +11,7 @@ module Api
       patient = Patient.find_by(id: params[:admission][:patient_id])
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
+      #Admissions belong to a patient and are charted by a user
       begin
         @admission = Admission.create({user_id: user.id, patient_id: patient.id, phone_number: params[:admission][:phone_number], address: params[:admission][:address], occupation: params[:admission][:occupation], diagnosis: params[:admission][:diagnosis], code_status: params[:admission][:code_status], diet: params[:admission][:diet], emergency_contact: params[:admission][:emergency_contact], emergency_relationship: params[:admission][:emergency_relationship], emergency_phone: params[:admission][:emergency_phone]})
         render 'api/admissions/show', status: :created
@@ -57,6 +58,7 @@ module Api
       return render json: { error: 'Admission not found.' }, status: :not_found if !@admission
     end
 
+    #Patients cannot be deleted, instead only updated and discharged
     def discharge
       @admission = Admission.find_by(id: params[:id])
 

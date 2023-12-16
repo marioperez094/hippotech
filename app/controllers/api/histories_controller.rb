@@ -10,6 +10,7 @@ module Api
       patient = Patient.find_by(id: params[:history][:patient_id])
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
+      #History belong to a patient and are charted by a user
       begin 
         @history = History.create({user_id: user.id, patient_id: patient.id, diagnosis: params[:history][:diagnosis], diagnosis_date: params[:history][:diagnosis_date]})
         render 'api/histories/show', status: :created
