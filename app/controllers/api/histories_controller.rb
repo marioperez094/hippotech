@@ -12,7 +12,10 @@ module Api
 
       #History belong to a patient and are charted by a user
       begin 
-        @history = History.create({user_id: user.id, patient_id: patient.id, diagnosis: params[:history][:diagnosis], diagnosis_date: params[:history][:diagnosis_date]})
+        @history = History.new(history_params)
+        @history.user = user
+        @history.patient = patient
+        @history.save!
         render 'api/histories/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request

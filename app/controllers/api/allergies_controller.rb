@@ -13,7 +13,10 @@ module Api
 
       #Allergies belong to a patient and are charted by a user
       begin 
-        @allergy = Allergy.create({user_id: user.id, patient_id: patient.id, name: params[:allergy][:name], reaction: params[:allergy][:reaction], symptoms: params[:allergy][:symptoms]})
+        @allergy = Allergy.new(allergy_params)
+        @allergy.user = user
+        @allergy.patient = patient
+        @allergy.save!
         render 'api/allergies/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request

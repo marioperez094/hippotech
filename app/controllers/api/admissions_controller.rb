@@ -13,7 +13,10 @@ module Api
 
       #Admissions belong to a patient and are charted by a user
       begin
-        @admission = Admission.create({user_id: user.id, patient_id: patient.id, phone_number: params[:admission][:phone_number], address: params[:admission][:address], occupation: params[:admission][:occupation], diagnosis: params[:admission][:diagnosis], code_status: params[:admission][:code_status], diet: params[:admission][:diet], emergency_contact: params[:admission][:emergency_contact], emergency_relationship: params[:admission][:emergency_relationship], emergency_phone: params[:admission][:emergency_phone]})
+        @admission = Admission.new(admission_params)
+        @admission.user = user
+        @admission.patient = patient
+        @admission.save!
         render 'api/admissions/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request

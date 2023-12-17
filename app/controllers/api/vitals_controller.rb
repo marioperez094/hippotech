@@ -13,7 +13,10 @@ module Api
     
       #Vitals belongs to a patient, the user is charting on the patient
       begin 
-        @vital = Vital.create({user_id: user.id, patient_id: patient.id, temperature: params[:vital][:temperature], temp_source: params[:vital][:temp_source], heart_rate: params[:vital][:heart_rate], systolic: params[:vital][:systolic], diastolic: params[:vital][:diastolic], respirations: params[:vital][:respirations], o2_source: params[:vital][:o2_source], fio2: params[:vital][:fio2], liters: params[:vital][:liters], intake: params[:vital][:intake], output: params[:vital][:output], comment: params[:vital][:comment], service_time: params[:vital][:service_time]})
+        @vital = Vital.new(vital_params)
+        @vital.user = user
+        @vital.patient = patient
+        @vital.save!
         render 'api/vitals/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request
