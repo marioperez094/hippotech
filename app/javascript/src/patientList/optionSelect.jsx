@@ -5,9 +5,8 @@ const OptionSelect = (props) => {
   return (
     <select name={num} value={option} onChange={(e) => changeOption(e)}>
       <option value={'diagnosis'}>Diagnosis</option>
-      <option value={'admission'}>Admission Date</option>
       <option value={'diet'}>Diet</option>
-      <option value={'code'}>Code Status</option>
+      <option value={'code_status'}>Code Status</option>
     </select>
   )
 }

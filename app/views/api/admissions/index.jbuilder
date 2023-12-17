@@ -14,27 +14,29 @@ json.admissions do
     json.created_at admission.created_at
 
     json.patient do
-      json.patient_id admission.patient.id
+      json.id admission.patient.id
       json.first_name admission.patient.first_name
       json.last_name admission.patient.last_name
+      json.date_of_birth admission.patient.date_of_birth
+      json.bio_sex admission.patient.bio_sex
+    end
 
-      if admission.patient.allergies.length < 1
-        json.allergies nil
-      else
-        json.allergies do
-          json.array! admission.patient.allergies do |allergy|
-            json.name allergy.name
-          end
+    if admission.patient.allergies.length < 1
+      json.allergies nil
+    else
+      json.allergies do
+        json.array! admission.patient.allergies do |allergy|
+          json.name allergy.name
         end
       end
+    end
 
-      if admission.patient.histories.length < 1
-        json.histories nil
-      else
-        json.histories do
-          json.array! admission.patient.histories do |history|
-            json.diagnosis history.diagnosis
-          end
+    if admission.patient.histories.length < 1
+      json.histories nil
+    else
+      json.histories do
+        json.array! admission.patient.histories do |history|
+          json.diagnosis history.diagnosis
         end
       end
     end

@@ -4,46 +4,28 @@ import Navbar from '../components/navbar'
 import PatientWidget from "./patientWidget";
 import OptionSelect from "./optionSelect";
 
+import { handleErrors } from "../utils/fetchHelper";
+
 class PatientList extends React.Component {
   state = {
-    patients: [{
-      id: 1,
-      fName: 'John',
-      lName: 'Feta',
-      gender: 'Male',
-      age: 62,
-      code: 'Full Code',
-      diet: 'Regular',
-      diagnosis: 'Shortness of breath',
-      admission: '12/06/2023',
-    },
-    {
-      id: 3,
-      fName: 'Sam',
-      lName: 'Goota',
-      gender: 'Male',
-      age: 62,
-      code: 'DNR',
-      diet: 'Diabetic',
-      diagnosis: 'Shortness of breath',
-      admission: '12/06/2023',
-    },
-    {
-      id: 2,
-      fName: 'Jane',
-      lName: 'Cheddar',
-      gender: 'Female',
-      age: 62,
-      code: 'Full Code',
-      diet: 'Cardiac',
-      diagnosis: 'Congestive Heart Failure',
-      admission: '12/02/2023',
-    }],
+    admissions: [],
     options: {
       1: 'diagnosis',
-      2: 'admission'
+      2: 'diet'
     },
     category: '',
+  }
+
+  componentDidMount() {
+    fetch('/api/admissions')
+      .then(handleErrors)
+      .then(data => {
+        console.log(data)
+        const admissions = data.admissions.filter((admission) => { return !admission.discharge })
+        this.setState({
+          admissions
+        })
+      })
   }
 
   sortByID = () => {
@@ -59,7 +41,7 @@ class PatientList extends React.Component {
   }
 
   render() {
-    const {patients, category, options} = this.state;
+    const {admissions, category, options} = this.state;
     return (
       <>
         <Navbar />
@@ -92,17 +74,17 @@ class PatientList extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {patients.length > 0
-                      ? patients.map((patient) => {
+                    {admissions.length > 0
+                      ? admissions.map((admission) => {
                         return (
                           <PatientWidget 
-                            key={patient.id} 
-                            patient={patient} 
+                            key={admission.patient.patient_id} 
+                            admission={admission} 
                             options={options}
                           />
                         )
                       })
-                      : <p>No patients found.</p> 
+                      : <tr><th>No patients found.</th></tr>
                     }
                   </tbody>
                 </table>
