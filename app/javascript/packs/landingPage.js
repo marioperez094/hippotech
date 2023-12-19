@@ -1,1 +1,1 @@
-import '@src/landingPage';
+import '@pages/landingPage';

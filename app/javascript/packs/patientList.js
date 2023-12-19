@@ -1,1 +1,1 @@
-import '@src/patientList'
+import '@pages/patientList'

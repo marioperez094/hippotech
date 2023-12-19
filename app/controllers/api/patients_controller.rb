@@ -46,7 +46,7 @@ module Api
       @patient = Patient.find_by(id: params[:id])
       return render json: { error: 'Patient not found.' }, status: :not_found if !@patient
     end
-
+    
     private
 
     def patient_params

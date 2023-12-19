@@ -128,11 +128,11 @@ RSpec.describe Admission, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
-    it 'diagnosis must be max 21 characters' do
+    it 'diagnosis must be max 50 characters' do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, diagnosis: 'c' * 21, patient: patient, user: user)
+        FactoryBot.create(:admission, diagnosis: 'c' * 51, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -152,11 +152,11 @@ RSpec.describe Admission, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
-    it 'diet must be max 20 characters' do
+    it 'diet must be max 25 characters' do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, diet: 'c' * 21, patient: patient, user: user)
+        FactoryBot.create(:admission, diet: 'c' * 26, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 

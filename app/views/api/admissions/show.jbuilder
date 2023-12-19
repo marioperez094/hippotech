@@ -13,12 +13,20 @@ json.admission do
   json.created_at @admission.created_at
 
   json.patient do
-    json.patient_id @admission.patient.id
+    json.id @admission.patient.id
     json.first_name @admission.patient.first_name
     json.last_name @admission.patient.last_name
+    json.date_of_birth @admission.patient.date_of_birth
+    json.bio_sex @admission.patient.bio_sex
+
+    if @admission.patient.image.attached?
+      json.image url_for(@admission.patient.image)
+    else 
+      json.image nil
+    end
 
     if @admission.patient.allergies.length < 1
-      json.allergies nil
+      json.allergies 'NKDA'
     else
       json.allergies do
         json.array! @admission.patient.allergies do |allergy|
@@ -30,7 +38,7 @@ json.admission do
     end
 
     if @admission.patient.histories.length < 1
-      json.histories nil
+      json.histories 'No Past Medical History'
     else
       json.histories do
         json.array! @admission.patient.histories do |history|
@@ -42,7 +50,7 @@ json.admission do
   end
 
   json.user do
-    json.user_first_name @admission.user.first_name
-    json.user_last_name @admission.user.last_name
+    json.first_name @admission.user.first_name
+    json.last_name @admission.user.last_name
   end
 end

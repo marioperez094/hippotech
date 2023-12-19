@@ -87,15 +87,18 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
-            patient_id: patient.id,
+            id: patient.id,
             first_name: patient.first_name,
             last_name: patient.last_name,
-            allergies: nil,
-            histories: nil
+            date_of_birth: patient.date_of_birth,
+            bio_sex: patient.bio_sex,
+            image: nil,
+            allergies: 'NKDA',
+            histories: 'No Past Medical History',
           },
           user: {
-            user_first_name: user.first_name,
-            user_last_name: user.last_name
+            first_name: user.first_name,
+            last_name: user.last_name
           }
         }
       }.to_json)
@@ -134,14 +137,16 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
-            patient_id: patient1.id,
+            id: patient1.id,
             first_name: patient1.first_name,
             last_name: patient1.last_name,
-            allergies: [{
-              name: allergy.name
-            }],
-            histories: nil
+            date_of_birth: patient1.date_of_birth,
+            bio_sex: patient1.bio_sex
           },
+          allergies: [{
+              name: allergy.name
+          }],
+          histories: 'No Past Medical History'
         },
         {
           id: admission2.id,
@@ -157,14 +162,16 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.second.created_at,
           patient: {
-            patient_id: patient2.id,
+            id: patient2.id,
             first_name: patient2.first_name,
             last_name: patient2.last_name,
-            allergies: nil,
-            histories: [{
-              diagnosis: history.diagnosis
-            }]
+            date_of_birth: patient2.date_of_birth,
+            bio_sex: patient2.bio_sex
           },
+          allergies: 'NKDA',
+          histories: [{
+            name: history.diagnosis
+          }]
         }]
       }.to_json)
     end
@@ -197,15 +204,18 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
-            patient_id: patient.id,
+            id: patient.id,
             first_name: patient.first_name,
             last_name: patient.last_name,
-            allergies: nil,
-            histories: nil
+            date_of_birth: patient.date_of_birth,
+            bio_sex: patient.bio_sex,
+            image: nil,
+            allergies: 'NKDA',
+            histories: 'No Past Medical History',
           },
           user: {
-            user_first_name: user.first_name,
-            user_last_name: user.last_name
+            first_name: user.first_name,
+            last_name: user.last_name
           }
         }
       }.to_json)
@@ -239,19 +249,22 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
-            patient_id: patient.id,
+            id: patient.id,
             first_name: patient.first_name,
             last_name: patient.last_name,
+            date_of_birth: patient.date_of_birth,
+            bio_sex: patient.bio_sex,
+            image: nil,
             allergies: [{
               name: allergy.name,
               reaction: allergy.reaction,
               symptoms: allergy.symptoms
             }],
-            histories: nil
+            histories: 'No Past Medical History'
           },
           user: {
-            user_first_name: user.first_name,
-            user_last_name: user.last_name
+            first_name: user.first_name,
+            last_name: user.last_name
           }
         }
       }.to_json)
@@ -285,18 +298,21 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
-            patient_id: patient.id,
+            id: patient.id,
             first_name: patient.first_name,
             last_name: patient.last_name,
-            allergies: nil,
+            date_of_birth: patient.date_of_birth,
+            bio_sex: patient.bio_sex,
+            image: nil,
+            allergies: 'NKDA',
             histories: [{
               diagnosis: history.diagnosis,
               diagnosis_date: history.diagnosis_date
             }]
           },
           user: {
-            user_first_name: user.first_name,
-            user_last_name: user.last_name
+            first_name: user.first_name,
+            last_name: user.last_name
           }
         }
       }.to_json)
@@ -304,7 +320,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
   end
 
   context 'GET /patients/:id/admissions' do
-    it 'renders a ist of admissions for a patient' do
+    it 'renders a list of admissions for a patient' do
       user = FactoryBot.create(:user)
       session = user.sessions.create
       @request.cookie_jar.signed['hippotech_session_token'] = session.token
@@ -321,45 +337,17 @@ RSpec.describe Api::AdmissionsController, type: :controller do
       expect(response.body).to eq({
         admissions: [{
           id: admission1.id,
-          phone_number: '1234567890',
-          address: '1234 S. First St. Paris, France 12345',
-          occupation: 'unemployed',
           diagnosis: 'Shortness of breath',
-          code_status: 'Full',
-          diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
-          patient: {
-            patient_id: patient1.id,
-            first_name: patient1.first_name,
-            last_name: patient1.last_name,
-            allergies: nil,
-            histories: nil
-          },
+          updated_at: Admission.first.updated_at
         },
         {
           id: admission3.id,
-          phone_number: '1234567890',
-          address: '1234 S. First St. Paris, France 12345',
-          occupation: 'unemployed',
           diagnosis: 'Shortness of breath',
-          code_status: 'Full',
-          diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
           discharge: false,
           created_at: Admission.third.created_at,
-          patient: {
-            patient_id: patient1.id,
-            first_name: patient1.first_name,
-            last_name: patient1.last_name,
-            allergies: nil,
-            histories: nil
-          },
+          updated_at: Admission.third.updated_at
         }]
       }.to_json)
     end
@@ -405,15 +393,18 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
-            patient_id: patient.id,
+            id: patient.id,
             first_name: patient.first_name,
             last_name: patient.last_name,
-            allergies: nil,
-            histories: nil
+            date_of_birth: patient.date_of_birth,
+            bio_sex: patient.bio_sex,
+            image: nil,
+            allergies: 'NKDA',
+            histories: 'No Past Medical History',
           },
           user: {
-            user_first_name: user.first_name,
-            user_last_name: user.last_name
+            first_name: user.first_name,
+            last_name: user.last_name
           }
         }
       }.to_json)
@@ -455,7 +446,11 @@ RSpec.describe Api::AdmissionsController, type: :controller do
   context 'PUT /admissions/:id/discharge' do
     it 'discharges a patient' do
       user = FactoryBot.create(:user)
+      session = user.sessions.create
+      @request.cookie_jar.signed['hippotech_session_token'] = session.token
+
       patient = FactoryBot.create(:patient, user: user)
+
       admission = FactoryBot.create(:admission, user: user, patient: patient)
 
       put :discharge, params: { id: admission.id }
@@ -464,32 +459,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
 
       admission.reload
       expect(response.body).to eq({
-        admission: {
-          id: 1,
-          phone_number: '1234567890',
-          address: '1234 S. First St. Paris, France 12345',
-          occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
-          code_status: 'Full',
-          diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
-          discharge: true,
-          created_at: Admission.first.created_at,
-          updated_at: Admission.first.updated_at,
-          patient: {
-            patient_id: patient.id,
-            first_name: patient.first_name,
-            last_name: patient.last_name,
-            allergies: nil,
-            histories: nil
-          },
-          user: {
-            user_first_name: user.first_name,
-            user_last_name: user.last_name
-          }
-        }
+        success: true
       }.to_json)
     end
   end
