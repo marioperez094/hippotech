@@ -1,1 +1,1 @@
-import '@src/newPatient';
+import '@pages/newPatient';

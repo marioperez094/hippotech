@@ -22,7 +22,7 @@ json.admissions do
     end
 
     if admission.patient.allergies.length < 1
-      json.allergies nil
+      json.allergies 'NKDA'
     else
       json.allergies do
         json.array! admission.patient.allergies do |allergy|
@@ -32,11 +32,11 @@ json.admissions do
     end
 
     if admission.patient.histories.length < 1
-      json.histories nil
+      json.histories 'No Past Medical History'
     else
       json.histories do
         json.array! admission.patient.histories do |history|
-          json.diagnosis history.diagnosis
+          json.name history.diagnosis
         end
       end
     end

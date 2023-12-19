@@ -1,0 +1,140 @@
+.patient-banner {
+  border-top: 2px solid #8d8df6;
+  background: linear-gradient(120deg, lightblue, #CCCCFF);
+}
+
+.patient-image {
+  padding-top: calc(2 /3 * 100px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#patient-page {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#sidebar {
+  background: linear-gradient(lightblue, #CCCCFF);
+  .bg-white {
+    border-bottom: 2px solid #CCCCFF;
+    height: 50px;
+  }
+
+  a{
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.sidebar-bg {
+  height: 100vh;
+}
+
+.menu-border {
+  background-color: #CCCCFF;
+}
+
+@media (max-width: 767px) {
+  #sidebar button {
+    position: relative;
+    z-index: 10
+  }
+
+  .sidebar-bg {
+    position: absolute;
+    background: linear-gradient(lightblue, #CCCCFF);
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.patient-container {
+  max-height: calc(100vh + 40px);
+  overflow-y: scroll;
+  overflow-x: clip;
+}
+
+#patient-summary {
+  .shadow {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.general-info, .allergies, .current-visit, .emergency-contact, .histories, .admissions {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.general-info {
+  background-color: #CCCCFF;
+}
+
+.allergies {
+  background-color: rgb(245, 194, 100);
+}
+
+.current-visit {
+  background-color: lightblue;
+}
+
+.emergency-contact {
+  background-color: rgb(255, 134, 134);
+}
+
+.histories {
+  background-color: #A3FFA9;
+}
+
+.admissions {
+  background-color: #e5a3ff;
+}
+
+.general-text {
+  p {
+    margin-bottom: 0;
+  }
+  span {
+    color: darkgray;
+  }
+  .patient-image {
+    padding-top: calc(2 /3 * 100%);
+  }
+}
+
+#i-o {
+  canvas {
+    max-height: 500px;
+  }
+}
+
+#flowsheet {
+  overflow-x: scroll;
+  th p {
+    margin-bottom: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:first-child {
+    color:blue;
+  }
+
+  input {
+    min-width: 100px;
+  }
+}
+
+@media (min-width: 992px) {
+  #flowsheet { 
+    .bp-form {
+      width: 48%;
+      display: inline-block;
+    }
+  }
+}
+

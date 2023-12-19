@@ -1,0 +1,17 @@
+.hover-to-discover {
+  .hover-text-box {
+    display: none;
+  }
+}
+
+.hover-to-discover:hover {
+  .hover-text-box {
+    background-color: white;
+    display: flex;
+    position: absolute;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

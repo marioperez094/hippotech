@@ -42,11 +42,11 @@ RSpec.describe History, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
-    it 'must have a diagnosis with max 20 characters' do
+    it 'must have a diagnosis with max 50 characters' do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:history, diagnosis: 'c' * 21, patient: patient, user: user)
+        FactoryBot.create(:history, diagnosis: 'c' * 51, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 

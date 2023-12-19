@@ -38,7 +38,7 @@ module Api
       patient = find_patient
 
       @admissions = patient.admissions.order(created_at: :asc)
-      render 'api/admissions/index', status: :ok
+      render 'api/admissions/discharge', status: :ok
     end
 
     def update
@@ -55,18 +55,22 @@ module Api
         render json: { error: e.message }, status: :bad_request
       end
     end
+    
+    #Patients cannot be deleted, instead only updated and discharged
+    def discharge
+      if !current_session
+        return render json: { error: 'Not logged in '}, status: :unauthorized
+      end
+
+      search_admission
+
+      render json: { success: true } if @admission&.update(discharge: true)
+
+    end
 
     def search_admission
       @admission = Admission.find_by(id: params[:id])
       return render json: { error: 'Admission not found.' }, status: :not_found if !@admission
-    end
-
-    #Patients cannot be deleted, instead only updated and discharged
-    def discharge
-      @admission = Admission.find_by(id: params[:id])
-
-      render 'api/admissions/discharge' if @admission&.update(discharge: true)
-
     end
 
     private

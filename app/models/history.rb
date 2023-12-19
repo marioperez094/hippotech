@@ -8,6 +8,7 @@ class History < ApplicationRecord
   before_validation :date_must_be_a_date
   validate :date_smaller_than_current_date, on: :create
 
+
   private
 
   #Input must be a valid date or error
