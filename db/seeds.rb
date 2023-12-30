@@ -130,3 +130,90 @@ admissions = Admission.create([{
   patient: patients.second,
   user: users.first
 }])
+
+
+vitals = Vital.create([{
+  temperature: 36.5,
+    temp_source: 'oral',
+    heart_rate: 80,
+    systolic: 115,
+    diastolic: 75,
+    respirations: 18,
+    o2_source: 'NC',
+    fio2: 28,
+    liters: 2,
+    intake: 100,
+    output: 50,
+    comment: 'Normal vital signs',
+    service_time: '2023-12-29 01:00:00 UTC',
+    patient: patients.first,
+    user: users.first
+    
+
+},{
+  temperature: 36.5,
+    temp_source: 'oral',
+    heart_rate: 80,
+    systolic: 115,
+    diastolic: 75,
+    respirations: 18,
+    o2_source: 'NC',
+    fio2: 28,
+    liters: 2,
+    intake: 100,
+    output: 50,
+    comment: 'Normal vital signs',
+    service_time: '2023-12-29 03:00:00 UTC',
+    patient: patients.first,
+    user: users.first
+
+},{
+  temperature: 36.5,
+    temp_source: 'oral',
+    heart_rate: 80,
+    systolic: 115,
+    diastolic: 75,
+    respirations: 18,
+    o2_source: 'NC',
+    fio2: 28,
+    liters: 2,
+    intake: 100,
+    output: 50,
+    comment: 'Normal vital signs',
+    service_time: '2023-12-29 02:00:00 UTC',
+    patient: patients.first,
+    user: users.first
+
+},{
+    temperature: 38,
+    temp_source: 'oral',
+    heart_rate: 80,
+    systolic: 115,
+    diastolic: 75,
+    respirations: 18,
+    o2_source: 'NC',
+    fio2: 28,
+    liters: 2,
+    intake: 100,
+    output: 50,
+    comment: 'Normal vital signs',
+    service_time: '2023-12-29 23:00:00 UTC',
+    patient: patients.first,
+    user: users.first
+},{
+  temperature: 39.1,
+    temp_source: 'oral',
+    heart_rate: 80,
+    systolic: 115,
+    diastolic: 75,
+    respirations: 18,
+    o2_source: 'NC',
+    fio2: 28,
+    liters: 2,
+    intake: 100,
+    output: 50,
+    comment: 'Normal vital signs',
+    service_time: '2023-12-29 23:58:00 UTC',
+    patient: patients.first,
+    user: users.first
+}])

@@ -6,10 +6,10 @@ import PatientBanner from "./patientBanner";
 import Sidebar from "./sidebar";
 import PatientSummary from "./patientSummary";
 import IntakeOutput from "./intakeOutput";
-import Flowsheet from "./flowsheet";
 import VitalChart from "./vitalChart";
-import LoadingRing from "@components/loadingRing/loadingRing";
 import Discharge from './discharge'
+import LoadingRing from "@components/loadingRing/loadingRing";
+import Flowsheet from "@components/flowsheet/flowSheet";
 
 import { utcConvert } from "@utils/utils";
 import { handleErrors } from "@utils/fetchHelper";
@@ -79,7 +79,7 @@ class Patient extends React.Component {
                     <IntakeOutput patient={patient} />
                   </Route>
                   <Route exact path={`/patient/${admission.id}/flowsheet`}>
-                    <Flowsheet />
+                    <Flowsheet patient={patient}/>
                   </Route>
                   <Route exact path={`/patient/${admission.id}/temp`}>
                     <VitalChart />

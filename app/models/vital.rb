@@ -13,4 +13,23 @@ class Vital < ApplicationRecord
   validates :output, numericality: { allow_nil: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 99999 }
   validates :comment, length: { maximum: 500 }
   validates :service_time, presence: true
+
+  before_validation :date_must_be_a_date
+  validate :date_smaller_than_current_date, on: :create
+
+  private
+
+  #Input must be a valid date or error
+  def date_must_be_a_date
+    if self.service_time == nil
+      raise ArgumentError.new("Service date must be a date")
+    end
+  end
+
+  #Diagnosis date must be before current date
+  def date_smaller_than_current_date
+    if self.service_time > Date.today
+      raise ArgumentError.new("Service date cannot be after today's date")
+    end
+  end
 end

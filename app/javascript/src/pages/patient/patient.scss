@@ -110,31 +110,3 @@
   }
 }
 
-#flowsheet {
-  overflow-x: scroll;
-  th p {
-    margin-bottom: 0;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  a:first-child {
-    color:blue;
-  }
-
-  input {
-    min-width: 100px;
-  }
-}
-
-@media (min-width: 992px) {
-  #flowsheet { 
-    .bp-form {
-      width: 48%;
-      display: inline-block;
-    }
-  }
-}
-
