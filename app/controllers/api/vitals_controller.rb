@@ -12,10 +12,12 @@ module Api
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
     
       #Vitals belongs to a patient, the user is charting on the patient
-      #Vitals is an array, allowing for multiple records
       begin 
-          @vitals = Vital.create!(vitals_params)
-          render 'api/vitals/index', status: :created
+          @vital = Vital.new(vital_params)
+          @vital.user = user
+          @vital.patient = patient
+          @vital.save!
+          render 'api/vitals/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request
       end
@@ -56,8 +58,8 @@ module Api
 
     private
 
-    def vitals_params
-      params.permit(vitals: [:patient_id, :user_id, :temperature, :temp_source, :heart_rate, :systolic, :diastolic, :respirations, :o2_source, :fio2, :liters, :intake, :output, :comment, :service_time]).require(:vitals)
+    def vital_params
+      params.require(:vital).permit(:temperature, :temp_source, :heart_rate, :systolic, :diastolic, :respirations, :o2_source, :fio2, :liters, :intake, :output, :comment, :service_time)
     end
   end
 end

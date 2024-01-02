@@ -26,6 +26,17 @@ export function capitalize(string) {
   return capitalString;
 }
 
+export function vitalsArrayToChart(vitalsArray, vitalName) {
+  const vitals = vitalsArray.filter((vital) => {
+    return vital[vitalName]
+  }).map((vital) => {
+    return (
+      { x: vital.service_time, y: vital[vitalName] }
+    )
+  })
+  return vitals;
+}
+
 export function arrayToString (list) {
   if (typeof list == 'string') { return list }
   

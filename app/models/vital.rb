@@ -28,7 +28,7 @@ class Vital < ApplicationRecord
 
   #Diagnosis date must be before current date
   def date_smaller_than_current_date
-    if self.service_time > Date.today
+    if self.service_time > DateTime.now
       raise ArgumentError.new("Service date cannot be after today's date")
     end
   end
