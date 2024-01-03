@@ -30,6 +30,7 @@ class PatientSummary extends React.Component {
     const { admission, histories, allergies, patient, loading, pastAdmissions } = this.state;
     const { phone_number, address, diagnosis, created_at, code_status, diet, emergency_contact, emergency_relationship, emergency_phone, occupation } = admission;
     const { id, image, last_name, first_name, bio_sex, date_of_birth } = patient;
+    const utcDateOfBirth = utcConvert(date_of_birth);
 
     if (loading) {
       return (
@@ -50,7 +51,7 @@ class PatientSummary extends React.Component {
               <div className="row">
                 <div className="col-6">
                   {/*Patient picture if patient has a picture or uses default picture*/}
-                  <div className="patient-image" style={{backgroundImage: `url(${image ? image : '/packs/media/images/anton-8q-U8X1zkvI-unsplash-27accd97.jpg'})`}}>
+                  <div className="patient-image" style={{backgroundImage: `url(${image ? image : '/packs/media/images/alexander-maasch-KaK2jp8ie8s-unsplash-fb61587e.jpg'})`}}>
                   </div>
                 </div>
                 <div className="col-6">
@@ -61,7 +62,7 @@ class PatientSummary extends React.Component {
                     <div className="col-12">
                       <p><span>Patient #: </span>{id}</p>
                       <p><span>Gender: </span>{capitalize(bio_sex)}</p>
-                      <p><span>Date of Birth: </span>{dateFormat(date_of_birth)[0]} {`(${differenceInYears(date_of_birth)}yrs)`}</p>
+                      <p><span>Date of Birth: </span>{dateFormat(utcDateOfBirth)[0]} {`(${differenceInYears(utcDateOfBirth)}yrs)`}</p>
                       <p><span>Phone Number: </span>{phone_number}</p>
                       <p><span>Occupation: </span>{capitalize(occupation)}</p>
                       <p><span>Address: </span>{address}</p>
@@ -75,7 +76,7 @@ class PatientSummary extends React.Component {
           {/*Lists all patient allergies*/}
           <div className="col-12 col-md-6 mb-3">
             <div className="allergies text-center">
-              Allergies
+              <a href={`/patient/${admission.id}/allergies`}><b>Allergies</b></a>
             </div>
             <div className="shadow general-text">
               {allergies !== 'NKDA'
@@ -165,7 +166,7 @@ class PatientSummary extends React.Component {
           {/*List all patient medical history*/}
           <div className="col-12 col-md-6 mb-3">
             <div className="histories text-center">
-              Past Medical History
+              <a href={`/patient/${admission.id}/histories`}><b>Past Medical History</b></a>
             </div>
             <div className="shadow general-text">
               {histories !== 'No Past Medical History'
@@ -182,10 +183,11 @@ class PatientSummary extends React.Component {
                     </thead>
                     <tbody>
                       {histories.map((history, index) => {
+                        const utcHistory = utcConvert(history.diagnosis_date)
                         return (
                           <tr key={index}>
                             <td>{capitalize(history.diagnosis)}</td>
-                            <td>{dateFormat(utcConvert(history.diagnosis_date))[0]}</td>
+                            <td>{dateFormat(utcHistory)[0]}</td>
                           </tr>
                         )
                       })}

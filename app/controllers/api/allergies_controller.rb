@@ -8,7 +8,7 @@ module Api
 
       user = current_session.user
 
-      patient = find_patient
+      patient = Patient.find_by(id: params[:allergy][:patient_id])
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
       #Allergies belong to a patient and are charted by a user

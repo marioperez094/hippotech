@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/patient_list' => 'static_pages#patient_list'
   get '/new_patient' => 'static_pages#new_patient'
   get '/patient/:id' => 'static_pages#patient'
+  get '/patient/:id/allergies' => 'static_pages#allergies'
+  get '/patient/:id/histories' => 'static_pages#histories'
 
   namespace :api do
     resources :users, only: [:create]
@@ -14,11 +16,10 @@ Rails.application.routes.draw do
     resources :vitals, only: [:show, :update]
     resources :admissions, only: [:create, :index, :show, :update]
     resources :allergies, only: [:create, :destroy]
-    resources :histories, only: [:destroy]
+    resources :histories, only: [:create, :destroy]
 
     #Histories API
     get '/patients/:id/histories' => 'histories#index_by_patient'
-    post '/patients/:id/histories' => 'histories#create'
 
     #Allergies API
     get '/patients/:id/allergies' => 'allergies#index_by_patient'
@@ -36,5 +37,7 @@ Rails.application.routes.draw do
     get '/authenticated' => 'sessions#authenticated'
   end
 
-  get '*path', to: 'static_pages#patient_list'
+  get "*path" => redirect('/patient_list'), constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end

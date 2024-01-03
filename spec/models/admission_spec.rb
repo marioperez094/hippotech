@@ -80,11 +80,11 @@ RSpec.describe Admission, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
-    it 'address must be max 45 characters' do
+    it 'address must be max 150 characters' do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, address: 'c' * 46, patient: patient, user: user)
+        FactoryBot.create(:admission, address: 'c' * 151, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 

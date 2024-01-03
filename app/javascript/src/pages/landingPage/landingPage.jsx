@@ -59,6 +59,46 @@ class LandingPage extends React.Component {
               <h5 className='text-white'>A solution for patient care</h5>
             </div>
           </main>
+          <article>
+            <div className='container-fluid'>
+              <div className='row my-3'>
+                <div className='offset-md-2 col-12 col-md-3 order-2 order-md-1 d-flex justify-content-center align-items-center'>
+                  <div>
+                    <h4 className='text-center'>Personalize Your Patient List</h4>
+                    <p>Easily change the information you see on your patient list. Without having to enter a patient chart you get a wealth of data.</p>
+                  </div>
+                </div>
+                <div className='col-12 col-md-6 order-1 order-md-2'>
+                  <div className="aspectRatio" style={{backgroundImage: `url('/packs/media/images/patientListCrop-62f82988.PNG')`}}>
+                  </div>
+                </div>
+              </div>
+              <div className='row my-3'>
+                <div className='col-12 col-md-3 order-2 order-md-2 d-flex justify-content-center align-items-center'>
+                  <div>
+                    <h4>Easily Add Your Own Data</h4>
+                    <p>From adding patients to inputting vitals, this solution is easy to use.</p>
+                  </div>
+                </div>
+                <div className='col-12 col-md-6 order-1 order-md-1'>
+                  <div className="aspectRatio"  style={{backgroundImage: `url('/packs/media/images/vitalsCrop-51bd225c.PNG')`}}>
+                  </div>
+                </div>
+              </div>
+              <div className='row my-3'>
+                <div className='offset-md-2 col-12 col-md-3 order-2 order-md-1 d-flex justify-content-center align-items-center'>
+                  <div>
+                    <h4 className='text-center'>Visualize Patient Information</h4>
+                    <p>Easily patient vitals to see improvement or potential patient decline. Information is put into easy to understand graphs to get a better picture of the patient.</p>
+                  </div>
+                </div>
+                <div className='col-12 col-md-6 order-1 order-md-2'>
+                  <div className="aspectRatio" style={{backgroundImage: `url('http://localhost:3000/packs/media/images/iograph-1ce80150.PNG')`}}>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
           <Footer />
         </div>
       </>

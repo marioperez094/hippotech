@@ -48,9 +48,11 @@ export function safeCredentialsFormData(options = {}) {
   });
 }
 
-export function handleErrors(response) {
+export function handleErrors(response, callback) {
   if (!response.ok) {
-    throw Error(response.statusText);
+    callback && callback(response.statusText)
+    throw Error(response.statusText)
   }
+  
   return response.json();
 }

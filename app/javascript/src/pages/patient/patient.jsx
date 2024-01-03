@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "@components/navbar/navbar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import PatientBanner from "./patientBanner";
+import Navbar from "@components/navbar/navbar";
 import Sidebar from "./sidebar";
 import PatientSummary from "./patientSummary";
 import IntakeOutput from "./intakeOutput";
@@ -32,17 +32,9 @@ class Patient extends React.Component {
           patient: data.admission.patient,
           allergies: data.admission.patient.allergies,
           histories: data.admission.patient.histories,
-        }, () => {this.dateOfBirthUTC()})
+          loading: false
+        })
       })
-  }
-
-  //Converts time to UTC to prevent incorrect date
-  dateOfBirthUTC = () => {
-    let patient = {...this.state.patient}
-    patient.date_of_birth = utcConvert(patient.date_of_birth)
-
-    this.setState({ patient, loading: false })
-
   }
 
   render() {
