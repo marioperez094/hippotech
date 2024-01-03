@@ -43,15 +43,13 @@ class SignupWidget extends React.Component {
     }))
       .then(handleErrors)
       .then(data => {
-        if (!data.user) {
-          console.log(data.user)
-          return this.setState({error: data.error, loading: false})
+        if (data.user) {
+          return this.login();
         }
-        return this.login();
       })
       .catch(error => {
         this.setState({
-          error: error.error,
+          error: 'Could not sign up',
           loading: false
         })
       })
@@ -71,10 +69,9 @@ class SignupWidget extends React.Component {
     }))
       .then(handleErrors)
       .then(data => {
-        if (!data.success) {
-          return this.setState({error: data.error, loading: false})
+        if (data.success) {
+          return location.assign('/patient_list')
         }
-        return location.assign('/patient_list')
       })
       .catch(error => {
         this.setState({

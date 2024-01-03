@@ -20,4 +20,14 @@ class StaticPagesController < ApplicationController
     @data = { admission_id: params[:id] }.to_json
     render 'patient'
   end
+
+  def allergies
+    @data = { admission_id: params[:id] }.to_json
+    render 'allergies'
+  end
+
+  def histories
+    @data = { admission_id: params[:id] }.to_json
+    render 'histories'
+  end
 end

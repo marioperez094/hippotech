@@ -12,6 +12,7 @@ import './flowsheet.scss'
 
 const FlowsheetTable = (props) => {
   const { vitals, vital, changeNewVital, patientID } = props;
+  
   return (
     <div className="row scrollable-row flex-nowrap">
       <div className="col-5 col-md-4 col-lg-2 ps-4 labels">

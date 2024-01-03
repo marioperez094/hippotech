@@ -22,7 +22,8 @@ module Api
     end
 
     def show
-      search_patient
+      @patient = search_patient
+      return render json: { error: 'Patient not found.' }, status: :not_found if !@patient
 
       render 'api/patients/show', status: :ok
     end
@@ -31,8 +32,9 @@ module Api
       if !current_session
         return render json: { error: 'Not logged in' }, status: :unauthorized
       end
-
-      search_patient
+      
+      @patient = search_patient
+      return render json: { error: 'Patient not found.' }, status: :not_found if !@patient
 
       begin
         @patient.update(patient_params)
@@ -43,10 +45,10 @@ module Api
     end
 
     def search_patient
-      @patient = Patient.find_by(id: params[:id])
-      return render json: { error: 'Patient not found.' }, status: :not_found if !@patient
+      patient = Patient.find_by(id: params[:id])
+      patient
     end
-    
+
     private
 
     def patient_params

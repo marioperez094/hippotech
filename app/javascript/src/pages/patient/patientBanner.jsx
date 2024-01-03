@@ -1,6 +1,6 @@
 import React from "react";
 
-import { dateFormat, differenceInYears, capitalize, arrayToString } from '@utils/utils'
+import { dateFormat, differenceInYears, capitalize, arrayToString, utcConvert } from '@utils/utils'
 
 import './patient.scss'
 import HoverToDiscover from "@components/hoverToDiscover/hoverToDiscover";
@@ -9,12 +9,13 @@ const PatientBanner = (props) => {
   const { admission, patient, allergies } = props;
   const { code_status, created_at } = admission;
   const { bio_sex, date_of_birth, first_name, last_name, image } = patient;
+  const utcDateOfBirth = utcConvert(date_of_birth);
 
   return (
     <div className="container-fluid patient-banner pt-3">
       <div className="row">
         <div className="col-2" >
-          <div className="patient-image rounded" style={{backgroundImage: `url(${image ? image : '/packs/media/images/anton-8q-U8X1zkvI-unsplash-27accd97.jpg'})`}}>
+          <div className="patient-image rounded" style={{backgroundImage: `url(${image ? image : '/packs/media/images/alexander-maasch-KaK2jp8ie8s-unsplash-fb61587e.jpg'})`}}>
           </div>
           <h3 className="text-center">{capitalize(last_name)}, {capitalize(first_name)}</h3>
         </div>
@@ -29,7 +30,7 @@ const PatientBanner = (props) => {
               <p>
                 <span className="d-none d-md-inline">Date of Birth: </span>
                 <span className="d-md-none">DoB: </span> 
-                {dateFormat(date_of_birth)[0]}
+                {dateFormat(utcDateOfBirth)[0]}
               </p>
             </div>
             <div className="col-4">

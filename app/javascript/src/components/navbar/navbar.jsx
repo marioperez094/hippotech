@@ -69,7 +69,7 @@ const Navbar = (props) => {
               {authenticated 
                 ? <>
                     <li className='nav-item order-md-2'>
-                      <a className='nav-link' href='/new_patient'>Admit A new Patient</a>
+                      <a className='nav-link' href='/new_patient'>Admit A New Patient</a>
                     </li>
                     <li className='nav-item order-md-3'>  
                       <a className='nav-link' href='#' onClick={() => logOut()}>Log out</a>  

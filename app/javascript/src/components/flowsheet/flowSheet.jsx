@@ -1,13 +1,13 @@
 import React from "react";
 
 import FlowsheetTable from "./flowsheetTable";
-import LoadingRing from '@components/loadingRing/loadingRing'
+import LoadingRing from '@components/loadingRing/loadingRing';
 
 
-import { dateFormat } from '@utils/utils'
-import { safeCredentials, handleErrors } from '@utils/fetchHelper'
+import { dateFormat } from '@utils/utils';
+import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
-import './flowsheet.scss'
+import './flowsheet.scss';
 
 class Flowsheet extends React.Component {
   state = {
@@ -33,12 +33,12 @@ class Flowsheet extends React.Component {
       output: '',
       comment: ''
     },
-  }
+  };
 
   componentDidMount() {
     this.setUser();
     this.loadVitals();
-  }
+  };
 
   setUser = () => {
     fetch('/api/authenticated')
@@ -46,11 +46,8 @@ class Flowsheet extends React.Component {
       .then(data => {
         if (!data.authenticated) { return }
         this.setState({user_id: data.user.id})
-      })
-      .catch(errors => {
-        return console.log(errors)
-      })
-  }
+      });
+  };
 
   loadVitals = () => {
     fetch(`/api/patients/${this.state.patient.id}/vitals`)
@@ -58,9 +55,9 @@ class Flowsheet extends React.Component {
       .then(data => {
         this.setState({ vitals: data.vitals, loading: false, }, () => {
           this.filterVitals();
-        })
-      })
-  }
+        });
+      });
+  };
 
   //Filters vitals based on set date
   filterVitals = () => {
@@ -70,11 +67,11 @@ class Flowsheet extends React.Component {
       const setDateInMilli = Date.parse(setDate);
       return (
         serviceTimeInMilli >= setDateInMilli && serviceTimeInMilli < setDateInMilli + 86400000
-      )
-    })
+      );
+    });
 
-    this.setState({ filteredVitals })
-  }
+    this.setState({ filteredVitals });
+  };
 
   changeDay = (plusOrMinus) => {
     //Adds or subtract a full day from the current day 
@@ -83,17 +80,17 @@ class Flowsheet extends React.Component {
 
     if (dateInMilliseconds > currentDate) {
       dateInMilliseconds = currentDate
-    }
+    };
     this.setState({ setDate: dateFormat(dateInMilliseconds)[0] }, () => {
       this.filterVitals()
-    })
-  }
+    });
+  };
 
   //Focuses on the new-vital column
   newVitalFocus = () => {
     const newVital = document.getElementById('new-vital');
     newVital.focus();
-  }
+  };
 
   changeNewVital = (e) => {
     this.setState({
@@ -101,8 +98,8 @@ class Flowsheet extends React.Component {
         ...this.state.vital, 
         [e.target.name]: e.target.value
       }
-    })
-  }
+    });
+  };
 
   clearVital = () => {
     const vital = {
@@ -119,16 +116,16 @@ class Flowsheet extends React.Component {
       intake: '',
       output: '',
       comment: ''
-    }
+    };
 
     this.setState({ vital })
-  }
+  };
 
   submitVital = (e) => {
     if (e) { e.preventDefault() }
 
     let vital = this.state.vital;
-    let date = new Date(`${this.state.setDate} ${vital.service_time}`)
+    let date = new Date(`${this.state.setDate} ${vital.service_time}`);
     vital.service_time = date;
 
     fetch(`/api/patients/${this.state.patient.id}/vitals`, safeCredentials({
@@ -137,14 +134,13 @@ class Flowsheet extends React.Component {
     }))
     .then(handleErrors)
     .then(data => {
-      console.log(data.vital)
       this.clearVital();
       this.loadVitals();
     })
     .catch(error => {
       return console.log(error.error)
-    })  
-  }
+    });  
+  };
 
   render() {
     const { user_id, filteredVitals, vital, setDate, loading } = this.state;
@@ -152,8 +148,8 @@ class Flowsheet extends React.Component {
     if (loading) {
       return (
         <LoadingRing />
-      )
-    }
+      );
+    };
 
     return(
       <div className="row" id="flowsheet">

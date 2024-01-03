@@ -38,14 +38,13 @@ class LoginWidget extends React.Component {
     }))
       .then(handleErrors)
       .then(data => {
-        if (!data.success) {
-          return this.setState({error: data.error, loading: false})
+        if (data.success) {
+          return location.assign('/patient_list')
         }
-        return location.assign('/patient_list')
       })
       .catch(error => {
         this.setState({
-          error: error.error,
+          error: 'Could not log in.',
           loading: false
         })
       })

@@ -36,6 +36,14 @@
       min-height: 250px;
     }
   }
+  
+  .aspectRatio {
+    padding-top: calc(2 / 3 * 100%); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../../../../assets/images/iograph.PNG);
+  }
 
   .hero-footer {
     background-color: #253746;

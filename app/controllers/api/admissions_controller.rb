@@ -19,7 +19,7 @@ module Api
         @admission.save!
         render 'api/admissions/show', status: :created
       rescue ArgumentError => e
-        render json: { error: e.message }, status: :bad_request
+        render json: @admission.errors.full_messages
       end
     end
 
@@ -29,7 +29,8 @@ module Api
     end
 
     def show
-      search_admission
+      @admission = search_admission
+      return render json: { error: 'Admission not found.'}, status: :not_found if !@admission
 
       render 'api/admissions/show', status: :ok
     end
@@ -46,7 +47,8 @@ module Api
         return render json: { error: 'Not logged in' }, status: :unauthorized
       end
 
-      search_admission
+      @admission = search_admission
+      return render json: { error: 'Admission not found.'}, status: :not_found if !@admission
 
       begin
         @admission.update(admission_params)
@@ -58,19 +60,18 @@ module Api
     
     #Patients cannot be deleted, instead only updated and discharged
     def discharge
-      if !current_session
-        return render json: { error: 'Not logged in '}, status: :unauthorized
-      end
+      return render json: { error: 'Not logged in '}, status: :unauthorized if !current_session
 
-      search_admission
+      @admission = search_admission
+      return render json: { error: 'Admission not found.'}, status: :not_found if !@admission
 
       render json: { success: true } if @admission&.update(discharge: true)
 
     end
 
     def search_admission
-      @admission = Admission.find_by(id: params[:id])
-      return render json: { error: 'Admission not found.' }, status: :not_found if !@admission
+      admission = Admission.find_by(id: params[:id])
+      admission
     end
 
     private

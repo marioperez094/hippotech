@@ -8,7 +8,5 @@ class ApplicationController < ActionController::Base
 
   def find_patient
     patient = Patient.find_by(id: params[:id])
-    return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
-    patient
   end
 end
