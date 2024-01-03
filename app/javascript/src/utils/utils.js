@@ -17,13 +17,24 @@ export function utcConvert(date) {
 
 export function dateFormat(date) {
   const dateFormat = new Date(date);
-  const formattedMinutes = dateFormat.getMinutes().length < 2 ? '0' + dateFormat.getMinutes() : dateFormat.getMinutes()
+  const formattedMinutes = (dateFormat.getMinutes() < 10 ?  '0' : '') + dateFormat.getMinutes()
   return [`${dateFormat.getMonth() + 1}/${dateFormat.getDate()}/${dateFormat.getFullYear()}`, `${dateFormat.getHours()}:${formattedMinutes}`]
 }
 
 export function capitalize(string) {
   const capitalString = string[0].toUpperCase().concat(string.slice(1).toLowerCase())
   return capitalString;
+}
+
+export function vitalsArrayToChart(vitalsArray, vitalName) {
+  const vitals = vitalsArray.filter((vital) => {
+    return vital[vitalName]
+  }).map((vital) => {
+    return (
+      { x: vital.service_time, y: vital[vitalName] }
+    )
+  })
+  return vitals;
 }
 
 export function arrayToString (list) {

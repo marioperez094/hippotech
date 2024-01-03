@@ -2,40 +2,50 @@ import React from "react";
 import { Chart } from "chart.js/auto";
 import 'chartjs-adapter-moment';
 
+import { handleErrors } from '@utils/fetchHelper'
+import { vitalsArrayToChart, capitalize, dateFormat } from "@utils/utils";
+
 class VitalChart extends React.Component {
   constructor(props) {
     super(props);
 
+    const params = new URLSearchParams(props.location.search);
+
     this.state = {
+      vitalName: params.get('vital'),
+      patientID: params.get('patientID'),
+      vitalArray: [],
+      loading: true,
     }
 
     this.chartRef = React.createRef();
   }
 
   componentDidMount() {
-    this.buildChart();
+    this.loadVitals();
   }
 
-  buildChart = () => {
+  loadVitals = () => {
+    fetch(`/api/patients/${this.state.patientID}/vitals`)
+      .then(handleErrors)
+      .then(data => {
+
+        //Makes an array that organizes the specific vital by date and time. 
+        const vitalsToChart = vitalsArrayToChart(data.vitals, this.state.vitalName)
+        this.setState({vitalArray: vitalsToChart})
+        this.buildChart(vitalsToChart);
+      })
+  }
+
+  buildChart = (vitals) => {
     const chartRef = this.chartRef.current.getContext("2d");
 
     this.chart = new Chart(chartRef, {
       type: 'line', 
       data: {
         datasets: [{
-          label: 'Temperature',
-          data: [{
-            x: '2023-08-11T22:11:00Z',
-            y: 36.7
-          },
-          {
-            x: '2023-07-11T23:11:00Z',
-            y: 36.5
-          },
-          {
-            x: '2023-01-11T21:00:00Z',
-            y: 35.8
-          }],
+          label: this.state.vitalName,
+          data: vitals,
         }],
       },
       options: {
@@ -53,10 +63,36 @@ class VitalChart extends React.Component {
   }
   
   render() {
+    const { vitalArray, vitalName } = this.state;
+
+    if (vitalArray.length < 1) {
+      return (
+        <h3 className="text-center">There is no {vitalName} data that can be graphed.</h3>
+      )
+    }
+
     return (
-      <div className="row m-5" id='i-o'>
+      <div className="row m-5" id='vitalChart'>
         <div className="col-12 d-flex justify-content-center align-items-center">
           <canvas ref={this.chartRef}></canvas>
+        </div>
+        <div className="table-container">
+          <table className="table table-responsive table-hover">
+            <tbody>
+              <tr>
+                <th scope='row'>{capitalize(vitalName)}</th>
+                {vitalArray.map((vital, index) => {
+                  return (<td key={vital.x + index}>{vital.y}</td>)
+                })}
+              </tr>
+              <tr>
+                <th scope="row">Service Time</th>
+                {vitalArray.map((vital, index) => {
+                  return (<td key={vital.x + index}>{dateFormat(vital.x)[0]} {dateFormat(vital.x)[1]}</td>)
+                })}
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     )

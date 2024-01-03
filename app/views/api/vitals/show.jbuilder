@@ -15,13 +15,13 @@ json.vital do
   json.service_time @vital.service_time
 
   json.patient do
-    json.patient_id @vital.patient.id
+    json.id @vital.patient.id
     json.first_name @vital.patient.first_name
     json.last_name @vital.patient.last_name
   end
 
   json.user do
-    json.user_first_name @vital.user.first_name
-    json.user_last_name @vital.user.last_name
+    json.first_name @vital.user.first_name
+    json.last_name @vital.user.last_name
   end
 end

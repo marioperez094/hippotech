@@ -6,10 +6,10 @@ import PatientBanner from "./patientBanner";
 import Sidebar from "./sidebar";
 import PatientSummary from "./patientSummary";
 import IntakeOutput from "./intakeOutput";
-import Flowsheet from "./flowsheet";
 import VitalChart from "./vitalChart";
-import LoadingRing from "@components/loadingRing/loadingRing";
 import Discharge from './discharge'
+import LoadingRing from "@components/loadingRing/loadingRing";
+import Flowsheet from "@components/flowsheet/flowSheet";
 
 import { utcConvert } from "@utils/utils";
 import { handleErrors } from "@utils/fetchHelper";
@@ -62,7 +62,7 @@ class Patient extends React.Component {
           <div className="container-fluid" id='patient-page'>
             <div className="row gx-0">
               <div className="col-12 col-md-2">
-                <Sidebar id={admission.id}/>
+                <Sidebar id={admission.id} patientID={patient.id}/>
               </div>
               <div className="col-12 col-md-10 patient-container">
                 <Switch>
@@ -75,15 +75,11 @@ class Patient extends React.Component {
                       loading={loading}
                     />
                   </Route>
-                  <Route exact path={`/patient/${admission.id}/I&Os`}>
-                    <IntakeOutput patient={patient} />
-                  </Route>
+                  <Route path={`/I&Os`} component={IntakeOutput} />
                   <Route exact path={`/patient/${admission.id}/flowsheet`}>
-                    <Flowsheet />
+                    <Flowsheet patient={patient}/>
                   </Route>
-                  <Route exact path={`/patient/${admission.id}/temp`}>
-                    <VitalChart />
-                  </Route>
+                  <Route path={`/vitalChart`} component={VitalChart} />
                   <Route exact path={`/patient/${admission.id}/discharge`}>
                     <Discharge patient={patient} admission={admission} />
                   </Route>

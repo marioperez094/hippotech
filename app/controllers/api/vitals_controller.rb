@@ -8,16 +8,16 @@ module Api
 
       user = current_session.user
 
-      patient = Patient.find_by(id: params[:vital][:patient_id])
+      patient = find_patient
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
     
       #Vitals belongs to a patient, the user is charting on the patient
       begin 
-        @vital = Vital.new(vital_params)
-        @vital.user = user
-        @vital.patient = patient
-        @vital.save!
-        render 'api/vitals/show', status: :created
+          @vital = Vital.new(vital_params)
+          @vital.user = user
+          @vital.patient = patient
+          @vital.save!
+          render 'api/vitals/show', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request
       end

@@ -22,6 +22,69 @@ class Flowsheet extends React.Component {
       date: [11, 7, 2023, 23, 11]
     },
     {
+      temp: 36.5,
+      source: 'oral',
+      heart: 80,
+      systolic: 125,
+      diastolic: 80,
+      resp: '',
+      oxygen: 'NC',
+      liters: 2,
+      spo2: 98,
+      intake: 250,
+      output: 400,
+      comment: 'Normal vital signs',
+      date: [11, 7, 2023, 23, 11]
+    },
+    
+    {
+      temp: 36.5,
+      source: 'oral',
+      heart: 80,
+      systolic: 125,
+      diastolic: 80,
+      resp: '',
+      oxygen: 'NC',
+      liters: 2,
+      spo2: 98,
+      intake: 250,
+      output: 400,
+      comment: 'Normal vital signs',
+      date: [11, 7, 2023, 23, 11]
+    },
+    
+    {
+      temp: 36.5,
+      source: 'oral',
+      heart: 80,
+      systolic: 125,
+      diastolic: 80,
+      resp: '',
+      oxygen: 'NC',
+      liters: 2,
+      spo2: 98,
+      intake: 250,
+      output: 400,
+      comment: 'Normal vital signs',
+      date: [11, 7, 2023, 23, 11]
+    },
+    
+    {
+      temp: 36.5,
+      source: 'oral',
+      heart: 80,
+      systolic: 125,
+      diastolic: 80,
+      resp: '',
+      oxygen: 'NC',
+      liters: 2,
+      spo2: 98,
+      intake: 250,
+      output: 400,
+      comment: 'Normal vital signs',
+      date: [11, 7, 2023, 23, 11]
+    },
+    {
       temp: 36.7,
       source: 'oral',
       heart: 86,

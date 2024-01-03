@@ -40,6 +40,7 @@ const Navbar = (props) => {
         setAuthenticated(false);
         setUsername('Demo Version')
         setLoading(false);
+        location.reload();
       })
   }
   

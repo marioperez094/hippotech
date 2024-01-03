@@ -29,7 +29,7 @@ const Sidebar = (props) => {
           </Link>
         </div>
         <div className="col-12">
-          <Link to={`/patient/${props.id}/I&Os`} onClick={() => setMenu(false)}>
+          <Link to={`/I&Os?patientID=${props.patientID}`} onClick={() => setMenu(false)}>
             <div className="bg-white mx-2 d-flex justify-content-center align-items-center">
               Intake/Output
             </div>

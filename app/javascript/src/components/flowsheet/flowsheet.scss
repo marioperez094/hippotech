@@ -1,0 +1,73 @@
+#flowsheet {
+  th p {
+    margin-bottom: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a.btn {
+    color: white;
+  }
+
+  a:first-child {
+    color:blue;
+  }
+
+  input {
+    min-width: 100px;
+  }
+
+  .labels {
+    z-index: -10;
+    position: sticky;
+    left: 0;
+    background-color: white;
+    border-right: 2px solid black;
+  }
+
+  .top-label-header {
+    height: 50px;
+  }
+
+  .vital {
+    height: 50px;
+  }
+
+  .blood-pressure {
+    height: 85px;
+  }
+
+  .scrollable-row {
+    overflow-x: scroll;
+  }
+  
+  .vital-popup {
+    position: absolute;
+    background: white;
+  }
+
+  .labels {
+    z-index: 1000;
+
+    a {
+      color: blue;
+    }
+  }
+}
+
+
+@media (min-width: 992px) {
+  #flowsheet { 
+    .blood-pressure {
+      height: 50px;
+    }
+
+    .bp-form {
+      width: 47%;
+      display: inline-block;
+    }
+  }
+}
+
