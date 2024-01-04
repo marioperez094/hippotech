@@ -25,7 +25,7 @@ module Api
     def index_by_patient
       patient = find_patient
 
-      @histories = patient.histories.order(name: :asc)
+      @histories = patient.histories.order(diagnosis: :asc)
       render 'api/histories/index', status: :ok
     end
 
