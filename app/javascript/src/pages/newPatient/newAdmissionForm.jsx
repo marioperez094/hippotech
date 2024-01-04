@@ -5,7 +5,6 @@ import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 class NewAdmissionForm extends React.Component {
   state = {
     admission: {
-      currentlyAdmitted: false,
       phone_number: '',
       address: '',
       occupation: '',
@@ -16,6 +15,7 @@ class NewAdmissionForm extends React.Component {
       code_status: 'Full',
       diet: 'Regular',
     },
+    currentlyAdmitted: false,
     admissionState: 0,
     error: null,
   }
@@ -39,7 +39,7 @@ class NewAdmissionForm extends React.Component {
         ...this.state.admission,
         [e.target.name]: e.target.value
       }
-    })
+    }, () => console.log(this.state.admission))
   }
 
   changeAdmissionState = (state) => {
@@ -68,7 +68,8 @@ class NewAdmissionForm extends React.Component {
 
   render () {
     const arrayTitle = ['Personal Information', 'Emergency Contact', 'Current Visit']
-    const { phone_number, address, occupation, admissionState, emergency_contact, emergency_relationship, emergency_phone, diagnosis, code_status, diet, error, currentlyAdmitted } = this.state;
+    const { admissionState, error, currentlyAdmitted, admission } = this.state;
+    const { phone_number, address, occupation, emergency_contact, emergency_relationship, emergency_phone, diagnosis, code_status, diet } = admission;
 
     if (currentlyAdmitted) {
       return (
