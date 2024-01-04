@@ -39,7 +39,7 @@ class NewAdmissionForm extends React.Component {
         ...this.state.admission,
         [e.target.name]: e.target.value
       }
-    }, () => console.log(this.state.admission))
+    })
   }
 
   changeAdmissionState = (state) => {
