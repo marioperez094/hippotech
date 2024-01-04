@@ -22,7 +22,7 @@ const FlowsheetTimeSlot = (props) => {
       <InputRow value={temperature} disabled={true} />
       <SelectRow value={temp_source} options={tempOptions} disabled={true} />
       <InputRow value={heart_rate} disabled={true} />
-      <div className="vital blood_pressure">
+      <div className="vital blood-pressure">
         <input className="form-control bp-form" value={systolic} readOnly/>
         <span className="d-none d-md-inline"> / </span>
         <input className="form-control bp-form" value={diastolic} readOnly/>

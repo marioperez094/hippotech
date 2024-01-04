@@ -14,12 +14,12 @@ const PatientBanner = (props) => {
   return (
     <div className="container-fluid patient-banner pt-3">
       <div className="row">
-        <div className="col-2" >
+        <div className="col-12 col-md-2" >
           <div className="patient-image rounded" style={{backgroundImage: `url(${image ? image : '/packs/media/images/alexander-maasch-KaK2jp8ie8s-unsplash-fb61587e.jpg'})`}}>
           </div>
           <h3 className="text-center">{capitalize(last_name)}, {capitalize(first_name)}</h3>
         </div>
-        <div className="col-10">
+        <div className="col-12 col-md-10">
           <div className="row w-100">
             <div className="col-4">
               <HoverToDiscover hoverText={arrayToString(allergies)}>
