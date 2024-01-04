@@ -69,7 +69,7 @@ class LandingPage extends React.Component {
                   </div>
                 </div>
                 <div className='col-12 col-md-6 order-1 order-md-2'>
-                  <div className="aspectRatio" style={{backgroundImage: `url('/packs/media/images/patientListCrop-62f82988.PNG')`}}>
+                  <div className="aspectRatio" id='patientListCrop'>
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@ class LandingPage extends React.Component {
                   </div>
                 </div>
                 <div className='col-12 col-md-6 order-1 order-md-1'>
-                  <div className="aspectRatio"  style={{backgroundImage: `url('/packs/media/images/vitalsCrop-51bd225c.PNG')`}}>
+                  <div className="aspectRatio"  id='vitalCrop'>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@ class LandingPage extends React.Component {
                   </div>
                 </div>
                 <div className='col-12 col-md-6 order-1 order-md-2'>
-                  <div className="aspectRatio" style={{backgroundImage: `url('http://localhost:3000/packs/media/images/iograph-1ce80150.PNG')`}}>
+                  <div className="aspectRatio" id='iograph'>
                   </div>
                 </div>
               </div>

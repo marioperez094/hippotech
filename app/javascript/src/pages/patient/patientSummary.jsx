@@ -51,8 +51,10 @@ class PatientSummary extends React.Component {
               <div className="row">
                 <div className="col-6">
                   {/*Patient picture if patient has a picture or uses default picture*/}
-                  <div className="patient-image" style={{backgroundImage: `url(${image ? image : '/packs/media/images/alexander-maasch-KaK2jp8ie8s-unsplash-fb61587e.jpg'})`}}>
-                  </div>
+                  {image 
+                    ? <div className="patient-image" style={{backgroundImage: `url(${image})`}} />
+                    : <div className="patient-image"  id='stock-image'/>
+                  }
                 </div>
                 <div className="col-6">
                   <div className="row">
