@@ -83,7 +83,7 @@ const Navbar = (props) => {
                 <input 
                   className="form-control me-2 search-input" 
                   type="search" 
-                  placeholder="Patient Name" 
+                  placeholder="Patient Last Name" 
                   aria-label="Search" 
                   onChange={(e) => searchText(e)}
                   value={props.search}
