@@ -5,6 +5,7 @@ import SpecialInput from '@components/specialInput/specialInput';
 import LoadingRing from '@components/loadingRing/loadingRing';
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper'
+import { errorObject } from '@utils/utils';
 
 class LoginWidget extends React.Component {
   state = {
@@ -44,7 +45,7 @@ class LoginWidget extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error: 'Could not log in.',
+          error: JSON.parse(error.message),
           loading: false
         })
       })

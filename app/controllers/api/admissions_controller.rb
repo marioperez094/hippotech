@@ -12,14 +12,14 @@ module Api
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
       #Admissions belong to a patient and are charted by a user
-      begin
-        @admission = Admission.new(admission_params)
-        @admission.user = user
-        @admission.patient = patient
-        @admission.save!
+      
+      @admission = Admission.new(admission_params)
+      @admission.user = user
+      @admission.patient = patient
+      if @admission.save
         render 'api/admissions/show', status: :created
-      rescue ArgumentError => e
-        render json: @admission.errors.full_messages
+      else
+        render json: { error: @admission.errors }, status: :bad_request
       end
     end
 

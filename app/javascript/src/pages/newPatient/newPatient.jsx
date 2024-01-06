@@ -41,9 +41,17 @@ class NewPatient extends React.Component {
     if (e) { e.preventDefault() }
 
     fetch(`/api/patients/${this.state.search}`)
-      .then(data => handleErrors(data, (response) => {this.setState({ error: response, patient: null})}))
-      .then(data => {
-        this.setState({patient: data.patient, error: null})
+      .then(handleErrors)
+      .then(data => 
+        this.setState({ 
+          patient: data.patient, 
+          error: null 
+        }))
+      .catch(error => {
+        this.setState({
+          error: JSON.parse(error.message),
+          patient: null
+        })
       })
   }
 

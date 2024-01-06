@@ -4,6 +4,7 @@ import SpecialInput from '@components/specialInput/specialInput';
 import LoadingRing from '@components/loadingRing/loadingRing';
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
+import { errorObject } from '@utils/utils';
 
 class SignupWidget extends React.Component {
   state = {
@@ -49,10 +50,12 @@ class SignupWidget extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error: 'Could not sign up',
+          //Returns any errors to be visible to the front end
+          error: errorObject(error),
           loading: false
         })
       })
+
   }
 
   login = () => {

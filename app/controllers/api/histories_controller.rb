@@ -11,14 +11,13 @@ module Api
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
       #History belong to a patient and are charted by a user
-      begin 
-        @history = History.new(history_params)
-        @history.user = user
-        @history.patient = patient
-        @history.save!
+      @history = History.new(history_params)
+      @history.user = user
+      @history.patient = patient
+      if @history.save
         render 'api/histories/show', status: :created
-      rescue ArgumentError => e
-        render json: { error: e.message }, status: :bad_request
+      else
+        render json: { error: @history.errors }, status: :bad_request
       end
     end
 

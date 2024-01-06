@@ -13,11 +13,12 @@ module Api
       user = current_session.user
       return render json: { error: 'cannot find user' }, status: :not_found if !user
 
-      begin 
-        @patient = user.patients.create!(patient_params)
+      @patient = Patient.new(patient_params)
+      @patient.user = user
+      if @patient.save
         render 'api/patients/show', status: :created
-      rescue ArgumentError => e
-        render json: { error: e.message }, status: :bad_request
+      else
+        render json: { error: @patient.errors }, status: :bad_request
       end
     end
 

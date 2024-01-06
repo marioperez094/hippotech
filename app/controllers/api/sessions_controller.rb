@@ -15,9 +15,8 @@ module Api
         render 'api/sessions/create'
       else
         render json: {
-          success: false,
           error: 'Invalid username or password.'
-        }
+        }, status: :not_found
       end
     end
 

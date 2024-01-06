@@ -7,8 +7,7 @@ module Api
         render 'api/users/create'
       else
         render json: { 
-          success: false,
-          error: @user.errors.full_messages 
+          error: @user.errors 
         }, status: :bad_request
       end
     end

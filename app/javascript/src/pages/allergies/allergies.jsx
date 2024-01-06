@@ -5,7 +5,7 @@ import PatientBanner from "@pages/patient/patientBanner";
 import LoadingRing from '@components/loadingRing/loadingRing';
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
-import { capitalize } from '@utils/utils';
+import { capitalize, errorObject } from '@utils/utils';
 
 import './allergies.scss'
 
@@ -93,7 +93,15 @@ class Allergies extends React.Component {
           this.clearAllergy();
         }
       })
-      .catch(error => this.setState({ error: 'Could not add allergy' }))
+      .catch(error => {
+        console.log(error.message)
+        if (!error.message) {
+          return this.setState({ error: 'Cannot submit allergies' })
+        }
+        this.setState({ 
+          error: errorObject(error) 
+          })
+        })
   }
 
   render () {

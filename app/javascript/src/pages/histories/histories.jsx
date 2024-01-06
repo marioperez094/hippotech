@@ -5,7 +5,7 @@ import PatientBanner from "@pages/patient/patientBanner";
 import LoadingRing from '@components/loadingRing/loadingRing';
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
-import { capitalize, dateFormat, utcConvert } from '@utils/utils';
+import { capitalize, dateFormat, utcConvert, errorObject } from '@utils/utils';
 
 import './histories.scss'
 
@@ -93,7 +93,14 @@ class Histories extends React.Component {
           this.clearHistory();
         }
       })
-      .catch(error => this.setState({ error: 'Could not add history' }))
+      .catch(error => {
+        if (!error.message) {
+          return this.setState({ error: 'Cannot submit history' })
+        }
+        this.setState({ 
+          error: errorObject(error) 
+        })
+      })
   };
 
   render() {

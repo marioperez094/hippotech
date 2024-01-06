@@ -1,6 +1,7 @@
 import React from "react";
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
+import { errorObject } from '@utils/utils'
 
 class NewAdmissionForm extends React.Component {
   state = {
@@ -62,7 +63,14 @@ class NewAdmissionForm extends React.Component {
         this.setState({ error: '' })
         return location.assign(`/patient/${admission.id}}/allergies`)
       })
-      .catch(error => this.setState({ error: 'Could not submit admission' }))
+      .catch(error => {
+        if (!error.message) {
+          return this.setState({ error: 'Cannot submit admission' })
+        }
+        this.setState({ 
+          error: errorObject(error) 
+        })
+      })
 
   }
 

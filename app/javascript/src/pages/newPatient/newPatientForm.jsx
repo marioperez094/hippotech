@@ -1,6 +1,7 @@
 import React from "react";
 
 import { safeCredentialsFormData, handleErrors } from '@utils/fetchHelper';
+import { errorObject } from '@utils/utils'
 
 class NewPatientForm extends React.Component {
   state = {
@@ -51,7 +52,14 @@ class NewPatientForm extends React.Component {
           return this.props.changeFormState(2)
         }
       })
-      .catch(error => this.setState({error: 'Could not add patient'}))
+      .catch(error => {
+        if (!error.message) {
+          return this.setState({ error: 'Cannot submit patient' })
+        }
+        this.setState({
+          error: errorObject(error)
+        })
+      })
   }
 
   render () {
@@ -62,7 +70,7 @@ class NewPatientForm extends React.Component {
       <>
         <h3>Patient Demographics</h3>
         <form className="col-11 shadow p-3 my-5 bg-body rounded" onSubmit={this.submitPatient}>
-          {error && <p className="text-center text-warning">{error}</p>}
+          {error && <p className="text-center text-danger">{error}</p>}
           <div className="mb-3">
             <label className="form-label">First Name</label>
             <input className="form-control" name="first_name" value={first_name} onChange={this.changePatientInput} required/>

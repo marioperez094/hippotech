@@ -12,14 +12,13 @@ module Api
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
 
       #Allergies belong to a patient and are charted by a user
-      begin 
-        @allergy = Allergy.new(allergy_params)
-        @allergy.user = user
-        @allergy.patient = patient
-        @allergy.save!
+      @allergy = Allergy.new(allergy_params)
+      @allergy.user = user
+      @allergy.patient = patient
+      if @allergy.save
         render 'api/allergies/show', status: :created
-      rescue ArgumentError => e
-        render json: { error: e.message }, status: :bad_request
+      else
+        render json: { error: @allergy.errors }, status: :bad_request
       end
     end
 
