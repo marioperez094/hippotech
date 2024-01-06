@@ -138,8 +138,13 @@ class Flowsheet extends React.Component {
       this.loadVitals();
     })
     .catch(error => {
-      return console.log(error.error)
-    });  
+      if (!error.message) {
+        return this.setState({ error: 'Cannot submit history' })
+      }
+      this.setState({ 
+        error: errorObject(error) 
+      })
+    })
   };
 
   render() {

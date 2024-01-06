@@ -12,14 +12,13 @@ module Api
       return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
     
       #Vitals belongs to a patient, the user is charting on the patient
-      begin 
-          @vital = Vital.new(vital_params)
-          @vital.user = user
-          @vital.patient = patient
-          @vital.save!
+      @vital = Vital.new(vital_params)
+      @vital.user = user
+      @vital.patient = patient
+      if @vital.save
           render 'api/vitals/show', status: :created
-      rescue ArgumentError => e
-        render json: { error: e.message }, status: :bad_request
+      else ArgumentError => e
+        render json: { error: @vital.errors }, status: :bad_request
       end
     end
 
