@@ -1,7 +1,8 @@
 import React from "react";
 
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
-import { errorObject } from '@utils/utils'
+import { errorObject, dateFormat } from '@utils/utils'
+import PatientSuccess from "./patientSuccess";
 
 class NewAdmissionForm extends React.Component {
   state = {
@@ -22,7 +23,7 @@ class NewAdmissionForm extends React.Component {
   }
 
   componentDidMount () {
-    fetch(`/api/patients/${this.props.patientID}/admissions`)
+    fetch(`/api/patients/${this.props.patient.id}/admissions`)
       .then(handleErrors)
       .then(data => {
         const currentlyAdmitted = data.admissions.filter((admission) => {
@@ -51,7 +52,7 @@ class NewAdmissionForm extends React.Component {
     if (e) { e.preventDefault() };
 
     let admission = {...this.state.admission};
-    admission.patient_id = this.props.patientID
+    admission.patient_id = this.props.patient.id
 
     fetch(`/api/admissions`, safeCredentials({
       method: 'POST',
@@ -61,20 +62,46 @@ class NewAdmissionForm extends React.Component {
       .then(data => {
         const admission = data.admission
         this.setState({ error: '' })
-        return location.assign(`/patient/${admission.id}}/allergies`)
+        console.log('hi')
+        this.submitHistory(admission);
       })
       .catch(error => {
-        if (!error.message) {
-          return this.setState({ error: 'Cannot submit admission' })
-        }
         this.setState({ 
           error: errorObject(error) 
         })
       })
+  };
 
+  //Every admission gets added to the patient history
+  submitHistory = (admission) => {
+    const date = new Date()
+
+    let history = {
+      diagnosis: this.state.admission.diagnosis,
+      diagnosis_date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+      patient_id: this.props.patient.id
+    }
+
+    fetch('api/histories', safeCredentials({
+      method: 'POST',
+      body: JSON.stringify(history)
+    }))
+      .then(handleErrors)
+      .then(data => {
+        if (data.history) {
+          console.log('hello')
+          return location.assign(`/patient/${admission.id}}/allergies`)
+        } 
+      })
+      .catch(error => {
+        this.setState({ 
+          error: errorObject(error) 
+        })
+      })
   }
 
   render () {
+    const { patient } = this.props;
     const arrayTitle = ['Personal Information', 'Emergency Contact', 'Current Visit']
     const { admissionState, error, currentlyAdmitted, admission } = this.state;
     const { phone_number, address, occupation, emergency_contact, emergency_relationship, emergency_phone, diagnosis, code_status, diet } = admission;
@@ -88,6 +115,7 @@ class NewAdmissionForm extends React.Component {
     return (
       <>
         <h3>{arrayTitle[this.state.admissionState]}</h3>
+        <PatientSuccess patient={patient} />
         <form className="col-11 shadow p-3 my-5 bg-body rounded" onSubmit={this.submitAdmission}>
           {error && <p className="text-danger text-center">{error}</p>}
           {admissionState === 0 &&

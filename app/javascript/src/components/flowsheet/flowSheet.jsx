@@ -4,7 +4,7 @@ import FlowsheetTable from "./flowsheetTable";
 import LoadingRing from '@components/loadingRing/loadingRing';
 
 
-import { dateFormat } from '@utils/utils';
+import { dateFormat, errorObject } from '@utils/utils';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
 import './flowsheet.scss';
@@ -18,6 +18,7 @@ class Flowsheet extends React.Component {
     //Gives the date in mm/dd/yyyy format
     setDate: dateFormat(new Date())[0],
     loading: true,
+    error: null,
     vital: {
       service_time: dateFormat(new Date())[1],
       temperature: '',
@@ -136,11 +137,10 @@ class Flowsheet extends React.Component {
     .then(data => {
       this.clearVital();
       this.loadVitals();
+      this.setState({ error: '' })
     })
     .catch(error => {
-      if (!error.message) {
-        return this.setState({ error: 'Cannot submit history' })
-      }
+      this.clearVital();
       this.setState({ 
         error: errorObject(error) 
       })
@@ -148,7 +148,7 @@ class Flowsheet extends React.Component {
   };
 
   render() {
-    const { user_id, filteredVitals, vital, setDate, loading } = this.state;
+    const { user_id, filteredVitals, vital, setDate, loading, error } = this.state;
     
     if (loading) {
       return (
@@ -186,6 +186,7 @@ class Flowsheet extends React.Component {
                 {'>'}
               </button>
             </div>
+            {error && <p className="text-center text-danger">{error}</p>}
           </div>
           <FlowsheetTable patientID={this.state.patient.id} vitals={filteredVitals} vital={vital} changeNewVital={this.changeNewVital} />
         </div>

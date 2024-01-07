@@ -22,14 +22,14 @@ class Vital < ApplicationRecord
   #Input must be a valid date or error
   def date_must_be_a_date
     if self.service_time == nil
-      raise ArgumentError.new("Service date must be a date")
+      errors.add(:diagnosis_date, "must be a date")
     end
   end
 
   #Diagnosis date must be before current date
   def date_smaller_than_current_date
     if self.service_time > DateTime.now
-      raise ArgumentError.new("Service date cannot be after today's date")
+      errors.add(:diagnosis_date, "must be a date")
     end
   end
 end

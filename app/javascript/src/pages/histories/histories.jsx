@@ -91,12 +91,10 @@ class Histories extends React.Component {
         if (data.history) {
           this.loadHistories();
           this.clearHistory();
+          this.setState({ error: '' })
         }
       })
       .catch(error => {
-        if (!error.message) {
-          return this.setState({ error: 'Cannot submit history' })
-        }
         this.setState({ 
           error: errorObject(error) 
         })
@@ -165,11 +163,11 @@ class Histories extends React.Component {
                 <div className="row">
                   <div className="form-group col-sm-6">
                     <label className="form-label">Diagnosis</label>
-                    <input className="form-control" name="diagnosis" value={diagnosis} onChange={this.changeHistoryInput} />
+                    <input className="form-control" name="diagnosis" value={diagnosis} onChange={this.changeHistoryInput} required />
                   </div>
                   <div className="form-group col-sm-6">
                     <label className="form-label">Diagnosis Date</label>
-                    <input className="form-control" type="date" name="diagnosis_date" value={diagnosis_date} onChange={this.changeHistoryInput} />
+                    <input className="form-control" type="date" name="diagnosis_date" value={diagnosis_date} onChange={this.changeHistoryInput} required />
                   </div>
                   <div className="mt-2 text-end">
                     <button className="btn btn-success" type="submit">

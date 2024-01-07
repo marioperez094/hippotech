@@ -6,6 +6,7 @@ import NewPatientForm from "./newPatientForm";
 import NewAdmissionForm from "./newAdmissionForm";
 
 import { handleErrors } from '@utils/fetchHelper';
+import { errorObject } from '@utils/utils'
 
 import './newPatient.scss'
 
@@ -49,7 +50,7 @@ class NewPatient extends React.Component {
         }))
       .catch(error => {
         this.setState({
-          error: JSON.parse(error.message),
+          error: errorObject(error),
           patient: null
         })
       })
@@ -85,7 +86,7 @@ class NewPatient extends React.Component {
             }
             {formState === 2 &&
               <NewAdmissionForm 
-                patientID={patient.id}
+                patient={patient}
                 changeFormState={this.changeFormState}
               />
             }

@@ -45,7 +45,7 @@ class LoginWidget extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error: JSON.parse(error.message),
+          error: errorObject(error),
           loading: false
         })
       })

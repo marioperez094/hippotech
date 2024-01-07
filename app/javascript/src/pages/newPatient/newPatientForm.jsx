@@ -53,9 +53,6 @@ class NewPatientForm extends React.Component {
         }
       })
       .catch(error => {
-        if (!error.message) {
-          return this.setState({ error: 'Cannot submit patient' })
-        }
         this.setState({
           error: errorObject(error)
         })

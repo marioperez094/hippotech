@@ -91,6 +91,7 @@ class Allergies extends React.Component {
         if (data.allergy) {
           this.loadAllergies();
           this.clearAllergy();
+          this.setState({ error: '' })
         }
       })
       .catch(error => {
