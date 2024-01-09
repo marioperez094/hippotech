@@ -1,76 +1,158 @@
 import React from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-
-import FlowsheetLabel from "./flowsheetLabel";
-import FlowsheetTimeSlot from "./flowsheetTimeSlot";
+import DateSelector from "./dateSelector";
+import FlowsheetLabels from "./flowsheetLabels";
 import FlowsheetEmpty from "./flowsheetEmpty";
-import HoverToDiscover from '@components/hoverToDiscover/hoverToDiscover'
+import FilterVitals from "./filterVitals";
 
+import { dateFormat, errorObject } from "@utils/utils";
+import { safeCredentials, handleErrors } from "@utils/fetchHelper";
 
-import './flowsheet.scss'
+class FlowsheetTable extends React.Component {
+  state = {
+    error: null,
+    vital: {
+      service_time: dateFormat(new Date())[1],
+      temperature: '',
+      temp_source: '',
+      heart_rate: '',
+      systolic: '',
+      diastolic: '',
+      respirations: '',
+      o2_source: '',
+      fio2: '',
+      liters: '',
+      intake: '',
+      output: '',
+      comment: ''
+    },
+  };
 
-const FlowsheetTable = (props) => {
-  const { vitals, vital, changeNewVital, patientID } = props;
-  
-  return (
-    <div className="row scrollable-row flex-nowrap">
-      <div className="col-5 col-md-4 col-lg-2 ps-4 labels">
-        <div className="top-label-header">
-          <h4>Vitals</h4>
-        </div>
-        <Link to={`/vitalChart?vital=temperature&patientID=${patientID}`}>   
-          <FlowsheetLabel title='Temperature' />
-        </Link>
-        <FlowsheetLabel title='Temp Source' />
-        
-        <Link to={`/vitalChart?vital=heart_rate&patientID=${patientID}`}>
-          <FlowsheetLabel title='Heart Rate' />
-        </Link>
+  newVitalFocus = () => {
+    const newVital = document.getElementById('new-vital');
+    newVital.focus();
+  };
 
-        
-        <HoverToDiscover hoverText={'Blood Pressure'}>
-          <div className="vital label-header d-flex align-items-center blood-pressure">
-            <Link to={`/vitalChart?vital=systolic&patientID=${patientID}`}>
-              <p><b>Systolic</b></p>
-            </Link>
-            <p> / </p>
-            <Link to={`/vitalChart?vital=diastolic&patientID=${patientID}`}>
-              <p><b>Diastolic</b></p>
-            </Link>
-          </div>
-        </HoverToDiscover>
-        
-        
-        <Link to={`/vitalChart?vital=respirations&patientID=${patientID}`}>
-          <FlowsheetLabel title='Respirations' />
-        </Link>
-
-        <FlowsheetLabel title='Oxygen Source' />
-        <FlowsheetLabel title='FiO2' />
-        <FlowsheetLabel title='Liters of Oxygen' />
-
-        
-        <Link to={`/I&Os?patientID=${patientID}`}>
-          <FlowsheetLabel title='Intake' />
-        </Link>
-        
-        <Link to={`/I&Os?patientID=${patientID}`}>
-          <FlowsheetLabel title='Output' />
-        </Link>
-        <FlowsheetLabel title='Additional Info' />
-      </div>
-      <FlowsheetEmpty vital={vital} changeNewVital={changeNewVital} />
-
-      {vitals.length > 0 &&
-        vitals.map((vital) => {
-          return (
-            <FlowsheetTimeSlot key={vital.id} vital={vital} />
-          )
-        })
+  changeNewVital = (e) => {
+    this.setState({
+      vital: {
+        ...this.state.vital, 
+        [e.target.name]: e.target.value
       }
-    </div>
-  )
+    });
+  };
+
+  clearVital = () => {
+    const vital = {
+      service_time: dateFormat(new Date())[1],
+      temperature: '',
+      temp_source: '',
+      heart_rate: '',
+      systolic: '',
+      diastolic: '',
+      respirations: '',
+      o2_source: '',
+      fio2: '',
+      liters: '',
+      intake: '',
+      output: '',
+      comment: ''
+    };
+
+    this.setState({ vital })
+  };
+
+  submitVital = (e) => {
+    if (e) { e.preventDefault() }
+
+    let date = this.timeFormat()
+
+    //Returns error if date is incorrect format i.e. time 99:99
+    if (isNaN(new Date(date))) {
+      console.log(date)
+      return this.setState({ error: 'Invalid Date'})
+    }
+
+    let vital = this.state.vital;
+    vital.service_time = date;
+
+    fetch(`/api/patients/${this.props.patientID}/vitals`, safeCredentials({
+      method: 'POST',
+      body: JSON.stringify({vital})
+    }))
+    .then(handleErrors)
+    .then(data => {
+      this.clearVital();
+      this.setState({ error: '' });
+      this.props.loadVitals();
+    })
+    .catch(error => {
+      this.clearVital();
+      this.setState({ 
+        error: errorObject(error) 
+      })
+    })
+  };
+
+  //Fixes time based on user input
+  timeFormat = () => {
+    const { date } = this.props;
+    const { service_time } = this.state.vital;
+
+    //Returns if time has a colon.
+    if (service_time.indexOf(':') > -1) {
+      return new Date(`${date} ${service_time}`);
+    };
+
+    switch(service_time.length) {
+      case 1:
+      case 2:
+        return new Date(`${date} ${service_time}:00`);
+      case 3:
+        return new Date(`${date} ${service_time[0]}:${service_time.slice(1)}`);
+      case 4:  
+        return new Date(`${date} ${service_time.slice(0, 2)}:${service_time.slice(2)}`); 
+    };
+  };
+
+  render() {
+    const { vital, error } = this.state;
+    const { date, patientID, changeDate, vitals } = this.props;
+    return (
+      <>
+        <DateSelector date={date} changeDate={changeDate} />
+        <div className="col-12 col-md-3 p-2 p-md-3 order-md-1 d-flex justify-content-evenly">
+          <button 
+            className="btn btn-primary"
+            onClick={this.submitVital}
+          >
+            Save
+          </button>
+          <button 
+            className="btn btn-danger"
+            onClick={this.clearVital}
+          >
+            Clear
+          </button>
+          <button 
+            className="btn btn-success"
+            onClick={this.newVitalFocus}
+          >
+            Add Column
+          </button>
+        </div>
+        <div className="col-12 order-3">
+          {error && <p className="text-center text-danger">{error}</p>}
+          <div className="row scrollable-row flex-nowrap">
+            <FlowsheetLabels patientID={patientID} />
+            <FlowsheetEmpty vital={vital} changeNewVital={this.changeNewVital} />
+
+            <FilterVitals vitals={vitals} date={date} />
+          </div>
+        </div>
+      </>
+    );
+  };
 };
 
 export default FlowsheetTable;

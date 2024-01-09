@@ -50,7 +50,6 @@ export function arrayToString(list) {
 
 export function errorObject(error) {
   const parseError = JSON.parse(error.message)
-  console.log(parseError)
   if (typeof parseError === 'string') {
     return JSON.parse(error.message);
   };
