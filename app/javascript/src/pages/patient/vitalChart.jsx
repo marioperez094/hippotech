@@ -67,7 +67,7 @@ class VitalChart extends React.Component {
 
     if (vitalArray.length < 1) {
       return (
-        <h3 className="text-center">There is no {vitalName} data that can be graphed.</h3>
+        <h3 className="text-center">There is no {vitalName.split('_').join(' ')} data that can be graphed.</h3>
       )
     }
 

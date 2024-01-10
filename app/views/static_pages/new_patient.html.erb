@@ -1,2 +1,7 @@
 <%= javascript_packs_with_chunks_tag 'newPatient' %>
 <%= stylesheet_packs_with_chunks_tag 'newPatient' %>
+
+<% content_for :head do %>
+  <title>Admit A Patient | Hippotech </title>
+  <meta name="description" content="Easily admit a new patient with pertinent information."/>
+<% end %>

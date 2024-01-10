@@ -2,3 +2,8 @@
 <%= stylesheet_packs_with_chunks_tag 'patient' %>
 
 <div id="params" data-params="<%= @data %>"></div>
+
+<% content_for :head do %>
+  <title>Patient | Hippotech </title>
+  <meta name="description" content="Quickly navigate through patient information with hippotech's colorful system."/>
+<% end %>

@@ -23,7 +23,6 @@ class Flowsheet extends React.Component {
     fetch(`/api/patients/${this.props.patient.id}/vitals`)
       .then(handleErrors)
       .then(data => {
-        console.log('here')
         this.setState({ vitals: data.vitals, loading: false, });
       });
   };

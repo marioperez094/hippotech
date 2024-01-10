@@ -2,3 +2,8 @@
 <%= stylesheet_packs_with_chunks_tag 'histories' %>
 
 <div id="params" data-params="<%= @data %>"></div>
+
+<% content_for :head do %>
+  <title>Patient PMH - Hippotech</title>
+  <meta name="description" content="Easily add or remove  past medical history from any patient."/>
+<% end %>

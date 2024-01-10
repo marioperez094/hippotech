@@ -2,3 +2,8 @@
 <%= stylesheet_packs_with_chunks_tag 'allergies' %>
 
 <div id="params" data-params="<%= @data %>"></div>
+
+<% content_for :head do %>
+  <title>Patient Allergies - Hippotech</title>
+  <meta name="description" content="Easily add or remove allergies from any patient."/>
+<% end %>

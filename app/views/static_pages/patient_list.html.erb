@@ -1,2 +1,7 @@
 <%= javascript_packs_with_chunks_tag 'patientList' %>
 <%= stylesheet_packs_with_chunks_tag 'patientList' %>
+
+<% content_for :head do %>
+  <title>Patient List - Hippotech</title>
+  <meta name="description" content="Hippotech's easy to navigate patient list."/>
+<% end %>

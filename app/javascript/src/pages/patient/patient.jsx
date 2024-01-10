@@ -27,11 +27,15 @@ class Patient extends React.Component {
     fetch(`/api/admissions/${this.props.admission_id}`)
       .then(handleErrors)
       .then(data => {
+        const { admission } = data;
+        const { patient } = data.admission;
+
+        document.title = `${patient.last_name}, ${patient.first_name} | Hippotech`
         this.setState({ 
-          admission: data.admission,
-          patient: data.admission.patient,
-          allergies: data.admission.patient.allergies,
-          histories: data.admission.patient.histories,
+          admission: admission,
+          patient: patient,
+          allergies: patient.allergies,
+          histories: patient.histories,
           loading: false
         })
       })

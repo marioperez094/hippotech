@@ -27,9 +27,13 @@ class Allergies extends React.Component {
     fetch(`/api/admissions/${this.props.admission_id}`)
       .then(handleErrors)
       .then(data => {
+        const { admission } = data;
+        const { patient } = data.admission;
+
+        document.title = `${patient.last_name}, ${patient.first_name} Allergies | Hippotech`
         this.setState({ 
-          admission: data.admission,
-          patient: data.admission.patient,
+          admission: admission,
+          patient: patient
         }, () => { this.loadAllergies() })
       })
   }
@@ -95,7 +99,6 @@ class Allergies extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error.message)
         if (!error.message) {
           return this.setState({ error: 'Cannot submit allergies' })
         }
