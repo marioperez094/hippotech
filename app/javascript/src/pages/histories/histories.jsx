@@ -122,7 +122,7 @@ class Histories extends React.Component {
           <PatientBanner admission={admission} patient={patient} allergies={allergies} />
           <div className="container-fluid" id="histories-page">
             <div className="row">
-              <div className="col-11">
+              <div className="col-9 col-md-11">
                 <div className="histories text-center">
                   Past Medical History
                 </div>
@@ -157,7 +157,7 @@ class Histories extends React.Component {
                   </table>
                 </div>
               </div>
-              <div className="col-1">
+              <div className="col-3 col-md-1">
                 <button className="btn btn-primary" onClick={() => location.assign(`/patient/${admission.id}/allergies`)}>
                   Allergies
                 </button>

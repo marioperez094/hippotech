@@ -2,6 +2,8 @@ import React from "react";
 import { Chart } from "chart.js/auto";
 import 'chartjs-adapter-moment';
 
+import LoadingRing from '@components/loadingRing/loadingRing'
+
 import { handleErrors } from '@utils/fetchHelper'
 import { vitalsArrayToChart, capitalize, dateFormat } from "@utils/utils";
 
@@ -32,7 +34,7 @@ class VitalChart extends React.Component {
 
         //Makes an array that organizes the specific vital by date and time. 
         const vitalsToChart = vitalsArrayToChart(data.vitals, this.state.vitalName)
-        this.setState({vitalArray: vitalsToChart})
+        this.setState({ vitalArray: vitalsToChart, loading: false })
         this.buildChart(vitalsToChart);
       })
   }
@@ -63,7 +65,11 @@ class VitalChart extends React.Component {
   }
   
   render() {
-    const { vitalArray, vitalName } = this.state;
+    const { vitalArray, vitalName, loading } = this.state;
+
+    if (loading) {
+      return <LoadingRing />
+    }
 
     if (vitalArray.length < 1) {
       return (

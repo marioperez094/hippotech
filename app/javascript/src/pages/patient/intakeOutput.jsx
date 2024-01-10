@@ -1,10 +1,12 @@
 import React from "react";
 import { Chart } from "chart.js/auto";
 
-import './patient.scss'
+import LoadingRing from '@components/loadingRing/loadingRing'
 
 import { handleErrors } from '@utils/fetchHelper'
 import { dateFormat } from '@utils/utils'
+
+import './patient.scss'
 
 class IntakeOutput extends React.Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class IntakeOutput extends React.Component {
           return vital.intake || vital.output
         })
 
-        this.setState({ iAndOWithTime })
+        this.setState({ iAndOWithTime, loading: false })
         this.sortIntakeOutput(data.vitals);
       })
   }
@@ -94,7 +96,11 @@ class IntakeOutput extends React.Component {
   }
   
   render() {
-    const { intake, output, iAndOWithTime } = this.state;
+    const { intake, output, iAndOWithTime, loading } = this.state;
+
+    if (loading) { 
+      return <LoadingRing />
+    }
 
     if (!intake || !output) {
       return (

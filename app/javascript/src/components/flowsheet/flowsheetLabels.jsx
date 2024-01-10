@@ -8,7 +8,7 @@ const FlowsheetLabels = (props) => {
   const { patientID } = props;
 
   return (
-    <div className="col-4 col-md-4 col-lg-2 ps-4 labels">
+    <div className="col-5 col-md-4 col-lg-2 ps-4 labels">
       <div className="top-label-header">
         <h4>Vitals</h4>
       </div>

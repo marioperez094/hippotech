@@ -9,7 +9,7 @@ const PatientSearch = (props) => {
     <>
       <h3>Search for Previous Patient</h3>
       <p>If patient has been admitted before, search for patient. Otherwise, establish a new patient.</p>
-      <form className='col-5 shadow p-3 my-5 bg-body rounded d-flex' onSubmit={(e) => searchPatient(e)}>
+      <form className='col-11 col-md-5 shadow p-3 my-5 bg-body rounded d-flex' onSubmit={(e) => searchPatient(e)}>
         <input 
           className='form-control me-2' 
           type='number' 
