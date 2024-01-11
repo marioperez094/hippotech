@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import SidebarTab from "./sidebarTab";
 
 const Sidebar = (props) => {
   const [menu, setMenu] = useState(true)
@@ -14,33 +15,23 @@ const Sidebar = (props) => {
         </div>
       </div>
       <div className={`d-md-block ${menu ? '' : 'd-none'} sidebar-bg`}>
-      <div className="col-12">
-          <Link to={`/patient/${props.id}`} onClick={() => setMenu(false)}>
-            <div className="bg-white mx-2 d-flex justify-content-center align-items-center">
-              Patient Summary
+        <SidebarTab name={ 'Patient Summary' } link={ `/patient/${props.id}` } setMenu={ setMenu } />
+        <SidebarTab name={ 'Flowsheet' } link={ `/patient/${props.id}/flowsheet` } setMenu={ setMenu } />
+        <SidebarTab name={ 'Intake/Output' } link={ `/I&Os?patientID=${props.patientID}` } setMenu={ setMenu } />
+        <SidebarTab name={ 'Discharge' } link={ `/patient/${props.id}/discharge` } setMenu={ setMenu } />
+        <div className="col-12">
+          <a href={ `/patient/${props.id}/allergies` } onClick={() => setMenu(false)}>
+            <div className="bg-white d-flex justify-content-center align-items-center mx-2">
+              Allergies
             </div>
-          </Link>
+          </a>
         </div>
         <div className="col-12">
-          <Link to={`/patient/${props.id}/flowsheet`} onClick={() => setMenu(false)}>
-            <div className="bg-white mx-2 d-flex justify-content-center align-items-center">
-              Flowsheet
+          <a href={ `/patient/${props.id}/histories` } onClick={() => setMenu(false)}>
+            <div className="bg-white d-flex justify-content-center align-items-center mx-2">
+              Past Medical History
             </div>
-          </Link>
-        </div>
-        <div className="col-12">
-          <Link to={`/I&Os?patientID=${props.patientID}`} onClick={() => setMenu(false)}>
-            <div className="bg-white mx-2 d-flex justify-content-center align-items-center">
-              Intake/Output
-            </div>
-          </Link>
-        </div>
-        <div className="col-12">
-          <Link to={`/patient/${props.id}/discharge`} onClick={() => setMenu(false)}>
-            <div className="bg-white mx-2 d-flex justify-content-center align-items-center">
-              Discharge
-            </div>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

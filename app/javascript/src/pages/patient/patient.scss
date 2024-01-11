@@ -3,6 +3,11 @@
   background: linear-gradient(120deg, lightblue, #CCCCFF);
 }
 
+.patient-banner-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .patient-image {
   padding-top: calc(2 /3 * 100px);
   background-size: cover;

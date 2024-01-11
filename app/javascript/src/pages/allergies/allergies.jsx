@@ -124,7 +124,7 @@ class Allergies extends React.Component {
         <main>
           <PatientBanner admission={admission} patient={patient} allergies={allergies} />
           <div className="container-fluid" id="allergies-page">
-            <div className="row">
+            <div className="row allergies-row">
               <div className="col-9 col-md-11">
                 <div className="allergies text-center">
                   Allergies
@@ -136,7 +136,7 @@ class Allergies extends React.Component {
                         <th scope="col">
                           Allergy
                         </th>
-                        <th scope="col">
+                        <th scope="col" className="d-none d-md-table-cell">
                           Reaction
                         </th>
                         <th scope="col">
@@ -150,7 +150,7 @@ class Allergies extends React.Component {
                           return (
                             <tr key={allergy.id}>
                               <td>{capitalize(allergy.name)}</td>
-                              <td>{capitalize(allergy.reaction)}</td>
+                              <td className="d-none d-md-table-cell">{capitalize(allergy.reaction)}</td>
                               <td>{capitalize(allergy.symptoms)}</td>
                               <td>
                                 <button className="btn btn-danger" onClick={() => {this.deleteAllergy(allergy.id)}}>Delete</button>
@@ -165,7 +165,7 @@ class Allergies extends React.Component {
               </div>
               <div className="col-3 col-md-1">
                 <button className="btn btn-primary" onClick={() => location.assign(`/patient/${admission.id}/histories`)}>
-                  Past Medical History
+                  History
                 </button>
               </div>
               <form className="col-11 py-4 ms-3" onSubmit={this.submitAllergy}>

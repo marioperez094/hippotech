@@ -15,9 +15,10 @@ const PatientBanner = (props) => {
     <div className="container-fluid patient-banner pt-3">
       <div className="row">
         <div className="col-12 col-md-2" >
-          <div className="patient-image rounded" style={{backgroundImage: `url(${image ? image : '/packs/media/images/alexander-maasch-KaK2jp8ie8s-unsplash-fb61587e.jpg'})`}}>
-          </div>
-          <h3 className="text-center">{capitalize(last_name)}, {capitalize(first_name)}</h3>
+          <a className="patient-banner-link" href={ `/patient/${patient.id}` }>
+            <div className="patient-image rounded" style={{backgroundImage: `url(${image ? image : '/packs/media/images/alexander-maasch-KaK2jp8ie8s-unsplash-fb61587e.jpg'})`}} />
+            <h3 className="text-center">{capitalize(last_name)}, {capitalize(first_name)}</h3>
+          </a>
         </div>
         <div className="col-12 col-md-10">
           <div className="row w-100">
