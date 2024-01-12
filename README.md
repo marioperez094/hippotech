@@ -3,7 +3,7 @@
 ![Screenshot of hippotech landing page](/app/assets/images/Hippotech%20Screenshot.PNG)
 
 ## Live Demo
-* Website: https://hippotech-33c168d59092.herokuapp.com/
+* Website: https://hippotechehr.com/
 https://www.loom.com/share/34e13482bbc24bb4a84b172534c5fed2
   
 ## Made with: 
