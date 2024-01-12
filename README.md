@@ -3,8 +3,8 @@
 ![Screenshot of hippotech landing page](/app/assets/images/Hippotech%20Screenshot.PNG)
 
 ## Live Demo
-https://hippotech-33c168d59092.herokuapp.com/
-![Video clip of webpage](https://www.loom.com/share/34e13482bbc24bb4a84b172534c5fed2)
+* Website: https://hippotech-33c168d59092.herokuapp.com/
+https://www.loom.com/share/34e13482bbc24bb4a84b172534c5fed2
   
 ## Made with: 
 * Ruby on Rails v6.1.6
