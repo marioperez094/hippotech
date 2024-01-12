@@ -64,10 +64,6 @@ foreman start -f Procfile.dev
 
 5. Load "localhost:3000" as a webpage
 
-```
-rails s
-```
-
 ## Overview
 From the beginning, the goal of this project was to make a charting system that was easy to use and navigate for healthcare workers. This project took about two months to complete. The front-end was initially drafted on paper and improved on uizard. Two healthcare workers of different fields completed user testing. 
 
