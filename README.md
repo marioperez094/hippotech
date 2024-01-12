@@ -18,12 +18,12 @@ https://hippotech-33c168d59092.herokuapp.com/
 https://app.uizard.io/p/21f06b9c/preview
 
 ## Features
-*Patient list that can be organized by last name or patient id
-*Easy patient search through last name
-*Customizable patient list allowing quick and easy retrieval of important patient information
-*Detailed patient summary, organized by topic and color coded
-*Flowsheet with simple to use UI
-*Graphs that help visualize patient vitals
+* Patient list that can be organized by last name or patient id
+* Easy patient search through last name
+* Customizable patient list allowing quick and easy retrieval of important patient information
+* Detailed patient summary, organized by topic and color coded
+* Flowsheet with simple to use UI
+* Graphs that help visualize patient vitals
 
 ## Installation
 
