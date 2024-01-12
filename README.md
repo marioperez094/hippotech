@@ -27,7 +27,7 @@ https://app.uizard.io/p/21f06b9c/preview
 
 ## Installation
 
-###Run the following to locally install this app.
+#### Run the following to locally install this app.
 
 1. Clone repository 
 
