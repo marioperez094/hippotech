@@ -1,3 +1,18 @@
 const { environment } = require('@rails/webpacker')
 
-module.exports = environment
+const path = require('path');
+
+const customConfig = {
+  resolve: {
+    alias: {
+      "@pages": path.resolve(__dirname, "..", "..", "app/javascript/src/pages"),
+      "@components": path.resolve(__dirname, "..", "..", "app/javascript/src/components"),
+      "@utils": path.resolve(__dirname, "..", "..", "app/javascript/src/utils"),
+      "@packs": path.resolve(__dirname, "..", "..", "app/javascript/packs"),
+    }
+  }
+};
+
+environment.config.merge(customConfig);
+
+module.exports = environment;
