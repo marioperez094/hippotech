@@ -66,7 +66,6 @@ function Hero() {
           {/* Shows up on small screens only */}
           <h5 className='text-white'>A solution for patient care</h5>
         </div>
-           
       </main>
     </>
   )
