@@ -1,12 +1,10 @@
 import React from 'react';
 
-import Navbar from '@components/landingLayout/landingNavbar';
-import Footer from '@components/landingLayout/landingFooter';
-import SignupWidget from './signupWidget';
-import LoginWidget from './loginWidget';
+import LandingLayout from "@components/landingLayout";
+import SignupWidget from "./signupWidget";
+import LoginWidget from "./loginWidget";
 
-import './login.scss'
-import { getRequest } from '@utils/fetchRequests';
+import "./login.scss";
 
 class Login extends React.Component {
   state = {
@@ -15,11 +13,6 @@ class Login extends React.Component {
 
   //Redirects if user is authenticated
   componentDidMount() {
-    getRequest('/api/authenticated', function(data) {
-      if (data.authenticated) {
-        location.assign('/patient_list')
-      }
-    })
   }
 
   //Toggle between sign up or log in 
@@ -33,23 +26,9 @@ class Login extends React.Component {
     const { showLogin } = this.state;
 
     return (
-      <>
-        <Navbar />
-          <div className='container-fluid' id='login'>
-            <div className='row'>
-              <div className='col-12 widget-container d-flex align-items-center justify-content-center'>
-                <div className='border rounded p-4 m-4'>
-                  <h1 className='text-center'>Hippotech </h1>
-                  {showLogin
-                    ? <LoginWidget toggle={this.toggle} />
-                    : <SignupWidget toggle={this.toggle} />
-                  }
-                </div>
-              </div>
-            </div>
-          </div>
-        <Footer />
-      </>
+      <LandingLayout>
+        
+      </LandingLayout>
     )
   }
 }

@@ -6,5 +6,5 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <LandingPage />,
     document.body.appendChild(document.createElement('div')),
-  )
-})
+  );
+});

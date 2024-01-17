@@ -1,3 +1,5 @@
+@import "@packs/variables.scss";
+
 #landing-page {
   .container-fluid {
     padding-left: 24px;
@@ -9,10 +11,10 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
 
-    h1 {
-      padding-top: 45px;
-    }
+  h1 {
+    padding-top: 45px;
   }
 
   #hero-cards {
@@ -20,32 +22,40 @@
       padding-left: 0;
       padding-right: 0;
     }
-  
+
     a {
       color: inherit;
       text-decoration: none;
     }
 
     a:hover {
-      color: rgba(0, 0, 0, 0.6);
+      counter-reset: rgba(0, 0, 0, 0.6);
     }
-  
+
     .hero-card {
       background-color: rgba(255, 255, 255, 0.8);
-      border-top: 5px solid #CCCCFF;
+      border-top: 5px solid $secondary-color;
       min-height: 250px;
     }
   }
-  
+
+  .hero-footer {
+    background-color: #253746;
+  }
+
   .aspectRatio {
-    padding-top: calc(2 / 3 * 100%); 
+    padding-top: calc(2 / 3 * 100%);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border: 2px solid $secondary-color;
+    border-radius: 50px;
   }
 
   #patientListCrop {
     background-image: url(../../../../assets/images/patientListCrop.PNG);
+    padding-top: 20%;
+    background-position: center 1%;
   }
 
   #vitalCrop {
@@ -53,31 +63,31 @@
   }
 
   #iograph {
-    background-image: url(../../../../assets/images//iograph.PNG);
+    background-image: url(../../../../assets/images/iograph.PNG);
   }
 
-  .hero-footer {
-    background-color: #253746;
-  }
-
+  //xsmall to medium screens
   @media (max-width: 991px) {
-    .landing-page {
+    #landing-layout {
       border-bottom: 2px solid black;
     }
+
     #hero {
       min-height: 300px;
     }
+
     footer {
       border-top: 2px solid black;
     }
   }
-  
+
+  //large to xlarge screens
   @media (min-width: 992px) {
     #hero {
       height: 50vh;
       min-height: 650px;
     }
-  
+
     #hero-cards {
       position: absolute;
       top: 120px;
