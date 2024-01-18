@@ -1,0 +1,21 @@
+@import "@packs/variables.scss";
+
+#login {
+  background-color: $secondary-color;
+  background: linear-gradient(120deg, $tertiary-color, $secondary-color);
+
+  h1 {
+    font-family: $primary-font;
+    color: $primary-color;
+  }
+
+  .widget-container {
+    min-height: 90vh;
+  }
+
+  .border {
+    background-color: white;
+    width: 75%;
+    max-width: 500px;
+  }
+}

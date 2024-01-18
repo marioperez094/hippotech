@@ -2,7 +2,7 @@ import React from "react";
 
 import HeroCard from "./heroCard";
 
-import "./landingPage.scss"
+import "./landingPage.scss";
 
 function Hero() {
   const logInHeroCard = {
