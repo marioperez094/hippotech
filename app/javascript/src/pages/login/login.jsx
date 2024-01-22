@@ -11,7 +11,7 @@ import "./login.scss"
 class Login extends React.Component {
   state = {
     showLogin: true,
-  }
+  };
 
   componentDidMount() {
     fetch("api/authenticated")
@@ -21,10 +21,10 @@ class Login extends React.Component {
           return location.assign("/patient_list")
         }
       })
-      .catch(error => { console.log(error) })
+      .catch(error => console.log(error))
   };
 
-  login = (username, password, callback) => {
+  login = (username, password, sendErrors) => {
     fetch("api/sessions", safeCredentials({
       method: "POST",
       body: JSON.stringify({
@@ -41,7 +41,7 @@ class Login extends React.Component {
         }
       })
       .catch(error => {
-        callback(error);
+        sendErrors(error);
       });
   };
 
@@ -56,7 +56,10 @@ class Login extends React.Component {
 
     return (
       <LandingLayout>
-        <div className="container-fluid" id="login">
+        <div 
+          className="container-fluid" 
+          id="login"
+        >
           <div className="row">
             <div className="col-12 widget-container d-flex align-items-center justify-content-center">
               <div className="border rounded p-4 m-4">

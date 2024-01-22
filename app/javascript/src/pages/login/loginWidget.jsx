@@ -29,9 +29,9 @@ class LoginWidget extends React.Component {
       loading: true
     });
 
-    this.props.login(username, password, (error) => {
+    this.props.login(username, password, (errors) => {
       this.setState({ 
-        error: errorObject(error),
+        error: errorObject(errors),
         loading: false
       })
     })
@@ -49,7 +49,10 @@ class LoginWidget extends React.Component {
         <p className="text-danger text-center">
           { error }
         </p>
-        <form className="pb-4" onSubmit={ this.login }>
+        <form 
+          className="pb-4" 
+          onSubmit={ this.login }
+        >
           <div className="form-group labeled-border col-12 mt-3">
             <SpecialInput 
               name="username" 
@@ -66,7 +69,10 @@ class LoginWidget extends React.Component {
             />
           </div>
           <div className="col-12 mt-3 text-end">
-            <button type="submit" className="btn btn-primary btn-block btn-lg">
+            <button 
+              type="submit" 
+              className="btn btn-primary btn-block btn-lg"
+            >
               Log in
             </button>
           </div>

@@ -21,12 +21,18 @@ function LandingPage() {
                 </div>
               </div>
               <div className="col-12 col-md-6 order-1 order-md-2">
-                <div className="aspectRatio" id="patientListCrop" />
+                <div 
+                  className="aspectRatio" 
+                  id="patientListCrop"
+                />
               </div>
             </div>
             <div className='row my-3'>
               <div className='col-12 col-md-6 offset-md-1'>
-                <div className="aspectRatio"  id='vitalCrop' />
+                <div 
+                  className="aspectRatio"
+                  id='vitalCrop' 
+                />
               </div>
               <div className='col-12 col-md-3 d-flex justify-content-center align-items-center mt-2 mt-md-0'>
                 <div className="ps-3">
@@ -43,7 +49,10 @@ function LandingPage() {
                 </div>
               </div>
               <div className='col-12 col-md-6 order-1 order-md-2'>
-                <div className="aspectRatio" id='iograph' />
+                <div 
+                  className="aspectRatio" 
+                  id='iograph' 
+                />
               </div>
             </div>
           </div>

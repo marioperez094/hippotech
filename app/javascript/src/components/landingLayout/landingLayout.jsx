@@ -5,15 +5,24 @@ import './landingLayout.scss'
 function LandingLayout(props) {
   return (
     <>
-      <nav className="navbar navbar-light" id="landing-layout">
+      <nav 
+        className="navbar navbar-light" 
+        id="landing-layout"
+      >
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <a 
+            className="navbar-brand" 
+            href="/"
+          >
             Hippotech
           </a>
           <div className="d-flex">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="/login">
+                <a 
+                  className="nav-link" 
+                  href="/login"
+                >
                   Log in
                 </a>
               </li>
@@ -30,7 +39,9 @@ function LandingLayout(props) {
                 <h6>Other Solutions</h6>
               </div>
               <div className='col-12'>
-                <a href='https://infusiontimer.github.io/'>Infusion Timer</a>
+                <a href='https://infusiontimer.github.io/'>
+                  Infusion Timer
+                </a>
               </div>
               <div className='col-12'>
                 <a href='#'>Nursing Task Tracker</a>
@@ -43,19 +54,27 @@ function LandingLayout(props) {
                 <h6>Personal links</h6>
               </div>
               <div className='col-12'>
-                <a href='https://www.linkedin.com/in/mario-perez-412b7b273/'>Linked in</a>
+                <a href='https://www.linkedin.com/in/mario-perez-412b7b273/'>
+                  Linked in
+                </a>
               </div>
               <div className='col-12'>
-                <a href='https://github.com/marioperez094'>GitHub</a>
+                <a href='https://github.com/marioperez094'>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
           <div className='col-12 mt-3'>
             <h6>Disclaimer</h6>
-            <p>This is a test build and does not represent a finished product. Patients in this product do not reflect real people.</p>
+            <p>
+              This is a test build and does not represent a finished product. Patients in this product do not reflect real people.
+            </p>
           </div>
           <div className='col-12 mt-3 d-flex justify-content-center'>
-            <p><small>&copy;2023 Hoppitech</small></p>
+            <p>
+              <small>&copy;2023 Hoppitech</small>
+            </p>
           </div>
         </div>
       </footer>

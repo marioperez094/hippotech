@@ -9,10 +9,10 @@ function HeroCard(props) {
 
   return (
     <div className="col-12 col-lg-6">
-      <a href={link}>
+      <a href={ link }>
         <div className="shadow p-3 m-5 rounded hero-card">
-          <h2>{title}</h2>
-          <h6>{description}</h6>
+          <h2>{ title }</h2>
+          <h6>{ description }</h6>
           <ul>
             { listItems.map((listItem, index) => {
               return (

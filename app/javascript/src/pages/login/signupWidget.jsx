@@ -1,7 +1,7 @@
 import React from "react";
 
-import SpecialInput from "@components/specialInput";
 import LoadingRing from "@components/loadingRing";
+import SignupForm from "@components/signupForm";
 
 import { handleErrors, safeCredentials } from "@utils/fetchHelper";
 import { errorObject } from "@utils/utils";
@@ -62,9 +62,9 @@ class SignUpWidget extends React.Component {
     const { username, password } = this.state;
     this.setState({ error: "" });
 
-    this.props.login(username, password, (error) => {
+    this.props.login(username, password, (errors) => {
       this.setState({
-        error: errorObject(error),
+        error: errorObject(errors),
         loading: false
       })
     })
@@ -84,51 +84,26 @@ class SignUpWidget extends React.Component {
         <p className="text-danger text-center">
           { error }
         </p>
-        <form className="py-4" onSubmit={ this.signup }>
+        <form 
+          className="py-4" 
+          onSubmit={ this.signup }
+        >
           <div className="row">
-            <div className="form-group labeled-border col-12 col-md-6">
-              <SpecialInput
-                name="first_name"
-                value={ first_name }
-                handleChange={ this.handleChange }
-              />
-            </div>
-            <div className="form-group labeled-border col-12 col-md-6 mt-3 mt-md-0">
-              <SpecialInput
-                name="last_name"
-                value={last_name}
-                handleChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group labeled-border col-12 mt-3">
-              <SpecialInput
-                name="username"
-                value={ username }
-                handleChange={ this.handleChange }
-              />
-            </div>
-            <div className="form-group labeled-border col-12 mt-3">
-              <SpecialInput
-                name="email"
-                value={ email }
-                type="email"
-                handleChange={ this.handleChange }
-              />
-            </div>
-            <div className="form-group labeled-border col-12 mt-3">
-              <SpecialInput
-                name="password"
-                value={ password }
-                type="password"
-                handleChange={ this.handleChange }
-              />
-            </div>
+            <SignupForm
+              first_name={ first_name }
+              last_name={ last_name }
+              email={ email }
+              password={ password }
+              username={ username }
+              handleChange={ this.handleChange }
+            />
             <div className="col-12 mt-3 text-end">
               <button 
                 type="submit"
-                className="btn btn-primary btn-block btn-lg">
-                  Sign up
-                </button>
+                className="btn btn-primary btn-block btn-lg"
+              >
+                Sign up
+              </button>
             </div>
           </div>
         </form>

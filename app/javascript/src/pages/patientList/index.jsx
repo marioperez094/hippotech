@@ -1,10 +1,10 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import LandingPage from "./landingPage";
+import React from "react";
+import ReactDOM from "react-dom";
+import PatientList from "./patientList";
 
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
-    <LandingPage />,
+    <PatientList />,
     document.body.appendChild(document.createElement("div")),
   );
 });

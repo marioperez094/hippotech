@@ -1,10 +1,10 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import LandingPage from "./landingPage";
+import React from "react";
+import ReactDOM from "react-dom";
+import ResetPassword from "./resetPassword";
 
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
-    <LandingPage />,
+    <ResetPassword/>,
     document.body.appendChild(document.createElement("div")),
   );
 });

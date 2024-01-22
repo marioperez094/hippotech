@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: "static_pages#landing_page"
 
   get "login" => "static_pages#login"
+  get "/patient_list" => "static_pages#patient_list"
+  get "/reset_password" => "static_pages#reset_password"
+  get "/new_patient" => "static_pages#new_patient"
 
   namespace :api do
     resources :users, only: [:create]

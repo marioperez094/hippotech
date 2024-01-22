@@ -4,7 +4,7 @@ module Api
       @user = User.new(user_params)
 
       if @user.save
-        render 'api/users/create'
+        render "api/users/create"
       else
         render json: { 
           error: @user.errors 
@@ -13,8 +13,16 @@ module Api
     end
 
     def password_reset
-      @user = User.find_by(username: params[:user][:username])
+      if !current_session
+        return render json: {
+          authenticated: false
+        }
+      end
 
+      @user = current_session.user
+      return render json: { error: "User not found." }, status: :not_found if !@user
+
+      render json: { success: true } if @user&.update(password: params[:user][:password])
     end
 
     private

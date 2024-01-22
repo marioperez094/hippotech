@@ -12,10 +12,10 @@ module Api
           httponly: true
         }
 
-        render 'api/sessions/create'
+        render "api/sessions/create"
       else
         render json: {
-          error: 'Invalid username or password.'
+          error: "Invalid username or password."
         }, status: :not_found
       end
     end
@@ -28,7 +28,7 @@ module Api
       end
 
       @user = current_session.user
-      render 'api/sessions/authenticated'
+      render "api/sessions/authenticated"
     end
 
     def destroy

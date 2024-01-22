@@ -17,6 +17,10 @@ class User < ApplicationRecord
 
   after_validation :hash_password
 
+  def needs_new_password
+    Date.parse(self.updated_at.to_s) + 93 <= Date.today
+  end
+
   private 
 
   def hash_password
