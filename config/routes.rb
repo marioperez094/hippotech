@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: [:create]
     resources :sessions, only: [:create]
+    resources :patients, only: [:create, :index, :show, :update]
 
     #Session APIs
     delete "/sessions" => "sessions#destroy"

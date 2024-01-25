@@ -1,31 +1,33 @@
 import React from "react";
 
-import "./specialInput.scss";
 import { capitalize, removeUnderscores } from "@utils/utils";
 
-function SpecialInput(props) {
-  const { name, handleChange, value, type } = props;
-  
+function PatientInput(props) {
+  const { name, handleChange, value, type, required } = props;
+
   //Takes away underscores in the name
   const nameTag = removeUnderscores(name)
 
 
   return (
-    <>
-      <label htmlFor={ name }>
+    <div className="mb-3">
+      <label 
+        htmlFor={ name }
+        className="form-label"
+      >
         { capitalize(nameTag) }
       </label>
-      <input 
+      <input
         name={ name }
         type={ type ? type : "text" }
         className="form-control form-control-lg rounded"
         id={ name }
         value={ value }
         onChange={ (e) => handleChange(e) }
-        required
+        required={ required }
       />
-    </>
+    </div>
   )
 };
 
-export default SpecialInput;
+export default PatientInput;
