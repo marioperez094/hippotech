@@ -3,10 +3,17 @@ import React from "react";
 import { removeUnderscores } from "@utils/utils";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
+import ErrorText from "@components/errorText"
+
+import { handleErrors } from "@utils/fetchHelper";
+import { errorObject } from "@utils/utils"
+
 class PatientSearch extends React.Component {
   state = {
-    searchKey: "id",
+    searchRow: "id",
     search: "",
+    patients: null,
+    error: null,
   };
 
   handleChange = (e) => {
@@ -15,8 +22,26 @@ class PatientSearch extends React.Component {
     });
   };
 
+  searchPatient = (e) => {
+    if (e) e.preventDefault();
+
+    const { search, searchRow } = this.state;
+
+    fetch(`api/patients/search/${ searchRow }/${ search }`)
+      .then(handleErrors)
+      .then(data => {
+        console.log(data)
+        this.setState({ patients: data.patients }, () => {
+          console.log(this.state.patients)
+        })
+      })
+      .catch(error => this.setState({ 
+        error: errorObject(error) 
+      }))
+  };
+
   render() {
-    const { searchKey, search } = this.state;
+    const { searchRow, search, error } = this.state;
 
     return (
       <>
@@ -25,12 +50,13 @@ class PatientSearch extends React.Component {
           <p>If patient has a prior admission, please search for patients. If no prior admission is found, please add a new patient to the system.</p>
         </div>
         <form className="col-12 col-md-9 col-xl-5 shadow p-3 my-5 bg-body" onSubmit={ this.searchPatient } id="patient-search">
+          { error && <ErrorText error={error} /> }
           <div className="row gx-0">
             <div className="form-group col-3">
               <select
                 className="form-control"
-                name="searchKey"
-                value={ searchKey }
+                name="searchRow"
+                value={ searchRow }
                 onChange={ this.handleChange }
               >
                 <option value="id">ID</option>
@@ -43,7 +69,7 @@ class PatientSearch extends React.Component {
               <input
                 className="form-control"
                 name="search"
-                placeholder={`Patient ${ removeUnderscores(searchKey) }`}
+                placeholder={`Patient ${ removeUnderscores(searchRow) }`}
                 value={ search }
                 onChange={ this.handleChange }
               />

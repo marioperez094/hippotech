@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
     resources :patients, only: [:create, :index, :show, :update]
 
+    #Patient Search
+    get "patients/search/:searchRow/:search" => "patients#index_by_last_name"
+
     #Session APIs
     delete "/sessions" => "sessions#destroy"
     get "/authenticated" => "sessions#authenticated"
