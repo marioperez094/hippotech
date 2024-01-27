@@ -31,12 +31,14 @@ class PatientSearch extends React.Component {
       .then(handleErrors)
       .then(data => {
         console.log(data)
-        this.setState({ patients: data.patients }, () => {
-          console.log(this.state.patients)
+        this.setState({ 
+          patients: data.patients,
+          error: "" 
         })
       })
       .catch(error => this.setState({ 
-        error: errorObject(error) 
+        error: errorObject(error),
+        search: ""
       }))
   };
 
