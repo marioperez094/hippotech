@@ -1,3 +1,11 @@
+export function differenceInYears(date) {
+  const currentDate = new Date()
+  const calcDate = new Date(date)
+
+  //Milliseconds in a year
+  return Math.floor((currentDate - calcDate) / 31556952000)
+};
+
 export function capitalize(string) {
   return string[0].toUpperCase().concat(string.slice(1).toLowerCase());
 };

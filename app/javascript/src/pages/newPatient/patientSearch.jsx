@@ -1,19 +1,20 @@
 import React from "react";
 
 import { removeUnderscores } from "@utils/utils";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import ErrorText from "@components/errorText"
 
 import { handleErrors } from "@utils/fetchHelper";
 import { errorObject } from "@utils/utils"
+import PatientSelector from "./patientSelector";
 
 class PatientSearch extends React.Component {
   state = {
     searchRow: "id",
     search: "",
-    patients: null,
     error: null,
+    patients: null,
   };
 
   handleChange = (e) => {
@@ -38,12 +39,13 @@ class PatientSearch extends React.Component {
       })
       .catch(error => this.setState({ 
         error: errorObject(error),
-        search: ""
+        search: "",
+        patients: "",
       }))
   };
 
   render() {
-    const { searchRow, search, error } = this.state;
+    const { searchRow, search, error, patients } = this.state;
 
     return (
       <>
@@ -95,6 +97,16 @@ class PatientSearch extends React.Component {
             </div>
           </div>
         </form>
+        { patients &&
+          patients.map((patient) => {
+            return ( 
+              <PatientSelector 
+                key={ patient.id }
+                patient={ patient } 
+              />
+            )
+          })
+        }
       </>
     )
   };

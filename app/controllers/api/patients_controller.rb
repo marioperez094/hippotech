@@ -29,7 +29,7 @@ module Api
       render 'api/patients/show', status: :ok
     end
 
-    def index_by_last_name
+    def index_by_search
       @patients = Patient.where("#{ params[:searchRow] } like ?", "%#{ params[:search] }%")
 
        return render json: { error: "Patient not found." }, status: :not_found if @patients.length == 0

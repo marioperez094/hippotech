@@ -8,12 +8,18 @@ Rails.application.routes.draw do
   get "/new_patient" => "static_pages#new_patient"
 
   namespace :api do
+    resources :admissions, only: [:create, :index, :show, :update]
     resources :users, only: [:create]
     resources :sessions, only: [:create]
     resources :patients, only: [:create, :index, :show, :update]
 
+    #Admission API
+    get "/patients/:id/admissions" => "admissions#index_by_patient"
+    put "/admissions/:id/discharge" => "admissions#discharge"
+
+
     #Patient Search
-    get "patients/search/:searchRow/:search" => "patients#index_by_last_name"
+    get "patients/search/:searchRow/:search" => "patients#index_by_search"
 
     #Session APIs
     delete "/sessions" => "sessions#destroy"
