@@ -15,4 +15,12 @@
       border-bottom-left-radius: 0;
     }
   };
+
+  .btn-outline-secondary {
+    background-color: $secondary-color;
+  }
+
+  .btn-outline-dark{
+    background: linear-gradient(120deg, $tertiary-color, $secondary-color)
+  }
 };

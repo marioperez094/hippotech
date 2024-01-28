@@ -39,31 +39,10 @@
       padding-top: 60px;
     }
   }
-  
-  @media (min-width: 768px) {
-    .search-input {
-      outline: none;
-      border: none;
-      background: none;
-      width: 0;
-      padding: 0;
-      color: white;
-      transition: 0.4s;
+
+    @media (min-width: 768px) {
+      .search-btn {
+        transition: 0.3s;
+      }
     }
-  
-    .search-btn {
-      transition: 0.3s;
-    }
-  
-    .search-input:focus {
-      width: 200px;
-      margin-left: -200px;
-    }
-  
-    .search-box:hover>.search-input {
-      width: 200px;
-      margin-left: -200px;
-      background-color: white;
-    }
-  }
 }

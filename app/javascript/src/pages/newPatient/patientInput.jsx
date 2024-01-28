@@ -3,7 +3,7 @@ import React from "react";
 import { capitalize, removeUnderscores } from "@utils/utils";
 
 function PatientInput(props) {
-  const { name, handleChange, value, type, required } = props;
+  const { name, handleChange, value, type } = props;
 
   //Takes away underscores in the name
   const nameTag = removeUnderscores(name)
@@ -24,7 +24,7 @@ function PatientInput(props) {
         id={ name }
         value={ value }
         onChange={ (e) => handleChange(e) }
-        required={ required }
+        required
       />
     </div>
   )

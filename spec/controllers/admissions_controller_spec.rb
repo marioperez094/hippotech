@@ -13,9 +13,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
         }
       }
       expect(Admission.count).to eq(0)
@@ -37,9 +37,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
         }
       }
       expect(Admission.count).to eq(0)
@@ -65,9 +65,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
         }
       }
       expect(Admission.count).to eq(1)
@@ -81,9 +81,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
@@ -131,9 +131,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
@@ -156,9 +156,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.second.created_at,
           patient: {
@@ -198,9 +198,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
@@ -243,9 +243,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
@@ -292,9 +292,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
@@ -372,9 +372,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
         }
       }
  
@@ -387,9 +387,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           discharge: false,
           created_at: Admission.first.created_at,
           patient: {
@@ -431,9 +431,9 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '1234567890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
         }
       }
  

@@ -1,13 +1,12 @@
 import React from "react";
-
-import { removeUnderscores } from "@utils/utils";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import ErrorText from "@components/errorText"
+import PatientSelector from "./patientSelector";
+import SearchBarContent from "@components/searchBarContent";
 
 import { handleErrors } from "@utils/fetchHelper";
 import { errorObject } from "@utils/utils"
-import PatientSelector from "./patientSelector";
 
 class PatientSearch extends React.Component {
   state = {
@@ -31,7 +30,6 @@ class PatientSearch extends React.Component {
     fetch(`api/patients/search/${ searchRow }/${ search }`)
       .then(handleErrors)
       .then(data => {
-        console.log(data)
         this.setState({ 
           patients: data.patients,
           error: "" 
@@ -56,28 +54,11 @@ class PatientSearch extends React.Component {
         <form className="col-12 col-md-9 col-xl-5 shadow p-3 my-5 bg-body" onSubmit={ this.searchPatient } id="patient-search">
           { error && <ErrorText error={error} /> }
           <div className="row gx-0">
-            <div className="form-group col-3">
-              <select
-                className="form-control"
-                name="searchRow"
-                value={ searchRow }
-                onChange={ this.handleChange }
-              >
-                <option value="id">ID</option>
-                <option value="last_name">Last Name</option>
-                <option value="first_name">First Name</option>
-                <option value="date_of_birth">Date of Birth</option>
-              </select>
-            </div>
-            <div className="form-group col-4">
-              <input
-                className="form-control"
-                name="search"
-                placeholder={`Patient ${ removeUnderscores(searchRow) }`}
-                value={ search }
-                onChange={ this.handleChange }
-              />
-            </div>
+            <SearchBarContent 
+              handleChange={ this.handleChange }
+              searchRow={ searchRow }
+              search={ search }
+            />
             <div className="form-group text-center col-2">
               <button
                 className="btn btn-success"

@@ -9,7 +9,7 @@ module Api
       user = current_session.user
 
       patient = Patient.find_by(id: params[:admission][:patient_id])
-      return render json: { error: 'Cannot find patient' }, status: :not_found if !patient
+      return render json: { error: 'Cannot find patient.' }, status: :not_found if !patient
 
       #Admissions belong to a patient and are charted by a user
       
@@ -77,7 +77,7 @@ module Api
     private
 
     def admission_params
-      params.require(:admission).permit(:phone_number, :address, :occupation, :diagnosis, :code_status, :diet, :emergency_contact, :emergency_relationship, :emergency_phone)
+      params.require(:admission).permit(:phone_number, :address, :occupation, :admission_diagnosis, :code_status, :diet, :emergency_contact_name, :relationship_to_patient, :emergency_contact_number)
     end
   end
 end

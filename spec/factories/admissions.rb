@@ -6,8 +6,8 @@ FactoryBot.define do
     diagnosis { 'Shortness of breath' }
     code_status { 'Full' }
     diet { 'cardiac' }
-    emergency_contact { 'Test Test' }
-    emergency_relationship { 'Spouse' }
-    emergency_phone { '1234567890' }
+    emergency_contact_name { 'Test Test' }
+    relationship_to_patient { 'Spouse' }
+    emergency_contact_number { '1234567890' }
   end
 end

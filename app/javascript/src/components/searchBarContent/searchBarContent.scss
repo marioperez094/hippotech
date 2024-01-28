@@ -1,0 +1,40 @@
+@media (min-width: 768px) {
+  #search-row {
+    outline: none;
+    border: none;
+    background: none;
+    width: 0;
+    padding: 0;
+    color: white;
+    transition: 0.4s;
+    select {
+      width: 0px;
+    }
+    input {
+      width: 0px;
+    }
+  }
+
+  #search-row:focus {
+    width: 200px;
+    margin-left: -200px;
+    select {
+      width: 25%;
+    }
+    input {
+      width: 75%;
+    }
+  }
+
+  .search-box:hover > #search-row {
+    width: 200px;
+    margin-left: -200px;
+    background-color: white;
+    select {
+        width: 100px;
+      }
+    input {
+      width: 200px;
+    }
+  }
+}

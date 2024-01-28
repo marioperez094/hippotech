@@ -77,19 +77,16 @@ class PatientForm extends React.Component {
             name="first_name"
             handleChange={ this.handleChange }
             value={ first_name }
-            required={ true }
           />
           <PatientInput
             name="last_name"
             handleChange={ this.handleChange }
             value={ last_name }
-            required={ true }
           />
           <PatientInput
             name="date_of_birth"
             handleChange={ this.handleChange }
             value={ date_of_birth }
-            required={ true }
             type="date"
           />
           <div className="mb-3">

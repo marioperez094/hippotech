@@ -14,6 +14,14 @@ class Patient < ApplicationRecord
   before_validation :date_must_be_a_date
   validate :date_smaller_than_current_date, on: :create
 
+  def is_admitted
+    if self.admissions.length == 0
+      return false
+    end
+
+    return !self.admissions.last.discharge
+  end
+
   private
 
   #Date of birth must be a valid date

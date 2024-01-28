@@ -10,7 +10,7 @@ function PatientSelector(props) {
 
   return (
     <button
-      className="col-8 btn shadow p-3 my-5 bg-body rounded"
+      className="col-8 btn shadow p-3 my-3 bg-body rounded"
       type="button"
       onClick={ () => history.push(`/new_patient/admit?patientID=${ patient.id }`) }
     >
