@@ -1,0 +1,16 @@
+@import "@packs/variables.scss";
+
+#patient-list { 
+  .active-category, .inactive-category {
+    display: inline-block;
+    transition: 0.2s;
+  }
+  
+  .active-category {
+    transform: rotateZ(180deg);
+  }
+  
+  .inactive-category {
+    transform: rotateZ(90deg);
+  }
+}

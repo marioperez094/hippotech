@@ -1,40 +1,36 @@
 @media (min-width: 768px) {
   #search-row {
-    outline: none;
-    border: none;
-    background: none;
-    width: 0;
-    padding: 0;
-    color: white;
-    transition: 0.4s;
-    select {
-      width: 0px;
-    }
-    input {
-      width: 0px;
+    .form-control {
+      outline: none;
+      border: none;
+      background: none;
+      width: 0;
+      height: 100%;
+      padding: 0;
+      color: white;
+      transition: 0.4s;
     }
   }
 
   #search-row:focus {
-    width: 200px;
-    margin-left: -200px;
-    select {
-      width: 25%;
-    }
-    input {
-      width: 75%;
-    }
+    margin-right: -90px;
   }
 
   .search-box:hover > #search-row {
-    width: 200px;
-    margin-left: -200px;
+    margin-right: -90px;
+  }
+
+  #searc-row .form-control:focus {
+    width: 300px;
+    outline: none;
+    color: black;
+    height: 100%;
+  }
+
+  .search-box:hover > #search-row .form-control {
+    width: 300px;
     background-color: white;
-    select {
-        width: 100px;
-      }
-    input {
-      width: 200px;
-    }
+    color: black;
+    height: 100%;
   }
 }
