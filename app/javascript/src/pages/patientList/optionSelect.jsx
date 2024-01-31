@@ -1,7 +1,7 @@
 import React from "react";
 
 function OptionSelect(props) {
-  const { option, name } = props;
+  const { option, name, changeOption } = props;
 
   return (
     <th 
@@ -11,6 +11,7 @@ function OptionSelect(props) {
         className="form-control text-center"
         name={name}
         value={option}
+        onChange={ (e) => changeOption(e) }
       >
         <option value="admission_diagnosis">
           Diagnosis

@@ -7,15 +7,15 @@ RSpec.describe Admission, type: :model do
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
         Admission.create!(
-          phone_number: '123-456-7890', 
+          phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '123-456-7890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           user: user,
         )
       }.to raise_error(ActiveRecord::RecordInvalid)
@@ -26,15 +26,15 @@ RSpec.describe Admission, type: :model do
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
         Admission.create!(
-          phone_number: '123-456-7890', 
+          phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
-          emergency_contact: 'Test Test',
-          emergency_relationship: 'Spouse',
-          emergency_phone: '123-456-7890',
+          emergency_contact_name: 'Test Test',
+          relationship_to_patient: 'Spouse',
+          emergency_contact_number: '1234567890',
           patient: patient
         )
       }.to raise_error(ActiveRecord::RecordInvalid)
@@ -116,7 +116,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, diagnosis: nil, patient: patient, user: user)
+        FactoryBot.create(:admission, admission_diagnosis: nil, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -124,7 +124,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, diagnosis: 'c' * 2, patient: patient, user: user)
+        FactoryBot.create(:admission, admission_diagnosis: 'c' * 2, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -132,7 +132,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, diagnosis: 'c' * 51, patient: patient, user: user)
+        FactoryBot.create(:admission, admission_diagnosis: 'c' * 51, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -164,7 +164,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_contact: 'c' * 2, patient: patient, user: user)
+        FactoryBot.create(:admission, emergency_contact_name: 'c' * 2, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -172,7 +172,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_contact: 'c' * 51, patient: patient, user: user)
+        FactoryBot.create(:admission, emergency_contact_name: 'c' * 51, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -180,7 +180,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_relationship: 'c' * 2, patient: patient, user: user)
+        FactoryBot.create(:admission, relationship_to_patient: 'c' * 2, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -188,7 +188,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_relationship: 'c' * 21, patient: patient, user: user)
+        FactoryBot.create(:admission, relationship_to_patient: 'c' * 21, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -196,7 +196,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_phone: 'c' * 9, patient: patient, user: user)
+        FactoryBot.create(:admission, emergency_contact_number: 'c' * 9, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -204,7 +204,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_phone: 'c' * 16, patient: patient, user: user)
+        FactoryBot.create(:admission, emergency_contact_number: 'c' * 16, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -229,7 +229,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_contact: nil, patient: patient, user: user)
+        FactoryBot.create(:admission, emergency_contact_name: nil, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -237,7 +237,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_relationship: nil, patient: patient, user: user)
+        FactoryBot.create(:admission, relationship_to_patient: nil, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -245,7 +245,7 @@ RSpec.describe Admission, type: :model do
       expect {
         user = FactoryBot.create(:user)
         patient = FactoryBot.create(:patient, user: user)
-        FactoryBot.create(:admission, emergency_phone: nil, patient: patient, user: user)
+        FactoryBot.create(:admission, emergency_contact_number: nil, patient: patient, user: user)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end

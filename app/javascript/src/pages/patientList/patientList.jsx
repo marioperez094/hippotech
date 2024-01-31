@@ -4,6 +4,7 @@ import Navbar from "@components/navbar";
 import SearchBar from "@components/searchBar";
 import SorterButton from "./sorterButton";
 import LoadingRing from "@components/loadingRing";
+import PatientWidget from "./patientWidget";
 
 import { handleErrors } from "@utils/fetchHelper";
 
@@ -13,9 +14,8 @@ import OptionSelect from "./optionSelect";
 class PatientList extends React.Component {
   state = {
     admissions: [],
-    filteredAdmissions: [],
     options: {
-      1: "diagnosis",
+      1: "admission_diagnosis",
       2: "diet"
     },
     category: "ID",
@@ -29,14 +29,21 @@ class PatientList extends React.Component {
       .then(data => this.setState({
         admissions: data.admissions,
         loading: false
-      }, () => console.log(this.state.admissions)))
+      }))
       .catch(errors => this.setState({
         loading: false
       }))
-  }
+  };
+
+  changeOption = (e) => {
+    this.setState({ options: {
+      ...this.state.options,
+      [e.target.name]: e.target.value
+    }});
+  };
   
   render() {
-    const { category, options, loading } = this.state;
+    const { admissions, category, options, loading } = this.state;
 
     if (loading) {
       return (
@@ -67,15 +74,31 @@ class PatientList extends React.Component {
                       <OptionSelect
                         option={ options[1] }
                         name={ 1 }
+                        changeOption={ this.changeOption }
                       />
                       <OptionSelect
                         option={ options[2] }
-                        name={ 2 }
+                        name={2}
+                        changeOption={this.changeOption}
                       />
                     </tr>
                   </thead>
                   <tbody>
+                    { admissions.length > 0
+                      ? admissions.map((admission) => {
+                        const { patient } = admission;
 
+                        return (
+                          <PatientWidget
+                            key={ admission.id }
+                            admission={ admission }
+                            options={ options }
+                            patient={ patient }
+                          />
+                        )
+                      })
+                      : <tr><th>No patients found.</th></tr>
+                    }
                   </tbody>
                 </table>
               </div>

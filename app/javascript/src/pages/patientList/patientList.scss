@@ -1,6 +1,17 @@
 @import "@packs/variables.scss";
 
-#patient-list { 
+#patient-list {
+  tr {
+    cursor: pointer;
+  }
+
+  .list-header {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    border-bottom: 2px solid black;
+  }
+
   .active-category, .inactive-category {
     display: inline-block;
     transition: 0.2s;
@@ -12,5 +23,13 @@
   
   .inactive-category {
     transform: rotateZ(90deg);
+  }
+
+  .widget-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
   }
 }

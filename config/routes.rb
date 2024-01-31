@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/patient_list" => "static_pages#patient_list"
   get "/reset_password" => "static_pages#reset_password"
   get "/new_patient" => "static_pages#new_patient"
+  get "/patient/:id" => "static_pages#patient"
 
   namespace :api do
     resources :admissions, only: [:create, :show, :update]

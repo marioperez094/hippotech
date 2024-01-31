@@ -10,7 +10,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -20,7 +20,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
       }
       expect(Admission.count).to eq(0)
       expect(response.body).to eq({
-        error: 'Not logged in'
+        error: 'Not logged in.'
       }.to_json)
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -45,7 +45,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
       expect(Admission.count).to eq(0)
 
       expect(response.body).to eq({
-        error: 'Cannot find patient'
+        error: 'Cannot find patient.'
       }.to_json)
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -78,7 +78,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -93,8 +93,6 @@ RSpec.describe Api::AdmissionsController, type: :controller do
             date_of_birth: patient.date_of_birth,
             bio_sex: patient.bio_sex,
             image: nil,
-            allergies: 'NKDA',
-            histories: 'No Past Medical History',
           },
           user: {
             first_name: user.first_name,
@@ -128,7 +126,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -143,17 +141,13 @@ RSpec.describe Api::AdmissionsController, type: :controller do
             date_of_birth: patient1.date_of_birth,
             bio_sex: patient1.bio_sex
           },
-          allergies: [{
-              name: allergy.name
-          }],
-          histories: 'No Past Medical History'
         },
         {
           id: admission2.id,
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -168,10 +162,6 @@ RSpec.describe Api::AdmissionsController, type: :controller do
             date_of_birth: patient2.date_of_birth,
             bio_sex: patient2.bio_sex
           },
-          allergies: 'NKDA',
-          histories: [{
-            name: history.diagnosis
-          }]
         }]
       }.to_json)
     end
@@ -195,7 +185,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -240,7 +230,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -289,7 +279,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -304,11 +294,6 @@ RSpec.describe Api::AdmissionsController, type: :controller do
             date_of_birth: patient.date_of_birth,
             bio_sex: patient.bio_sex,
             image: nil,
-            allergies: 'NKDA',
-            histories: [{
-              diagnosis: history.diagnosis,
-              diagnosis_date: history.diagnosis_date
-            }]
           },
           user: {
             first_name: user.first_name,
@@ -337,14 +322,14 @@ RSpec.describe Api::AdmissionsController, type: :controller do
       expect(response.body).to eq({
         admissions: [{
           id: admission1.id,
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           discharge: false,
           created_at: Admission.first.created_at,
           updated_at: Admission.first.updated_at
         },
         {
           id: admission3.id,
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           discharge: false,
           created_at: Admission.third.created_at,
           updated_at: Admission.third.updated_at
@@ -369,7 +354,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567891',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -384,7 +369,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567891',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',
@@ -428,7 +413,7 @@ RSpec.describe Api::AdmissionsController, type: :controller do
           phone_number: '1234567890',
           address: '1234 S. First St. Paris, France 12345',
           occupation: 'unemployed',
-          diagnosis: 'Shortness of breath',
+          admission_diagnosis: 'Shortness of breath',
           code_status: 'Full',
           diet: 'cardiac',
           emergency_contact_name: 'Test Test',

@@ -3,13 +3,13 @@ module Api
 
     def create
       if !current_session
-        return render json: { error: 'Not logged in' }, status: :unauthorized
+        return render json: { error: "Not logged in." }, status: :unauthorized
       end
 
       user = current_session.user
 
       patient = Patient.find_by(id: params[:admission][:patient_id])
-      return render json: { error: 'Cannot find patient.' }, status: :not_found if !patient
+      return render json: { error: "Cannot find patient." }, status: :not_found if !patient
 
       #Admissions belong to a patient and are charted by a user
       
@@ -58,7 +58,7 @@ module Api
 
       begin
         @admission.update(admission_params)
-        render 'api/admissions/show', status: :ok
+        render "api/admissions/show", status: :ok
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request
       end

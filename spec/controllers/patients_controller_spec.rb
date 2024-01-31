@@ -42,6 +42,7 @@ RSpec.describe Api::PatientsController, type: :controller do
           last_name: 'test', 
           date_of_birth: '2023-01-31',
           bio_sex: 'male',
+          is_admitted: false,
           image: nil,
           user:{
             user_first_name: "test",
@@ -102,7 +103,7 @@ RSpec.describe Api::PatientsController, type: :controller do
             last_name: 'test', 
             date_of_birth: '2023-01-31',
             bio_sex: 'male',
-            image: nil
+            image: nil,
           }, 
         ]
       }.to_json)
@@ -126,6 +127,7 @@ RSpec.describe Api::PatientsController, type: :controller do
           last_name: 'test',
           date_of_birth: '2023-01-31',
           bio_sex: 'male',
+          is_admitted: false,
           image: nil,
           user:{
             user_first_name: "test",
@@ -187,6 +189,7 @@ RSpec.describe Api::PatientsController, type: :controller do
           last_name: 'test',
           date_of_birth: '2023-01-31',
           bio_sex: 'male',
+          is_admitted: false,
           image: nil,
           user:{
             user_first_name: "test",
