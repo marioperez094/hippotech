@@ -3,7 +3,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import ErrorText from "@components/errorText"
 import PatientSelector from "./patientSelector";
-import SearchBarContent from "@components/searchBarContent";
+import SearchBarContent from "@components/searchBar/searchBarContent";
 
 import { handleErrors } from "@utils/fetchHelper";
 import { errorObject } from "@utils/utils"
@@ -59,14 +59,6 @@ class PatientSearch extends React.Component {
               searchRow={ searchRow }
               search={ search }
             />
-            <div className="form-group text-center col-2">
-              <button
-                className="btn btn-success"
-                type="submit"
-              >
-                Search
-              </button>
-            </div>
             <div className="form-group col-3">
               <Link
                 className="btn btn-warning"

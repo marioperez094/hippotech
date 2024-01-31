@@ -1,8 +1,9 @@
 import React from "react";
 
 import Navbar from "@components/navbar";
-import SearchBar from "@components/navbar/searchBar";
+import SearchBar from "@components/searchBar";
 import SorterButton from "./sorterButton";
+import LoadingRing from "@components/loadingRing";
 
 import { handleErrors } from "@utils/fetchHelper";
 
@@ -12,6 +13,7 @@ import OptionSelect from "./optionSelect";
 class PatientList extends React.Component {
   state = {
     admissions: [],
+    filteredAdmissions: [],
     options: {
       1: "diagnosis",
       2: "diet"
@@ -22,16 +24,25 @@ class PatientList extends React.Component {
   };
 
   componentDidMount() {
-    fetch("/api/admissions")
+    fetch("/api/admissions/search/current_admissions")
       .then(handleErrors)
       .then(data => this.setState({
-        admissions: data.admissions
+        admissions: data.admissions,
+        loading: false
       }, () => console.log(this.state.admissions)))
-      .catch(errors => console.log(errors))
+      .catch(errors => this.setState({
+        loading: false
+      }))
   }
   
   render() {
-    const { category, options } = this.state;
+    const { category, options, loading } = this.state;
+
+    if (loading) {
+      return (
+        <LoadingRing />
+      )
+    }
 
     return (
       <>
@@ -63,6 +74,9 @@ class PatientList extends React.Component {
                       />
                     </tr>
                   </thead>
+                  <tbody>
+
+                  </tbody>
                 </table>
               </div>
             </div>

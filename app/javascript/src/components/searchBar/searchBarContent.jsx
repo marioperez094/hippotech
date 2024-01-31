@@ -2,13 +2,13 @@ import React from "react";
 
 import { removeUnderscores } from "@utils/utils";
 
-import "./searchBarContent.scss"
+import "./searchBar.scss"
 
 function SearchBarContent(props) {
   const { handleChange, searchRow, search } = props;
   return (
     <>
-      <div className="form-group col-3" id="search-input">
+      <div className="form-group col-3">
         <select
           className="form-control"
           name="searchRow"
@@ -34,6 +34,14 @@ function SearchBarContent(props) {
           }
           onChange={ handleChange }
         />
+      </div>
+      <div className="form-group text-center col-2">
+        <button
+          className="btn btn-success"
+          type="submit"
+        >
+          Search
+        </button>
       </div>
     </>
   )

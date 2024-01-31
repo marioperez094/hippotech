@@ -17,7 +17,7 @@ module Api
       @admission.user = user
       @admission.patient = patient
       if @admission.save
-        render 'api/admissions/show', status: :created
+        render "api/admissions/show", status: :created
       else
         render json: { error: @admission.errors }, status: :bad_request
       end
@@ -25,30 +25,36 @@ module Api
 
     def index
       @admissions = Admission.order(created_at: :asc)
-      render 'api/admissions/index', status: :ok
+      render "api/admissions/index", status: :ok
+    end
+
+    def index_by_current_admissions
+      @admissions = Admission.where(discharge: false)
+      p @admissions
+      render "api/admissions/index"
     end
 
     def show
       @admission = search_admission
-      return render json: { error: 'Admission not found.'}, status: :not_found if !@admission
+      return render json: { error: "Admission not found." }, status: :not_found if !@admission
 
-      render 'api/admissions/show', status: :ok
+      render "api/admissions/show", status: :ok
     end
 
     def index_by_patient
       patient = find_patient
 
       @admissions = patient.admissions.order(created_at: :asc)
-      render 'api/admissions/discharge', status: :ok
+      render "api/admissions/discharge", status: :ok
     end
 
     def update
       if !current_session
-        return render json: { error: 'Not logged in' }, status: :unauthorized
+        return render json: { error: "Not logged in" }, status: :unauthorized
       end
 
       @admission = search_admission
-      return render json: { error: 'Admission not found.'}, status: :not_found if !@admission
+      return render json: { error: "Admission not found." }, status: :not_found if !@admission
 
       begin
         @admission.update(admission_params)
@@ -60,10 +66,10 @@ module Api
     
     #Patients cannot be deleted, instead only updated and discharged
     def discharge
-      return render json: { error: 'Not logged in '}, status: :unauthorized if !current_session
+      return render json: { error: "Not logged in " }, status: :unauthorized if !current_session
 
       @admission = search_admission
-      return render json: { error: 'Admission not found.'}, status: :not_found if !@admission
+      return render json: { error: "Admission not found." }, status: :not_found if !@admission
 
       render json: { success: true } if @admission&.update(discharge: true)
 

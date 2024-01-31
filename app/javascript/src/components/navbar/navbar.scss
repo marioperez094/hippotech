@@ -32,17 +32,11 @@
       position: absolute;
       z-index: 5;
       background-color: #CCCCFF;
-      background: linear-gradient(120deg, lightblue, #CCCCFF);
+      background: linear-gradient(120deg, $tertiary-color, $secondary-color);
       top: 0;
       left: 0;
       right: 0;
       padding-top: 60px;
     }
   }
-
-    @media (min-width: 768px) {
-      .search-btn {
-        transition: 0.3s;
-      }
-    }
 }

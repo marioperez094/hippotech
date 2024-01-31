@@ -101,11 +101,12 @@ function Navbar(props) {
                   Home
                 </a>
               </li>
+              { props.children }
               { username
                 ? <LoggedInMenu
                     logOut={ logOut }
                   />
-                : <li className="nav-item order-md-3">
+                : <li className="nav-item">
                     <a 
                       className="nav-link"
                       href="/login"
@@ -114,7 +115,6 @@ function Navbar(props) {
                     </a>
                   </li>
               }
-              { props.children }
             </ul>
           </div>
         </div>
@@ -130,7 +130,7 @@ function LoggedInMenu(props) {
 
   return (
     <>
-      <li className="nav-item order-md-2">
+      <li className="nav-item">
         <a 
           className="nav-link"
           href="/new_patient"
@@ -138,7 +138,7 @@ function LoggedInMenu(props) {
           Admit A New Patient
         </a>
       </li>
-      <li className="nav-item order-md-3">
+      <li className="nav-item">
         <a
           className="nav-link"
           href="#"

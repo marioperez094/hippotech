@@ -1,0 +1,13 @@
+@import "@packs/variables.scss";
+
+.dropdown-menu {
+  min-width: 500px;
+  background-color: transparent;
+  border: transparent;
+  select {
+    width: 100%;
+  }
+  input {
+    width: 200px;
+  }
+}
